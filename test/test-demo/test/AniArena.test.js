@@ -74,7 +74,7 @@ describe('Arena Test', () => {
 
   it.todo('New Game initializes HP, AP');
 
-  it('New Round Regenerates AP', () => {
+  it('new round regenerates AP', () => {
     const arena = new Arena(P1_Char, P2_Char);
     
     original_AP = arena.P1.AP;
@@ -82,5 +82,11 @@ describe('Arena Test', () => {
     expect(arena.P1.AP).toBe(original_AP + arena.P1.AP_Regen);
   });
 
-
+  it.todo('holds on to a skill untill it can be executed');
+  it.todo('checks whether one can attack if current AP > skill.AP');
+  it.todo('if both player can attack, smaller skill.AP attacks first');
+  it.todo('start game, finish once roundCount > MAX_ROUND');
+  it.todo('start game, finish once HP of "one" player drops below 0');
+  it.todo('start game, finish once HP of "both" player drops below 0');
+  it.todo('Logs correctly per round');
 })

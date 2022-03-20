@@ -1,4 +1,4 @@
 # AniArena
 test
 
-run test with "npm run test".
+run test with "yarn test".

@@ -1,4 +1,4 @@
-class Skill{
+export default class Skill{
   constructor(ID, Name, Type, Description, ATK_Val, DEF_Val, AP_Cost) {
     this.ID = ID;
     this.Name = Name;

@@ -21,7 +21,7 @@ export default class Character{
           Name: "test3",
           Type: "Attack",
           Description: "$name uses Mega Beam!",
-          ATK_Val: 10,
+          ATK_Val: 7,
           DEF_Val: 0,
           AP_Cost: 5,
         },

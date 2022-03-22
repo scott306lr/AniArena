@@ -3,7 +3,7 @@ import Skill from "./AniClasses/Skill";
 describe('Abilities', () => {
     it('constructor', () => {
         let id = 'user';
-        let name = id;;
+        let name = id;
         let type = 'Attack';
         let dsp = '$name Attack!';
         let atk = 10;

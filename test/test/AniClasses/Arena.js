@@ -25,6 +25,12 @@ export default class Arena{
   logRound(description){
     let log = "Turn $round: $description";
     this.log.push(log.replace('$round', this.roundCount).replace('$description',description));
+    // this.log.push(
+    //   {
+    //   "Round": this.roundCount,
+    //   "Description": description,
+    //   }
+    // )
   }
 
   startGame(){
@@ -61,8 +67,11 @@ export default class Arena{
       }
 
       
-
-      if(this.P1.HP <= 0){
+      //End Game Condtions 
+      if(this.P1.HP <= 0 && this.P2.HP <= 0){
+        this.logRound(this.P1.Character.Owner_ID+' and '+this.P1.Character.Owner_ID+' fainted at the same time!');
+        break;
+      } else if(this.P1.HP <= 0){
         this.logRound(this.P1.Character.Owner_ID+' was defeted!');
         break;
       } else if(this.P2.HP <= 0) {

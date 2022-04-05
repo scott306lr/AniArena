@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest --watchAll --verbose"
+    "jest": "jest --watchAll --verbose ./jest",
+    "cypress": "cypress open",
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
@@ -12,5 +13,8 @@
     "babel-jest": "^27.5.1",
     "jest": "^27.5.1"
   },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.0",
+  "dependencies": {
+    "cypress": "^9.5.3"
+  }
 }

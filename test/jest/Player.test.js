@@ -1,6 +1,6 @@
-import Abilities from "./AniClasses/Abilities";
-import Character from "./AniClasses/Character";
-import Player from "./AniClasses/Player" 
+import Abilities from "../../client/AniClasses/Abilities";
+import Character from "../../client/AniClasses/Character";
+import Player from "../../client/AniClasses/Player" 
 
 describe('Player', () => {
     let abi;

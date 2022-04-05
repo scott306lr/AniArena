@@ -1,4 +1,4 @@
-import Abilities from "./AniClasses/Abilities";
+import Abilities from "../../client/AniClasses/Abilities";
 
 describe('Abilities', () => {
     it('constructor', () => {

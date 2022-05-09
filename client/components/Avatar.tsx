@@ -1,16 +1,23 @@
-import React, { SVGProps } from 'react'
+import React from 'react'
 
 interface Props{
-    Icon: (props: SVGProps<SVGAElement>) => JSX.Element
-    title: string
+    imgsrc: string
 }
 
-function Avatar({Icon, title}:Props) {
-  return (
-        <div className="p-2 rounded-full hover:bg-gray-500">
-            <Icon className="h-12 w-12"/>
+
+function Avatar({imgsrc} : Props) {
+    return (
+        <div className="p-1 rounded-lg hover:bg-gray-500">
+            <div className="border-solid border-black border-2 rounded-full p-0.5">
+                <div className="overflow-hidden h-24 w-24 rounded-full">
+                    <div className="border-solid">
+                        <img src={imgsrc}></img>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
 
 export default Avatar
+

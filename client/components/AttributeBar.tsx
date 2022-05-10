@@ -16,7 +16,6 @@ function AttributeBar({attribute, max, val}: Props): ReactElement {
     const rightStyle = {
         width: (100-length)+'%'
     };
-    console.log(length)
 
     return (
         <div className="grid justify-items-stretch w-64 border-solid border-2 gap-1 p-3 rounded-lg shadow-lg bg-white">

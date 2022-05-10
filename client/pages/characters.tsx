@@ -19,6 +19,9 @@ const Characters: NextPage = () => {
     const [hp, setHp] = React.useState(7);
     const addHp = () => setHp(hp + 1);
     const minusHp = () => setHp(Math.max(0, hp -1));
+
+    const confirmClick = () => {console.log("confirm clicked")};
+    const resetClick = () => {console.log("reset clicked")};
     // Todo: fetch data here
 
     return (
@@ -38,6 +41,8 @@ const Characters: NextPage = () => {
                         <AttributeAdjustor name="HP" value={hp} minusClick={minusHp} addClick={addHp}/>
                         <AttributeAdjustor name="HP" value={hp} minusClick={minusHp} addClick={addHp}/>
                         <AttributeAdjustor name="HP" value={hp} minusClick={minusHp} addClick={addHp}/>
+                        <ActionButton text="重設" onClick={confirmClick}/>
+                        <ActionButton text="確認" onClick={resetClick}/>
                     </div>
                     
                     

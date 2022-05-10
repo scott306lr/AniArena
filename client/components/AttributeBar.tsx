@@ -7,14 +7,28 @@ interface Props {
 }
 
 function AttributeBar({attribute, max, val}: Props): ReactElement {
-    let length = Math.ceil(val / (max / 12))
+    let length = (val/max)*100
+    let color = ((length < 40)?'rgb(239 68 68)':'rgb(34 197 94)')
+    const leftStyle = {
+        width: length+'%',
+        backgroundColor: color
+    };
+    const rightStyle = {
+        width: (100-length)+'%'
+    };
+    console.log(length)
+
     return (
         <div className="grid justify-items-stretch w-64 border-solid border-2 gap-1 p-3 rounded-lg shadow-lg bg-white">
             {/* bar */}
             <div className="flex ">
                 {/* Todo: change bar propotion accroding to max and val */}
-                <div className="w-8/12 h-1 bg-green-500 rounded-l-lg"></div>
-                <div className="w-4/12 h-1 bg-gray-500 rounded-r-lg"></div>
+                <div style={leftStyle}>
+                    <div className="h-1 rounded-l-lg"></div>
+                </div>
+                <div style={rightStyle}>
+                    <div className="h-1 bg-gray-500 rounded-r-lg"></div>
+                </div>
             </div>
             {/* attribute text description */}
             <p className="justify-self-end">{attribute} {val}/{max}</p>

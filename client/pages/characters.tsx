@@ -1,14 +1,21 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import ActionButton from '../components/ActionButton';
 import AttributeBar from '../components/AttributeBar';
 import Avatar from '../components/Avatar';
 import Navbar from '../components/Navbar';
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
+import React from 'react'
+import SkillCard from '../components/SkillCard';
 
 const Characters: NextPage = () => {
-    let expMax : number = 15
-    let expVal : number = 12
+    const [expMax, setExpMax] = React.useState(15);
+    const [expVal, setExpVal] = React.useState(10);
+    const increaseExp = () => setExpVal(Math.min(expMax, expVal+1));
+    const decreaseExp = () => setExpVal(Math.max(0, expVal-1));
+    // Todo: fetch data here
+
     return (
         <div className="bg-slate-200 w-screen h-screen">
             <Head>
@@ -19,16 +26,22 @@ const Characters: NextPage = () => {
                 <Navbar />
                 
                 {/* sections */}
-                <div className="flex items-center justify-center m-4 gap-8">
-                    <div className="grid justify-items-center my-50 p-4 gap-4">
+                <div className="flex items-center justify-center m-8 gap-8">
+                    <div className="w-1/6">
+                        {/* Attribute Secion */}
+                        <p>section Attribute</p>
+                    </div>
+                    <div className="grid justify-items-center gap-4 w-1/6">
                         {/* Character status section */}
                         <RectCard imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
-                        <div className="w-64">
+                        {/* <div className="w-64"> */}
                             <WordBallon text="其名惠惠，職業乃大法師，使役最強之攻擊魔法：爆裂魔法之人！" />
-                        </div>
+                        {/* </div> */}
                         <AttributeBar attribute="EXP" max={expMax} val={expVal}/>
+                        <ActionButton onClick={increaseExp} text="addExp" />
+                        <ActionButton onClick={decreaseExp} text="minusExp" />
                     </div>
-                    <div className="items-center justify-center mx-100 my-4 border-2 p-2 gap-2 bg-white rounded-lg">
+                    <div className="items-center justify-center border-2 p-2 gap-2 bg-white rounded-lg shadow-lg">
                         {/* middle section */}
                         {/*Todo: change it to filter map  */}
                         {/*      Add click event */}
@@ -36,8 +49,12 @@ const Characters: NextPage = () => {
                         <Avatar imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png" />
                         <Avatar imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045678669484062/nkmBV7R.png" />
                     </div>
-                    <div className="space-y-4">
-                        <WordBallon text="Section 2" />
+                    <div className="space-y-4 w-1/3">
+                        {/* SkillCard Section */}
+                        <SkillCard name="Explosion" type="攻擊" description="黑より黑く 闇より暗き漆黑に ，無謬の境界に落ちし理，無行の歪みとなりて，現出せよ！Explosion！" imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
+                        <SkillCard name="Explosion" type="防禦" description="防禦魔法！" imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
+                        <SkillCard name="Explosion" type="攻擊" description="黑より黑く 闇より暗き漆黑に ，無謬の境界に落ちし理，無行の歪みとなりて，現出せよ！Explosion！" imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
+
                     </div>
                 </div>
 

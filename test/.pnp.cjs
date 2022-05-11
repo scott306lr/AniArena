@@ -37,7 +37,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-env", "virtual:d045d2cbbe0ee6cb975b1c6960b02b9bd0ef6d77253c64378f4ce4ef6998d88e83c170fa908c88413e716d6d8bacbbb1feff6312e79b2c50e25728a24fa679aa#npm:7.16.11"],\
             ["babel-jest", "virtual:d045d2cbbe0ee6cb975b1c6960b02b9bd0ef6d77253c64378f4ce4ef6998d88e83c170fa908c88413e716d6d8bacbbb1feff6312e79b2c50e25728a24fa679aa#npm:27.5.1"],\
             ["cypress", "npm:9.5.3"],\
-            ["jest", "virtual:d045d2cbbe0ee6cb975b1c6960b02b9bd0ef6d77253c64378f4ce4ef6998d88e83c170fa908c88413e716d6d8bacbbb1feff6312e79b2c50e25728a24fa679aa#npm:27.5.1"]\
+            ["jest", "virtual:d045d2cbbe0ee6cb975b1c6960b02b9bd0ef6d77253c64378f4ce4ef6998d88e83c170fa908c88413e716d6d8bacbbb1feff6312e79b2c50e25728a24fa679aa#npm:27.5.1"],\
+            ["lodash-es", "npm:4.17.21"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -4814,7 +4815,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-env", "virtual:d045d2cbbe0ee6cb975b1c6960b02b9bd0ef6d77253c64378f4ce4ef6998d88e83c170fa908c88413e716d6d8bacbbb1feff6312e79b2c50e25728a24fa679aa#npm:7.16.11"],\
             ["babel-jest", "virtual:d045d2cbbe0ee6cb975b1c6960b02b9bd0ef6d77253c64378f4ce4ef6998d88e83c170fa908c88413e716d6d8bacbbb1feff6312e79b2c50e25728a24fa679aa#npm:27.5.1"],\
             ["cypress", "npm:9.5.3"],\
-            ["jest", "virtual:d045d2cbbe0ee6cb975b1c6960b02b9bd0ef6d77253c64378f4ce4ef6998d88e83c170fa908c88413e716d6d8bacbbb1feff6312e79b2c50e25728a24fa679aa#npm:27.5.1"]\
+            ["jest", "virtual:d045d2cbbe0ee6cb975b1c6960b02b9bd0ef6d77253c64378f4ce4ef6998d88e83c170fa908c88413e716d6d8bacbbb1feff6312e79b2c50e25728a24fa679aa#npm:27.5.1"],\
+            ["lodash-es", "npm:4.17.21"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -6011,6 +6013,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/",\
           "packageDependencies": [\
             ["lodash", "npm:4.17.21"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lodash-es", [\
+        ["npm:4.17.21", {\
+          "packageLocation": "./.yarn/cache/lodash-es-npm-4.17.21-b45832dfce-05cbffad6e.zip/node_modules/lodash-es/",\
+          "packageDependencies": [\
+            ["lodash-es", "npm:4.17.21"]\
           ],\
           "linkType": "HARD"\
         }]\

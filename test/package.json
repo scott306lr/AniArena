@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "jest": "jest --watchAll --verbose ./jest",
-    "cypress": "cypress open",
+    "cypress": "cypress open"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
@@ -15,6 +15,12 @@
   },
   "packageManager": "yarn@3.2.0",
   "dependencies": {
-    "cypress": "^9.5.3"
+    "cypress": "^9.5.3",
+    "lodash-es": "^4.17.21"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/!node_modules\\/lodash-es/"
+    ]
   }
 }

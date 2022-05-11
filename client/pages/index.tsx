@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Navbar from '../components/Navbar';
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
 
@@ -11,10 +10,7 @@ const Home: NextPage = () => {
         <title>AniArena</title>
       </Head>
 
-      <main className="">
-        {/* navbar */}
-        <Navbar />
-        
+      <main className="grid">
         {/* sections */}
         <div className="flex items-center justify-center m-4 gap-8">
           {/* section 2 */}

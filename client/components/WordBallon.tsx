@@ -6,9 +6,9 @@ interface Props{
 
 function WordBallon({text}: Props) {
     return (
-        <div className="break-inside-auto border-solid border-2 p-1 px-3 rounded-lg shadow-lg
+        <div className="w-fit break-inside-auto p-1 px-3 rounded-lg shadow-lg
                         bg-white">
-            <p>{text}</p>
+            <div>{text}</div>
         </div>
     )
 }

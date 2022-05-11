@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Navbar from '../components/Navbar';
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
 
@@ -12,13 +11,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="grid">
-        {/* navbar */}
-        <div className="grid w-screen p-2  border-solid border-black border-2">
-                    <div className="place-self-center">
-                        <Navbar />
-                    </div>
-                </div>
-        
         {/* sections */}
         <div className="flex items-center justify-center m-4 gap-8">
           {/* section 2 */}

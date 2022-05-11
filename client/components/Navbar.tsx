@@ -5,7 +5,8 @@ import Avatar from './NavItem'
 import {
     HomeIcon,
     UserGroupIcon,
-    GlobeIcon
+    GlobeIcon,
+    PlayIcon
 } from "@heroicons/react/outline"
 
 function Navbar() {
@@ -25,6 +26,11 @@ function Navbar() {
             <Link href="playerList" passHref>
                 <a>
                     <Avatar Icon={GlobeIcon} title="Rank"/>
+                </a>
+            </Link>
+            <Link href="battle" passHref>
+                <a>
+                    <Avatar Icon={PlayIcon} title="Battle" />
                 </a>
             </Link>
         </div>

@@ -3,7 +3,6 @@ import Head from 'next/head'
 import ActionButton from '../components/ActionButton';
 import AttributeBar from '../components/AttributeBar';
 import Avatar from '../components/Avatar';
-import Navbar from '../components/Navbar';
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
 import React from 'react'
@@ -31,11 +30,7 @@ const Characters: NextPage = () => {
             </Head>
             <main className="grid bg-slate-200">
 
-                <div className="grid w-screen p-2 border-solid border-black border-2">
-                    <div className="w-min place-self-center">
-                        <Navbar />
-                    </div>
-                </div>
+
                 
                 {/* sections */}
                 <div className="flex flex-wrap justify-center m-8 p-4 gap-8">

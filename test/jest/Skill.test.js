@@ -12,7 +12,6 @@ describe('Abilities', () => {
         let skill = new Skill(id, name, type, dsp, shoutout, ap_cost, states);
         expect(skill.ID).toBe(id);
         expect(skill.Name).toBe(name);
-        expect(skill.Type).toBe(type);
         expect(skill.Description).toBe(dsp);
         expect(skill.AP_Cost).toBe(ap_cost);
     })

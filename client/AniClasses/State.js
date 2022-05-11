@@ -1,9 +1,10 @@
 import { cloneDeep } from 'lodash-es';
 
 export default class State {
-  constructor(cnt, name, priority, loc, action, args, effectOn, label){
+  constructor(cnt, name, description, priority, loc, action, args, effectOn, label){
     this.cnt = cnt;
     this.name = name;
+    this.description = description;
     this.priority = priority;
     this.loc = loc;
     this.action = action;

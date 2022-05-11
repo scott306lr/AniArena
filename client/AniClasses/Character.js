@@ -19,20 +19,64 @@ export default class Character{
         {
           ID: 3,
           Name: "test3",
-          Type: "Attack",
           Description: "$name uses Mega Beam!",
-          ATK_Val: 7,
-          DEF_Val: 0,
+          Shoutout: "Ahhhhhh!",
           AP_Cost: 5,
+          States: [
+            {
+              cnt: 1,
+              name: "damage",
+              definition: "Thats a lot of damage!",
+              priority: 5,
+              loc: "NORM",
+              action: "SUB",
+              args: {"HP": 30},
+              effectOn: ["status"],
+              label: ["damage", "physical"],
+            },
+            {
+              cnt: 2,
+              name: "burning",
+              definition: "$name burning!",
+              priority: 5,
+              loc: "NORM",
+              action: "SUB",
+              args: {"HP": 5},
+              effectOn: ["status"], 
+              label: ["burn", "fire", "debuff"]
+            }
+          ]
         },
         {
           ID: 25,
-          Name: "test25",
-          Type: "React",
+          Name: "test_shield",
           Description: "$name Shields!",
-          ATK_Val: 0,
-          DEF_Val: 5,
-          AP_Cost: 0,
+          Shoutout: "Shieeeeldddd!",
+          AP_Cost: 3,
+          States: [
+            {
+              cnt: 3,
+              name: "reduce damage",
+              definition: "Reducing damage!",
+              priority: 3,
+              loc: "NORM",
+              action: "SUB",
+              args: {"HP": 5},
+              effectOn: ["damage", "debuff"],
+              label: ["protect", "buff"],
+            },
+            {
+              cnt: 3,
+              name: "slow",
+              definition: "so slow!",
+              priority: 3,
+              loc: "NORM",
+              action: "SUB",
+              args: {"AP_regen": 2},
+              effectOn: ["status"], 
+              label: ["slow", "debuff"]
+            }
+          ]
         },
         {
           ID: 113,

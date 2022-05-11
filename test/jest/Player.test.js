@@ -24,13 +24,6 @@ describe('Player', () => {
     it('chooseSkill', () => {
         player.chooseSkill();
         expect(player.nextSkill).toBeDefined();
-        expect(player.nextSkill.Type).toBe('Attack');
-    })
-
-    it('conterSkill', () => {
-        let counterSkill = player.counterSkill();
-        expect(counterSkill).toBeDefined();
-        expect(counterSkill.Type).toBe('React'); 
     })
 
     it('attack', () => {

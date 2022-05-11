@@ -27,7 +27,7 @@ export default class EffectQueue {
 
   effect(states, countdown = true){
     let qCopy = cloneDeep(this.Queue);
-    const dummyState = new State(9999, "dummy", 5, "NORM", "NONE", {}, [], []);
+    const dummyState = new State(9999, "dummy", "dummy", 5, "NORM", "NONE", {}, [], []);
     qCopy.push(dummyState)
     qCopy.push(...cloneDeep(states));
 

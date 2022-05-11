@@ -13,7 +13,11 @@ const PlayerList: NextPage = () => {
 
       <main className="">
         {/* navbar */}
-        <Navbar />
+        <div className="grid w-screen p-2 border-solid border-black border-2">
+          <div className="w-min place-self-center">
+              <Navbar />
+          </div>
+        </div>
         
         {/* sections */}
         <div className="flex items-center justify-center m-4 gap-8">

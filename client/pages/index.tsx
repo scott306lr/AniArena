@@ -11,9 +11,13 @@ const Home: NextPage = () => {
         <title>AniArena</title>
       </Head>
 
-      <main className="">
+      <main className="grid">
         {/* navbar */}
-        <Navbar />
+        <div className="grid w-screen p-2  border-solid border-black border-2">
+                    <div className="place-self-center">
+                        <Navbar />
+                    </div>
+                </div>
         
         {/* sections */}
         <div className="flex items-center justify-center m-4 gap-8">

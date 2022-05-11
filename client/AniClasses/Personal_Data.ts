@@ -1,11 +1,11 @@
-type Personal_Data_JSON = {
+export type Personal_Data_JSON = {
   HP_Init: number;
   AP_Regen: number;
   AP_Init: number;
   Exp: number;
 }
 
-class Personal_Data{
+export class Personal_Data{
   HP_Init: number;
   AP_Regen: number;
   AP_Init: number;

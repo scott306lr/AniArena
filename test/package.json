@@ -1,26 +1,17 @@
 {
-  "name": "hello",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "jest": "jest --watchAll --verbose ./jest",
-    "cypress": "cypress open"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/preset-env": "^7.16.11",
-    "babel-jest": "^27.5.1",
-    "jest": "^27.5.1"
-  },
+  "name": "test",
   "packageManager": "yarn@3.2.0",
-  "dependencies": {
-    "cypress": "^9.5.3",
-    "lodash-es": "^4.17.21"
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.5.0",
+    "babel-jest": "^28.1.0",
+    "jest": "^28.1.0"
   },
   "jest": {
-    "transformIgnorePatterns": [
-      "/!node_modules\\/lodash-es/"
-    ]
+    "moduleNameMapper": {
+      "^lodash-es$": "lodash"
+    }
   }
 }

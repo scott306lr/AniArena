@@ -1148,6 +1148,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
+  languageName: node
+  linkType: hard
+
 "loose-envify@npm:^1.1.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
@@ -1807,6 +1814,7 @@ next@latest:
     "@types/react": 17.0.38
     autoprefixer: ^10.4.0
     framer-motion: ^6.3.3
+    lodash: ^4.17.21
     lodash-es: ^4.17.21
     next: latest
     postcss: ^8.4.5

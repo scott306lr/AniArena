@@ -9,11 +9,17 @@ import React from 'react'
 import SkillCard from '../components/SkillCard';
 import AttributeAdjustor from '../components/AttributeAdjustor';
 
+const variants = {
+    hidden: { opacity: 0.2, x: -200, y: 0 },
+    enter: { opacity: 1, x: 0, y: 0 },
+    exit: { opacity: 0.2, x: 0, y: -200 },
+  }
+
 const Characters: NextPage = () => {
-    const [expMax, setExpMax] = React.useState(15);
-    const [expVal, setExpVal] = React.useState(10);
-    const increaseExp = () => setExpVal(Math.min(expMax, expVal+1));
-    const decreaseExp = () => setExpVal(Math.max(0, expVal-1));
+    const [expMax, setExpMax] = React.useState(4);
+    const [expVal, setExpVal] = React.useState(1);
+    const increaseExp = () => setExpVal((prev) => Math.min(expMax, expVal+1));
+    const decreaseExp = () => setExpVal((prev) => Math.max(0, expVal-1));
 
     const [hp, setHp] = React.useState(7);
     const addHp = () => setHp(hp + 1);

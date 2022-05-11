@@ -8,7 +8,7 @@ type BattleLog_JSON = {
   P2_ID: number;
   P2_Char: Character_JSON;
   Winner: number;
-  Log: string;
+  Log: string[];
 }
 
 export default class BattleLog{
@@ -19,7 +19,7 @@ export default class BattleLog{
   P2_ID: number;
   P2_Char: Character_JSON;
   Winner: number;
-  Log: string;
+  Log: string[];
 
   constructor(battle_json: BattleLog_JSON) {
     this.ID = battle_json.ID;

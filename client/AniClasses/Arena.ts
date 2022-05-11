@@ -1,9 +1,15 @@
+import { Character } from "./Character";
 import {Player} from "./Player";
 
 export default class Arena{
-  constructor(P1_Char, P2_Char) {
+  P1: Player;
+  P2: Player;
+  roundCount: number;
+  log: string[];
+  constructor(P1_Char: Character, P2_Char: Character) {
     this.P1 = new Player(P1_Char, 1);
     this.P2 = new Player(P2_Char, 2);
+    this.roundCount = -1;
     this.log = [];
   }
 
@@ -22,9 +28,9 @@ export default class Arena{
     return true;
   }
 
-  logRound(description){
+  logRound(description: string){
     let log = "Turn $round: $description";
-    this.log.push(log.replace('$round', this.roundCount).replace('$description',description));
+    this.log.push(log.replace('$round', this.roundCount.toString()).replace('$description',description));
     // this.log.push(
     //   {
     //   "Round": this.roundCount,
@@ -32,7 +38,7 @@ export default class Arena{
     //   }
     // )
   }
-  endGameCondtion(maxRound) {
+  endGameCondtion(maxRound: number) {
     //End Game Condtions 
     if(this.P1.HP <= 0 && this.P2.HP <= 0){
       this.logRound(this.P1.Character.Owner_ID+' and '+this.P1.Character.Owner_ID+' fainted at the same time!');
@@ -66,8 +72,9 @@ export default class Arena{
       // decide who attacks first is possible
       let attacker;
       let defenser;
+      // typescript needs to check if nextSkill is null
       if( this.P1.isReady() && this.P2.isReady() ){
-        if( this.P1.nextSkill.AP_Cost <= this.P2.nextSkill.AP_Cost ){
+        if( (this.P1.nextSkill?.AP_Cost ?? 9999) <= (this.P2.nextSkill?.AP_Cost ?? 9999) ){
           attacker = this.P1;
           defenser = this.P2;
         } else {
@@ -83,7 +90,7 @@ export default class Arena{
       }
       
       // process attack
-      if(attacker !== undefined){
+      if(attacker && defenser){
         //let log = attacker.attack(defenser);
 
         // attacker's raw attack state

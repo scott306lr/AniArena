@@ -6,10 +6,10 @@ import {Character} from "./Character";
 
 export type Player_JSON = {
   Character: Character;
-  Team: Number;
-  HP: Number;
-  AP: Number;
-  AP_Regen: Number;
+  Team: number;
+  HP: number;
+  AP: number;
+  AP_Regen: number;
   nextSkill: Skill;
   EQ_NORM: EffectQueue;
   EQ_ATK: EffectQueue;
@@ -18,17 +18,17 @@ export type Player_JSON = {
 
 export class Player{
   Character: Character;
-  Team: Number;
-  HP: Number;
-  AP: Number;
-  AP_Regen: Number;
+  Team: number;
+  HP: number;
+  AP: number;
+  AP_Regen: number;
   nextSkill: Skill | null;
   EQ_NORM: EffectQueue;
   EQ_ATK: EffectQueue;
   EQ_DEF: EffectQueue;
 
 
-  constructor(Character:Character, Team:Number) {
+  constructor(Character:Character, Team:number) {
     this.Character = Character;
     this.Team = Team;
     this.HP = this.Character.Abilities.HP_Init;
@@ -49,11 +49,11 @@ export class Player{
 
   /*Player defenser
   return battlelog*/
-  attack(){
+  attack(): State[] {
     //let retLog = attackSkill.Description.replace('$name',this.Character.Owner_ID) + 
     //                  " " +
     //                  counterSkill.Description.replace('$name', defenser.Character.Owner_ID);
-    if (!this.nextSkill) return; // no skill chosen
+    if (!this.nextSkill) return []; // no skill chosen
     const states = this.nextSkill.States;
 
     //filter out states to EQ_ATK and EQ_DEF

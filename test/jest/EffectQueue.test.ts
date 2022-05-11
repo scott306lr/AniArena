@@ -1,58 +1,65 @@
 import {State_JSON, State} from "../../client/AniClasses/State";
-import EffectQueue from "../../client/AniClasses/EffectQueue";
+import {EffectQueue} from "../../client/AniClasses/EffectQueue";
 
 describe('Arena Test', () => {
-  let state1;
-  let state2;
-  let state3;
-  let status_state;
-  let arr = [];
+  let state1: State;
+  let state2: State;
+  let state3: State;
+  let status_state: State;
+  let arr: State[] = [];
 
   beforeEach( () => {
-    state1 = new State(
-                  2, 
-                  "nobleed", 
-                  "immune to bleeding!", 
-                  3, 
-                  "NORM", 
-                  "DEL", 
-                  {}, 
-                  ["bleed"], 
-                  ["anti-bleed", "buff"]
-                );
-    state2 = new State(
-                  5, 
-                  "burning", 
-                  "$name burning!", 
-                  5, 
-                  "NORM", 
-                  "SUB", 
-                  {"HP": 10}, 
-                  ["status"], 
-                  ["burn", "fire", "debuff"]
-                );
-    state3 = new State(
-                  4, 
-                  "bleeding", 
-                  "$name burning!", 
-                  5, 
-                  "NORM", 
-                  "SUB", 
-                  {"HP": 50}, 
-                  ["status"], 
-                  ["bleed", "debuff"]
-                );
-    status_state = new State(
-                  9999, 
-                  "status", 
-                  5, 
-                  "NORM", 
-                  "NONE", 
-                  "DEL", 
-                  {"HP": 100, "AP": 100}, 
-                  [], 
-                  ["status"] 
-                );
+    const state1_json:State_JSON = {
+      cnt: 2,
+      name: "nobleed",
+      description: "immune to bleeding!",
+      priority: 3,
+      loc: "NORM",
+      action: "DEL",
+      args: {},
+      effectOn: ["bleed"], 
+      labels: ["anti-bleed", "buff"]
+    }
+
+    const state2_json:State_JSON = {
+      cnt: 5,
+      name: "burning", 
+      description: "$name burning!",
+      priority: 5,
+      loc: "NORM",
+      action: "SUB",
+      args: {"HP": 10},
+      effectOn: ["status"], 
+      labels: ["burn", "fire", "debuff"]
+    }
+
+    const state3_json:State_JSON = {
+      cnt: 4,
+      name: "bleeding",
+      description: "$name burning!",
+      priority: 5,
+      loc: "NORM",
+      action: "SUB",
+      args: {"HP": 50}, 
+      effectOn: ["status"], 
+      labels: ["bleed", "debuff"]
+    }
+
+    const status_json:State_JSON = {
+      cnt: 9999,
+      name: "status",
+      description: "$name burning!",
+      priority: 5,
+      loc: "NORM",
+      action: "NONE",
+      args: {"HP": 100, "AP": 100}, 
+      effectOn: [], 
+      labels: ["status"]
+    }
+    state1 = new State(state1_json);
+    state2 = new State(state2_json);
+    state3 = new State(state3_json);
+    status_state = new State(status_json);
     arr = [state1, state2, state3];
   });
 

@@ -4,9 +4,9 @@ type BattleLog_JSON = {
   ID: number;
   StartTime: Date;
   P1_ID: number;
-  P1_Char: Character_JSON;
+  P1_Char: Character;
   P2_ID: number;
-  P2_Char: Character_JSON;
+  P2_Char: Character;
   Winner: number;
   Log: string[];
 }
@@ -15,12 +15,13 @@ export default class BattleLog{
   ID: number;
   StartTime: Date;
   P1_ID: number;
-  P1_Char: Character_JSON;
+  P1_Char: Character;
   P2_ID: number;
-  P2_Char: Character_JSON;
+  P2_Char: Character;
   Winner: number;
   Log: string[];
 
+  //to be corrected
   constructor(battle_json: BattleLog_JSON) {
     this.ID = battle_json.ID;
     this.StartTime = battle_json.StartTime;

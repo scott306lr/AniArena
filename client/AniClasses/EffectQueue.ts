@@ -3,8 +3,8 @@ import {State_JSON, State} from "./State";
 
 export class EffectQueue {
   Queue: State[];
-  constructor(states: State[] = []){
-    this.Queue = states;
+  constructor(states?: State[]){
+    this.Queue = states ?? [];
   }
 
   push_states(states: State[]){

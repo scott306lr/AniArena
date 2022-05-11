@@ -1,9 +1,9 @@
-import Personal_Data from "../../client/AniClasses/Personal_Data";
-import Skill from "../../client/AniClasses/Skill";
-import Abilities from "../../client/AniClasses/Abilities";
-import Character from "../../client/AniClasses/Character";
-import Player from "../../client/AniClasses/Player";
-import Arena from "../../client/AniClasses/Arena";
+import {Personal_Data} from "../../client/AniClasses/Personal_Data";
+import {Skill} from "../../client/AniClasses/Skill";
+import {Abilities} from "../../client/AniClasses/Abilities";
+import {Character} from "../../client/AniClasses/Character";
+import {Player} from "../../client/AniClasses/Player";
+import {Arena} from "../../client/AniClasses/Arena";
 
 describe('Arena Test', () => {
   let abilites;

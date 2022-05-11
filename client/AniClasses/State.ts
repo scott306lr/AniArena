@@ -1,25 +1,47 @@
 import { cloneDeep } from 'lodash-es';
 
-export default class State {
-  constructor(cnt, name, description, priority, loc, action, args, effectOn, label){
-    this.cnt = cnt;
-    this.name = name;
-    this.description = description;
-    this.priority = priority;
-    this.loc = loc;
-    this.action = action;
-    this.args = args;
-    this.effectOn = effectOn;
-    this.label = label;
+export type State_JSON = {
+  cnt: number; 
+  name: string;
+  description: string;
+  priority: number;
+  loc: string;
+  action: string;
+  args: object | any;
+  effectOn: string[];
+  labels: string[];
+}
+
+export class State {
+  cnt: number; 
+  name: string;
+  description: string;
+  priority: number;
+  loc: string;
+  action: string;
+  args: object | any;
+  effectOn: string[];
+  labels: string[];
+
+  constructor(state_json: State_JSON){
+    this.cnt = state_json.cnt;
+    this.name = state_json.name;
+    this.description = state_json.description;
+    this.priority = state_json.priority;
+    this.loc = state_json.loc;
+    this.action = state_json.action;
+    this.args = state_json.args;
+    this.effectOn = state_json.effectOn;
+    this.labels = state_json.labels;
   }
 
-  effect(arr){
+  effect(states: State[]){
     let ret = [];
-    for(let i = 0; i < arr.length; i++){
-      let state = arr[i];
+    for(let i = 0; i < states.length; i++){
+      let state = states[i];
 
       // any of the states' labels are included in effectOn
-      const found = this.effectOn.some( r => state.label.includes(r) );
+      const found = this.effectOn.some( r => state.labels.includes(r) );
 
       // if not found, skip, don't modify state.
       if (!found){

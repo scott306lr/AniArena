@@ -1,4 +1,4 @@
-import Player from "./Player";
+import {Player} from "./Player";
 
 export default class Arena{
   constructor(P1_Char, P2_Char) {
@@ -32,7 +32,7 @@ export default class Arena{
     //   }
     // )
   }
-  endGameCondtion() {
+  endGameCondtion(maxRound) {
     //End Game Condtions 
     if(this.P1.HP <= 0 && this.P2.HP <= 0){
       this.logRound(this.P1.Character.Owner_ID+' and '+this.P1.Character.Owner_ID+' fainted at the same time!');
@@ -52,15 +52,16 @@ export default class Arena{
   }
 
   startGame(){
-    let maxRound = 20;
+    const maxRound = 20;
     this.P1.chooseSkill();
     this.P2.chooseSkill();
 
     while( this.roundCount <= maxRound ){
+      console.log("Round: ", this.roundCount);
       // run EffectQueue
       this.P1.execEffect();
       this.P2.execEffect();
-      if (this.endGameCondtion()) break;
+      if (this.endGameCondtion(maxRound)) break;
 
       // decide who attacks first is possible
       let attacker;
@@ -96,9 +97,10 @@ export default class Arena{
         //this.logRound(log);
         this.roundCount += 1;
       }
-      if (this.endGameCondtion()) break;
+      if (this.endGameCondtion(maxRound)) break;
       
       this.newRound();
+      break;
     }
   }
 

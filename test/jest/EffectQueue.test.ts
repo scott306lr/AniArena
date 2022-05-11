@@ -1,4 +1,4 @@
-import State from "../../client/AniClasses/State";
+import {State_JSON, State} from "../../client/AniClasses/State";
 import EffectQueue from "../../client/AniClasses/EffectQueue";
 
 describe('Arena Test', () => {

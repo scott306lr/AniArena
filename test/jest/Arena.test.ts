@@ -12,9 +12,16 @@ describe('Arena Test', () => {
   let arena;
 
   beforeEach( () => {
-    abilites = new Abilities(10, 1, 3, 10);
-    P1_Char = new Character(101, 100, abilites, 100);
-    P2_Char = new Character(102, 100, abilites, 100);  
+    
+    abilites = new Abilities({
+      HP_Init: 100,
+      AP_Regen: 1,
+      AP_Init: 3,
+      Exp: 10
+    });
+
+    P1_Char = new Character(101, 8787);
+    P2_Char = new Character(102, 8111);  
     arena = new Arena(P1_Char, P2_Char);
   });
 

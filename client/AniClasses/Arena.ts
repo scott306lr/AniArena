@@ -1,7 +1,7 @@
 import { Character } from "./Character";
 import {Player} from "./Player";
 
-export default class Arena{
+export class Arena{
   P1: Player;
   P2: Player;
   roundCount: number;
@@ -41,7 +41,7 @@ export default class Arena{
   endGameCondtion(maxRound: number) {
     //End Game Condtions 
     if(this.P1.HP <= 0 && this.P2.HP <= 0){
-      this.logRound(this.P1.Character.Owner_ID+' and '+this.P1.Character.Owner_ID+' fainted at the same time!');
+      this.logRound(this.P1.Character.Owner_ID+' and '+this.P2.Character.Owner_ID+' fainted at the same time!');
       return true;
     } else if(this.P1.HP <= 0){
       this.logRound(this.P1.Character.Owner_ID+' was defeted!');
@@ -107,7 +107,7 @@ export default class Arena{
       if (this.endGameCondtion(maxRound)) break;
       
       this.newRound();
-      break;
+      //break;
     }
   }
 

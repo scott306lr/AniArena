@@ -21,22 +21,22 @@ export class Character{
   Skills: Skill[];
   Abilities: Abilities;
 
-  constructor(character_json: Character_JSON) {
-    const data = this.fetchData(character_json.ID);
+  constructor(Owner_ID: number, Char_ID: number) {
+    const data = this.fetchData(Owner_ID, Char_ID);
 
-    this.Owner_ID = character_json.Owner_ID;
-    this.ID = character_json.ID;
-    this.Name = data["Name"];
-    this.Rarity = data["Rarity"];
-    this.Exp = character_json.Exp;
-    this.Skills = data["Skills"].map( s => new Skill(s) );
-    this.Abilities = character_json.Abilities;
+    this.Owner_ID = data.Owner_ID;
+    this.ID = data.ID;
+    this.Name = data.Name;
+    this.Rarity = data.Rarity;
+    this.Exp = data.Exp;
+    this.Skills = data.Skills.map( s => new Skill(s) );
+    this.Abilities = data.Abilities;
   }
 
-  fetchData(Char_ID: number){
+  fetchData(Owner_ID: number, Char_ID: number){
     const data: Character_JSON = {
-      Owner_ID: 0,
-      ID: 0,
+      Owner_ID: Owner_ID,
+      ID: Char_ID,
       Name: "Star",
       Rarity: "SS",
       Exp: 0,

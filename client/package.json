@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "@types/lodash-es": "^4.17.6",
     "framer-motion": "^6.3.3",
+    "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "next": "latest",
     "react": "^17.0.2",

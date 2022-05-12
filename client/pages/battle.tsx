@@ -15,11 +15,11 @@ const Battle: NextPage = () => {
     // Todo: fetch data here
 
     return (
-        <div className="bg-slate-200 w-screen h-screen">
+        <div className="">
             <Head>
                 <title>AniArena</title>
             </Head>
-            <main className="grid bg-slate-200">
+            <main className="grid">
                 
                 {/* sections */}
                 <div className="flex flex-wrap justify-center m-8 p-4 gap-4">

@@ -28,7 +28,7 @@ function SkillCard({imgsrc, name, type, description}: Props): ReactElement {
     };
 
     return (
-        <div className="flex bg-white rounded-lg p-2 gap-2 shadow-lg">
+        <div className="flex bg-white rounded-lg p-2 gap-2 shadow-lg hover:scale-105 hover:-translate-y-2 transition-all">
             <div>
                 <Avatar imgsrc={imgsrc} />
             </div>

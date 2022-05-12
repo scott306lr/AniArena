@@ -30,11 +30,11 @@ const Characters: NextPage = () => {
     // Todo: fetch data here
 
     return (
-        <div className="bg-slate-200 w-screen h-screen">
+        <div className="">
             <Head>
                 <title>AniArena</title>
             </Head>
-            <main className="grid bg-slate-200">
+            <main className="grid">
 
 
                 
@@ -44,7 +44,7 @@ const Characters: NextPage = () => {
                         {/* middle characters section*/}
                         {/*Todo: change it to filter map  */}
                         {/*      Add click event */}
-                        <div className="md:grid flex flex-wrap bg-white rounded-lg shadow-lg p-2 space-y-2">
+                        <div className="md:grid flex flex-wrap bg-white rounded-lg shadow-lg p-2 space-y-2 hover:scale-110 transition-all">
                             <Avatar imgsrc="https://images-ext-1.discordapp.net/external/x08twzHAcDIWcqHEPgEIdfLNoIGST3tHUdti0Ww3b00/https/mudae.net/uploads/1232276/v6uL2AsAjYy0QE0-4OKy~0P98O5C.png" />
                             <Avatar imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png" />
                             <Avatar imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045678669484062/nkmBV7R.png" />

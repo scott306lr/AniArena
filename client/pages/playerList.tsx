@@ -10,12 +10,12 @@ const PlayerList: NextPage = () => {
   const handleSearch = () => {console.log("search click")};
 
   return (
-    <div className="bg-slate-200 w-screen h-screen">
+    <div className="">
       <Head>
         <title>AniArena</title>
       </Head>
 
-      <main className="bg-slate-200">
+      <main className="">
         
         {/* sections */}
         <div className="flex flex-wrap items-center justify-center m-4 p-4 gap-8">

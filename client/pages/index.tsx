@@ -5,7 +5,7 @@ import WordBallon from '../components/WordBallon';
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-slate-200 w-screen h-screen">
+    <div className="">
       <Head>
         <title>AniArena</title>
       </Head>

@@ -12,7 +12,7 @@ import {
 function Navbar() {
 
     return (
-        <div className="flex w-min border-2 p-2 gap-2 bg-white rounded-lg">
+        <div className="flex w-min p-2 bg-white rounded-lg shadow-xl hover:scale-110 transition-all hover:translate-y-4">
             <Link href="/" passHref>
                 <a>
                     <Avatar Icon={HomeIcon} title="Home"/>

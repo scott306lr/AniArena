@@ -8,13 +8,10 @@ interface Props {
 
 function AttributeBar({attribute, max, val}: Props): ReactElement {
     const [leftStyle, setLeftStyle] = React.useState({width: '100%', backgroundColor: 'rgb(34 197 94)'})
-    const [rightStyle, setRightStyle] = React.useState({width: '0%'})
-
     React.useEffect(() => {
         let length = (val/max)*100
         let color = ((length < 40)?'rgb(239 68 68)':'rgb(34 197 94)')
         setLeftStyle({width: length+'%', backgroundColor: color})
-        setRightStyle({width: (100-length)+'%'})
     }, [max, val])
 
     return (
@@ -22,8 +19,9 @@ function AttributeBar({attribute, max, val}: Props): ReactElement {
             {/* bar */}
             <div className="flex">
                 {/* Todo: change bar propotion accroding to max and val */}
-                <div className="h-1 rounded-l-lg transition-all ease-linear" style={leftStyle}></div>
-                <div className="h-1 bg-gray-500 rounded-r-lg transition-all ease-linear" style={rightStyle}></div>
+                <div className="h-fit w-full rounded-lg overflow-hidden bg-gray-500">
+                    <div className="h-1 rounded-l-lg transition-all ease-linear" style={leftStyle}></div>
+                </div>
             </div>
             {/* attribute text description */}
             <p className="justify-self-end">{attribute} {val}/{max}</p>

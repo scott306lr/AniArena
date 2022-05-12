@@ -87,6 +87,7 @@ describe('Arena Test', () => {
     expect(out_arr).toEqual(new_arr);
   });
 
+  it.todo('state action only modifies exisiting keys.')
   it.todo('EffectQueue.effect() logs correctly.')
 
 })

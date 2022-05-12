@@ -52,6 +52,7 @@ export class State {
       switch (this.action) {
         case 'ADD':
           for (const key in this.args) {
+            if (!state.args.key) continue;
             state.args[key] += this.args[key];
           }
           ret.push(state);
@@ -59,6 +60,7 @@ export class State {
   
         case 'SUB':
           for (const key in this.args) {
+            if (!state.args.key) continue;
             state.args[key] -= this.args[key];
           }
           ret.push(state);
@@ -66,6 +68,7 @@ export class State {
   
         case 'MUL':
           for (const key in this.args) {
+            if (!state.args.key) continue;
             state.args[key] *= this.args[key];
           }
           ret.push(state);
@@ -73,6 +76,7 @@ export class State {
   
         case 'DIV':
           for (const key in this.args) {
+            if (!state.args.key) continue;
             state.args[key] /= this.args[key];
           }
           ret.push(state);

@@ -1,7 +1,7 @@
 import {State_JSON, State} from "../../client/AniClasses/State";
 import {EffectQueue} from "../../client/AniClasses/EffectQueue";
 
-describe('Arena Test', () => {
+describe('EffectQueue Test', () => {
   let state1: State;
   let state2: State;
   let state3: State;

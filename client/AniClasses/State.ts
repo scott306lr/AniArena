@@ -46,38 +46,43 @@ export class State {
         ret.push(state);
         continue;
       }
-      //console.log("found", state.name);
+      // console.log("found", state.name);
       
       // modify state
       switch (this.action) {
         case 'ADD':
           for (const key in this.args) {
-            if (!state.args.key) continue;
-            state.args[key] += this.args[key];
+            if(key in state.args){
+              state.args[key] += this.args[key];
+            }
           }
           ret.push(state);
           break;
   
         case 'SUB':
           for (const key in this.args) {
-            if (!state.args.key) continue;
-            state.args[key] -= this.args[key];
+            if (key in state.args){
+              state.args[key] = Math.max(0, state.args[key] - this.args[key]);
+            }
           }
           ret.push(state);
           break;
   
         case 'MUL':
           for (const key in this.args) {
-            if (!state.args.key) continue;
-            state.args[key] *= this.args[key];
+            if (key in state.args){
+              state.args[key] *= this.args[key];
+            }
           }
           ret.push(state);
           break;
   
         case 'DIV':
           for (const key in this.args) {
-            if (!state.args.key) continue;
-            state.args[key] /= this.args[key];
+            if (key in state.args){
+              state.args[key] /= this.args[key];
+              Math.round(state.args[key])
+            }
           }
           ret.push(state);
           break;

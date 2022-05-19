@@ -76,9 +76,9 @@ export class Player{
     const temp_states = this.EQ_NORM.effect(states, false);
     //console.log(temp_states.map(state => state.name));
     
-    // we need to execute attack states once, 
-    // need to be modified by EQ_NORM but only temporarily,
-    // hence we create temp_states, to be modified by EQ_NORM and executed.
+    // We need to execute attack states once. 
+    // States needs to be modified by EQ_NORM but only temporarily.
+    // Hence we create temp_states, to be modified by EQ_NORM and executed.
     const temp_EQ = new EffectQueue(temp_states)
     const modified_status = temp_EQ.effect([this.getStatus()])[0];
     this.HP = modified_status.args["HP"];

@@ -73,20 +73,26 @@ export class Player{
   defend(states: State[]){
     //process states
     states = this.EQ_DEF.effect(states);
-    states = this.EQ_NORM.effect(states, false);
-    const temp_EQ = new EffectQueue(states)
-    console.log(states.map(state => state.name));
+    const temp_states = this.EQ_NORM.effect(states, false);
+    //console.log(temp_states.map(state => state.name));
     
-    //execute once, guess log here
-    const log = "log here";
+    // we need to execute attack states once, 
+    // need to be modified by EQ_NORM but only temporarily,
+    // hence we create temp_states, to be modified by EQ_NORM and executed.
+    const temp_EQ = new EffectQueue(temp_states)
     const modified_status = temp_EQ.effect([this.getStatus()])[0];
     this.HP = modified_status.args["HP"];
     this.AP = modified_status.args["AP"];
     this.AP_Regen = modified_status.args["AP_Regen"];
 
-    //add the rest of the states to EQ_NORM
-    this.EQ_NORM.push_states(temp_EQ.Queue);
+    //countdown real states by 1, as if it has been executed once.
+    const real_EQ = new EffectQueue(states)
+    real_EQ.countdown();
 
+    //add the rest of the states to EQ_NORM
+    this.EQ_NORM.push_states(real_EQ.Queue);
+
+    const log = "hello there."
     return log;
   }
 

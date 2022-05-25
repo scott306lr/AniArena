@@ -49,11 +49,12 @@ export class Player{
 
   /*Player defenser
   return battlelog*/
-  attack(): State[] {
+  attack(){
     //let retLog = attackSkill.Description.replace('$name',this.Character.Owner_ID) + 
     //                  " " +
     //                  counterSkill.Description.replace('$name', defenser.Character.Owner_ID);
     if (!this.nextSkill) return []; // no skill chosen
+    this.AP -= this.nextSkill.AP_Cost;
     const states = this.nextSkill.States;
 
     //filter out states to EQ_ATK and EQ_DEF
@@ -67,7 +68,7 @@ export class Player{
 
     //process remaining attack states
     const attack_states = this.EQ_ATK.effect(to_norm);
-    return attack_states
+    return [attack_states, this.nextSkill.Shoutout];
   }
 
   defend(states: State[]){
@@ -108,7 +109,7 @@ export class Player{
       action: "NONE",
       args: {"HP":this.HP, "AP":this.AP, "AP_Regen":this.AP_Regen},
       effectOn: [],
-      labels: []
+      labels: ["status"]
     }
     return new State(state_json);
   }

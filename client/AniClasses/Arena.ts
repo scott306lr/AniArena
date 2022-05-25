@@ -7,10 +7,10 @@ export class Arena{
   roundCount: number;
   log: string[];
   constructor(P1_Char: Character, P2_Char: Character) {
+    this.log = [];
     this.P1 = new Player(P1_Char, 1);
     this.P2 = new Player(P2_Char, 2);
     this.roundCount = -1;
-    this.log = [];
   }
 
   newGame(){
@@ -59,16 +59,17 @@ export class Arena{
 
   startGame(){
     const maxRound = 20;
+    this.newRound();
     this.P1.chooseSkill();
     this.P2.chooseSkill();
 
     while( this.roundCount <= maxRound ){
-      console.log("Round: ", this.roundCount);
       // run EffectQueue
       this.P1.execEffect();
       this.P2.execEffect();
       if (this.endGameCondtion(maxRound)) break;
 
+      
       // decide who attacks first is possible
       let attacker;
       let defenser;
@@ -92,17 +93,22 @@ export class Arena{
       // process attack
       if(attacker && defenser){
         //let log = attacker.attack(defenser);
-
+        this.log.push("new round $cnt".replace("$cnt", this.roundCount.toString()))
+        let LogHP = "    P1 HP: " + this.P1.HP.toString() + ", P2 HP: " + this.P2.HP.toString()
+        let LogAP = "    P1 AP: " + this.P1.AP.toString() + ", P2 AP: " + this.P2.AP.toString()
+        this.roundCount += 1;
+        this.log.push(LogHP, LogAP)
         // attacker's raw attack state
         // attacker proccess attack state
         // defender proccess attack state
         // attack state is pushed to defender's EQ_NORM
-        const attack_states = attacker.attack();
-        const log = defenser.defend(attack_states);
-
+        const atkResult = attacker.attack();
+        const attack_states = atkResult[0]
+        const atklog = atkResult[1]
+        this.log.push("    " + attacker.Character.Name+": "+atklog)
+        const deflog = defenser.defend(attack_states);
+  
         attacker.chooseSkill();
-        //this.logRound(log);
-        this.roundCount += 1;
       }
       if (this.endGameCondtion(maxRound)) break;
       

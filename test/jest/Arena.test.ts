@@ -64,7 +64,7 @@ describe('Arena Test', () => {
   it('startGame', () => {
     arena.newGame();
     arena.startGame();
-    console.log(arena.getLog());
+    // console.log(arena.getLog());
   });
   
   it.todo('calculates result after battle');

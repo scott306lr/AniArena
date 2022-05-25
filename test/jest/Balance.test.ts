@@ -75,7 +75,6 @@ describe('Balance Test', () => {
     console.log(arena.log);
 });
 
-<<<<<<< HEAD
   it('古神祭司對上惠惠', () => {
     let inanis = new Character(101, 1);
     inanis.loadData(inanis.fetchInanis(101, 1));
@@ -87,6 +86,4 @@ describe('Balance Test', () => {
     console.log(arena.log);
 });
 
-=======
->>>>>>> 736865677eedc85e8214890f97e9362fce469338
 })

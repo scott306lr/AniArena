@@ -1,0 +1,20 @@
+export enum DamageType{
+    physical,
+    mental,
+    magic
+}
+
+export class Damage{
+    value: number;
+    type: DamageType;
+
+    constructor(value: number, type: DamageType){
+        this.value = value;
+        this.type = type;
+    }
+
+    clone(): Damage {
+        return new Damage(this.value, this.type);
+    }
+
+}

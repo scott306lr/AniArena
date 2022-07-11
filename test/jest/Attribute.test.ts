@@ -24,7 +24,7 @@ describe('Attribute Test', () => {
         let attribute = new Attribute(attribute_JSON);
         let newdata = JSON.parse(JSON.stringify(attribute_JSON));
         newdata.HP = 1000;
-        newdata.Exp = 1000;
+        newdata.exp = 1000;
         attribute.reset(newdata);
 
         expect(attribute.HP.get()).toBe(1000);

@@ -9,6 +9,9 @@ export class Damage{
     type: DamageType;
 
     constructor(value: number, type: DamageType){
+        if(value < 0){
+            value = 0;
+        }
         this.value = value;
         this.type = type;
     }

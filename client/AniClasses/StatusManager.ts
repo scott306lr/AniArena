@@ -1,5 +1,5 @@
 import { Combater } from "./Combater";
-import { Status } from "./Status/Status";
+import { Status, StatusState } from "./Status/Status";
 
 export enum EventCode {
     BeforeGetDamage,	
@@ -8,20 +8,25 @@ export enum EventCode {
     AfterDealDamage,
     BeforeLoseHP,
     AfterLoseHP,
-    BeforeHealHP,	
-    AfterHealHP,
+    BeforeGetHP,	
+    AfterGetHP,
+    BeforeGetAP,
+    AfterGetAP,
+    BeforeLoseAP,
+    AfterLoseAP,
     BeforeActivateSkill,
     AfterActivateSkill,
     BeforeAddStatus,
     AfterNewRound,
+    Once,
 }
 
-export class EventHandler{
+export class StatusManager{
     owner: Combater;
-    events: Status[];
+    statusList: Status[];
 
     constructor(owner: Combater){
-        this.events = [];
+        this.statusList = [];
         this.owner = owner;
     }
 
@@ -30,7 +35,7 @@ export class EventHandler{
      * @param status 
      */
     _add(status: Status){
-        this.events.push(status);
+        this.statusList.push(status);
     }
 
     /**
@@ -38,7 +43,7 @@ export class EventHandler{
      * @param status which will be remove from list, remember to call status.exit() before remove
      */
     _remove(status: Status){
-        this.events = this.events.filter(item => item !== status);
+        this.statusList = this.statusList.filter(item => item !== status);
     }
 
     /**
@@ -46,8 +51,15 @@ export class EventHandler{
      * @param eventCode which event is happening.
      * @param eventTrigger who trigger this event.
      */
-    trigger(eventCode: EventCode, eventTrigger: Combater){
-        this.events.forEach(item => item.trigger(eventCode, eventTrigger));
+    trigger(eventCode: EventCode, eventTrigger: Combater | undefined){
+        this.statusList.forEach(item => item.trigger(eventCode, eventTrigger));
+    }
+
+    get(): StatusState[] {
+        let ret: StatusState[] = [];
+        let pushEach = (item: Status) => ret.push(item.get());
+        this.statusList.forEach(item => pushEach(item));
+        return ret;
     }
 
 }

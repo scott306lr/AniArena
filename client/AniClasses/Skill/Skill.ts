@@ -1,6 +1,7 @@
-import { Combater } from "./Combater";
-import { Status } from "./Status/Status"
-import { Tag } from "./Tag";
+import { Skill_Fireball } from "./Skill_Fireball";
+import { Combater } from "../Combater";
+import { Status } from "../Status/Status"
+import { Tag } from "../Tag";
 
 export type Cost = {
     HP: number;
@@ -10,6 +11,7 @@ export type Cost = {
 export type Requirement = {
     level: number;
 }
+
 
 export type Skill_JSON = {
     name: string;
@@ -21,14 +23,14 @@ export type Skill_JSON = {
     requirement: Requirement;
 }
 
-export class Skill{
+
+export abstract class Skill{
     owner: Combater;
     dataJSON: Skill_JSON;
     description: string;
     declaration: string;
     cost: Cost;
-    requirement: Requirement;
-    
+    requirement: Requirement;  
     name: string;
 
     constructor(owner: Combater){
@@ -92,15 +94,35 @@ export class Skill{
         return true;
     }
 
-    Cast(object: Combater, isCost: boolean = true){
+
+    /**
+     * This function first check if combater
+     * @param object target combater.
+     * @param isCost if true, combater needs to pay attribute to cast spell. 
+     */
+    abstract cast(object: Combater, isCost: boolean): boolean;
+
+    
+    /**
+     * cast helper, override if needs.
+     * @param isCost if true, combater needs to pay attribute to cast spell. 
+     */
+    protected consume(isCost: boolean = true): boolean{
+        if(this.isCastable(isCost) === false){
+            return false;
+        }
+
         if(isCost){
             for(let key in this.cost){
                 if(key === "HP"){
-                    this.owner.loseHP(this.cost.HP);
+                    this.owner.loseHP(this.cost.HP, undefined);
                 }
-
+                else if(key === "AP"){
+                    this.owner.loseAP(this.cost.AP, undefined);
+                }
             }
         }
 
+        return true;
     }
 }

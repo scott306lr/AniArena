@@ -1,7 +1,8 @@
 import { Combater } from "../Combater";
 import { Damage, DamageType } from "../Damage";
 import { Tag } from "../Tag";
-import { EventCode } from "../EventHandler"
+import { EventCode } from "../StatusManager"
+import { clone } from "lodash";
 
 export type Status_JSON = {
     name: string;
@@ -9,6 +10,14 @@ export type Status_JSON = {
     description: string;
     declaration: string;
     tags : Tag[];
+}
+
+export type StatusState = {
+    name: string,
+    image: string,
+    countdown: number | undefined,
+    description: string | undefined,
+    tags: Tag[]
 }
 
 
@@ -31,12 +40,7 @@ export abstract class Status{
     abstract eventCode: EventCode;
     
 
-    constructor(caster: Combater,
-                owner?: Combater,
-                damage?: Damage,
-                countdown?: number,
-                description?: string,
-                declaration?: string)
+    constructor(caster: Combater, owner?: Combater, damage?: Damage, countdown?: number, description?: string, declaration?: string)
     {
         this.caster = caster;
         this.owner = owner;
@@ -81,7 +85,7 @@ export abstract class Status{
      * Activate status if trigger pass some conditions.
      * @param eventTrigger who trigger this status
      */
-    abstract activate(eventTrigger: Combater): void;
+    abstract activate(eventTrigger: Combater | undefined): void;
     
     
     /**
@@ -97,9 +101,25 @@ export abstract class Status{
      * @param eventCode 
      * @param eventTrigger 
      */
-    trigger(eventCode: EventCode, eventTrigger: Combater){
+    trigger(eventCode: EventCode, eventTrigger: Combater | undefined){
         if(eventCode == this.eventCode){
             this.activate(eventTrigger);
         }
+    }
+
+    /**
+     * Return Status inner state information, eg name,
+     * description, imagelink, tags, and countdown
+     */
+    get(): StatusState{
+        let ret: StatusState = {
+            name: this.name,
+            image: this.dataJson.image,
+            countdown: this.countdown,
+            description: this.description,
+            tags: clone(this.tags)
+        }
+        return ret;
+
     }
 }

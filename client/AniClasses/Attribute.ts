@@ -6,6 +6,16 @@ export type Attribute_JSON = {
     APRegen: number;
 }
 
+export type AttributeState = {
+    level: number;
+    exp: number;
+    HP: number;
+    maxHP: number;
+    AP: number;
+    maxAP: number;
+    APRegen: number;
+}
+
 export class IntAttribute{
     private value: number;
     constructor(value: number){
@@ -54,6 +64,19 @@ export class Attribute{
         this.AP      = new IntAttribute(this.jsonData.AP);
         this.maxAP   = new IntAttribute(this.jsonData.AP);
         this.APRegen = new IntAttribute(this.jsonData.APRegen);
+    }
+
+    get(): AttributeState{
+        let ret: AttributeState = {
+            level:      this.level.get(),
+            exp:        this.exp.get(),
+            HP:         this.HP.get(),
+            maxHP:      this.maxHP.get(),
+            AP:         this.AP.get(),
+            maxAP:      this.maxAP.get(),
+            APRegen:    this.APRegen.get(),
+        }
+        return ret;
     }
 
 }

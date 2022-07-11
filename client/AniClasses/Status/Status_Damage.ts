@@ -1,11 +1,14 @@
 import { Combater } from "../Combater"
 import { Status } from "./Status"
 import { Damage } from "../Damage"
-import { EventCode } from "../EventHandler"
+import { EventCode } from "../StatusManager"
 
 
 export class Status_Damage extends Status{
-    
+    constructor(caster: Combater,owner?: Combater,damage?: Damage,countdown?: number,description?: string,declaration?: string){
+        super(caster, owner, damage, countdown, description, declaration);
+    }
+
     override eventCode = EventCode.Once;
 
     override apply(object: Combater): void {

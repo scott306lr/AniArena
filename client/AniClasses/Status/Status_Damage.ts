@@ -5,8 +5,8 @@ import { EventCode } from "../StatusManager"
 
 
 export class Status_Damage extends Status{
-    constructor(caster: Combater,owner?: Combater,damage?: Damage,countdown?: number,description?: string,declaration?: string){
-        super(caster, owner, damage, countdown, description, declaration);
+    constructor(caster: Combater, damage?: Damage,countdown?: number,description?: string,declaration?: string){
+        super(caster, damage, countdown, description, declaration);
     }
 
     override eventCode = EventCode.Once;

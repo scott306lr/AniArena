@@ -25,7 +25,7 @@ export abstract class Status{
     caster: Combater;
     owner: Combater | undefined;
     damage: Damage = new Damage(1, DamageType.physical);
-    countdown: number | undefined;
+    countdown: number;
 
     dataJson: Status_JSON;
     description: string | undefined;
@@ -40,17 +40,15 @@ export abstract class Status{
     abstract eventCode: EventCode;
     
 
-    constructor(caster: Combater, owner?: Combater, damage?: Damage, countdown?: number, description?: string, declaration?: string)
+    constructor(caster: Combater, damage?: Damage, countdown: number = 0, description?: string, declaration?: string)
     {
         this.caster = caster;
-        this.owner = owner;
 
         this.damage = (damage === undefined)? this.damage: damage.clone();
         this.countdown = countdown;
         this.description = description;
         this.declaration = declaration;
 
-        console.log(this.constructor.name);
         this.name = this.constructor.name;
         
         this.dataJson = this.fetch(this.name);
@@ -63,7 +61,7 @@ export abstract class Status{
      * fetch database data
      */
     fetch(name: string): Status_JSON{
-        console.log('temporily use stub simulate fetch data from database');
+        // console.log('temporily use stub simulate fetch data from database');
         let ret: Status_JSON = {
             name: 'name',
             image: 'image',

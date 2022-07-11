@@ -8,12 +8,12 @@ export class Status_Invincible extends Status{
 
     override eventCode = EventCode.BeforeGetDamage;
 
-    constructor(caster: Combater,owner?: Combater,damage?: Damage,countdown?: number,description?: string,declaration?: string){
-        super(caster, owner, damage, countdown, description, declaration);
+    constructor(caster: Combater, damage?: Damage,countdown?: number,description?: string,declaration?: string){
+        super(caster, damage, countdown, description, declaration);
     }
 
     override apply(object: Combater): void {
-        
+        this.object
     }
 
     // just do nothing, this status don't bind to owner.

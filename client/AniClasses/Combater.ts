@@ -9,7 +9,7 @@ import { EventCode, StatusManager } from "./StatusManager";
 
 
 export class Combater{
-    private player: Player_JSON;
+    player: Player_JSON;
     private character: Character_JSON;
     attribute: Attribute;
     private skills: Skill[];
@@ -44,13 +44,7 @@ export class Combater{
         this.statusManager = new StatusManager(this);
 
         this.skills = [];
-        let loadHelper = (skillName: string) => {
-            let skill = SkillLoader(this, skillName);
-            if(skill != undefined){
-                this.skills.push(skill);
-            }
-        }
-        this.character.skills.forEach(skillName => loadHelper(skillName));
+        this.character.skills.forEach(skillName => this.loadSkill(skillName));
         // this.arena = arena;
     }
 
@@ -65,7 +59,7 @@ export class Combater{
                         AP: 10,
                         APRegen: 2
                     },
-                    skills: ["Skill_NormalAttack"],
+                    skills: [],
                 }
         return ret;
     }
@@ -80,14 +74,26 @@ export class Combater{
         this.chooseSkill();
     }
 
+    loadSkill(skillname: string): boolean{
+        let skill = SkillLoader(this, skillname);
+        if(skill === undefined){
+            return false;
+        }
+        this.skills.push(skill);
+        return true;
+    }
+
     castSkill(object: Combater): boolean{
         this.nextSkill.cast(object, true);
         return true;
     }
 
     chooseSkill(): Skill{
-        let randomIndex = Math.floor(Math.random()*this.skills.length);
-        this.nextSkill = this.skills[randomIndex];
+        let RequirementFilter = (item: Skill, index: number, array: Skill[]) => { return item.isCastable(false);}
+        let meetSkills = this.skills.filter(RequirementFilter);
+
+        let randomIndex = Math.floor(Math.random()*meetSkills.length);
+        this.nextSkill = meetSkills[randomIndex];
         return this.nextSkill;
     }
 
@@ -117,7 +123,8 @@ export class Combater{
         this.statusManager.trigger(EventCode.BeforeGetDamage, source);
 
         this.loseHP(this.damage.value, undefined);
-
+        this.arena.logger.log(this, `${this.player.nickname}受到${this.damage.getString()}`)
+        
         this.statusManager.trigger(EventCode.AfterLoseHP, source);
 
         return true;
@@ -137,7 +144,7 @@ export class Combater{
         return true;
     }
 
-    getHP(value : number, caller: Combater | undefined): boolean{
+    getHP(value : number, caller: Combater): boolean{
         if(value < 0){
             return false;
         }

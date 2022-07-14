@@ -89,7 +89,6 @@ export abstract class Status{
     /**
      * exit function, execute when the status is going to be remove from owner.
      * remove temporarily change on combater in this function.
-     * remember to set exited to true;
      */
     abstract remove(): void;
 

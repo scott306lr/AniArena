@@ -13,14 +13,26 @@ export class Status_Invincible extends Status{
     }
 
     override apply(object: Combater): void {
-        this.object
+        if(this.countdown == undefined){
+            this.countdown = 1;
+        }
+        this.owner = object;
+        object.statusManager._add(this);
     }
 
-    // just do nothing, this status don't bind to owner.
     override activate(eventTrigger: Combater): void {
+        this.owner?.arena.logger.log(this.owner, "無敵效果發動！");
+
+        this.owner.damage.value = 0;
+        this.countdown-=1;
+
+        if(this.countdown <= 0){
+            this.remove();
+        }
+
         return ;
     }
     override remove(): void {
-
+        this.owner?.statusManager._remove(this);
     }
 }

@@ -4,9 +4,10 @@ import { Player_JSON } from "../../client/AniClasses/Player"
 import { Arena } from "../../client/AniClasses/Arena";
 import { Status_RoundDamage } from "../../client/AniClasses/Status/Status_RoundDamage";
 import { Damage, DamageType } from "../../client/AniClasses/Damage";
+import { Status_Invincible } from "../../client/AniClasses/Status/Status_Invincible";
 
 
-describe("Status_Damage Test", () => {
+describe("Status Test", () => {
     let arena;
     let player1: Player_JSON;
     let player2: Player_JSON;
@@ -48,6 +49,8 @@ describe("Status_Damage Test", () => {
         testStatus.apply(combater_bot);
         let hurtHP = combater_bot.attribute.HP.get();
         expect(hurtHP).toBe(originalHP - damage.value);
+        // console.log(arena.logger.get());
+
     })
 
     it("round damage", () => {
@@ -68,6 +71,24 @@ describe("Status_Damage Test", () => {
         expect(combater_bot.attribute.HP.get()).toBe(originalHP - 2*damage.value);
 
         expect(combater_bot.statusManager.statusList.length).toBe(0);
+        // console.log(arena.logger.get());
+
+    });
+
+    it("invincible", () => {
+        let damage = new Damage(5, DamageType.magic);
+        let testStatus = new Status_Invincible(combater_bot, undefined, 1);
+
+        testStatus.apply(combater_bot);
+        let originalHP = combater_bot.attribute.HP.get();
+        combater_engineer.dealDamage(damage, combater_bot);
+        expect(combater_bot.attribute.HP.get()).toBe(originalHP);
+
+        combater_engineer.dealDamage(damage, combater_bot);
+        expect(combater_bot.attribute.HP.get()).toBe(originalHP - damage.value);
+
+        // console.log(arena.logger.get());
+
     });
 
 })

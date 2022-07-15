@@ -12,8 +12,8 @@ export class Combater{
     player: Player_JSON;
     private character: Character_JSON;
     attribute: Attribute;
-    private skills: Skill[];
-    private nextSkill: Skill;
+    skills: Skill[];
+    nextSkill: Skill;
     statusManager: StatusManager;
     arena: Arena;
     
@@ -23,19 +23,14 @@ export class Combater{
         this.character = this.fetchCharacter(this.player.combater.character);
         this.attribute = new Attribute(this.player.combater.attribute);
         this.statusManager = new StatusManager(this);
+        
         this.skills = [];
-        let loadHelper = (skillName: string) => {
-            let skill = SkillLoader(this, skillName);
-            if(skill != undefined){
-                this.skills.push(skill);
-            }
-        }
-        this.character.skills.forEach(skillName => loadHelper(skillName));
+        this.character.skills.forEach(skillName => this.loadSkill(skillName));
         this.arena = arena;
         this.nextSkill = this.chooseSkill();
     }
 
-    reset(player_JSON: Player_JSON | undefined){
+    reset(player_JSON?: Player_JSON | undefined){
         if(player_JSON != undefined){
             this.player = JSON.parse(JSON.stringify(player_JSON));
         }
@@ -84,7 +79,12 @@ export class Combater{
     }
 
     castSkill(object: Combater): boolean{
+        if( this.nextSkill.isCastable() === false ){
+            return false;
+        }
+        this.statusManager.trigger(EventCode.BeforeCastSkill, this);
         this.nextSkill.cast(object, true);
+        this.statusManager.trigger(EventCode.AfterCastSkill, this);
         return true;
     }
 
@@ -102,6 +102,9 @@ export class Combater{
     }
 
     isReady(): boolean{
+        if(this.nextSkill === undefined){
+            return false;
+        }
         return this.nextSkill.isCastable();
     }
 

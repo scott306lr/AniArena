@@ -23,7 +23,9 @@ export class Status_Invincible extends Status{
     override activate(eventTrigger: Combater): void {
         this.owner?.arena.logger.log(this.owner, "無敵效果發動！");
 
-        this.owner.damage.value = 0;
+        if(this.owner?.damage !== undefined){
+            this.owner.damage.value = 0;
+        }
         this.countdown-=1;
 
         if(this.countdown <= 0){

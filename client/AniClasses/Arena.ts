@@ -42,7 +42,8 @@ export class Arena{
 
     start(): CombatLog{
 
-        while( this.round < this.maxRound ) {
+        let isEnd = false;
+        while( this.round < this.maxRound && !isEnd) {
             this.newRound(true);
 
             while(this.combater1.isReady() || this.combater2.isReady()){  
@@ -65,9 +66,11 @@ export class Arena{
 
 
                 if(this.endCondition()){
+                    isEnd = true;
                     break;
                 }
             }
+
         }
         return this.getLog();
     }

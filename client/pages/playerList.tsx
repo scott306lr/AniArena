@@ -5,17 +5,15 @@ import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
 import SearchBar from '../components/SearchBar';
 import PlayerCard from '../components/PlayerCard';
+import Navbar from 'components/Navbar';
 
 const PlayerList: NextPage = () => {
   const handleSearch = () => {console.log("search click")};
 
   return (
-    <div className="">
-      <Head>
-        <title>AniArena</title>
-      </Head>
-
-      <main className="">
+    <div>
+      <Navbar />
+      <main className="grid">
         
         {/* sections */}
         <div className="flex flex-wrap items-center justify-center m-4 p-4 gap-8">

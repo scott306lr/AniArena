@@ -6,4 +6,22 @@
     html {
         @apply bg-slate-200
     }
+    .round-btn {
+        @apply rounded-full bg-gray-700 w-12 h-12 text-white border-solid border-2 border-white
+        duration-200 hover:bg-white hover:border-black hover:text-black hover:ease-in-out
+    }
+
+    .action-btn {
+        @apply w-fit place-self-center bg-sky-400 text-white p-2 rounded-lg shadow-lg border-solid border-2 border-gray-200 
+        transition-all hover:bg-white hover:scale-110 hover:ease-in-out hover:text-black hover:border-black
+    }
+
+    .char-img {
+        @apply w-fit h-fit p-0.5 border-solid border-2 border-gray-700 rounded-lg shadow-xl bg-white hover:scale-105 
+            transition-all ease-in-out
+    }
+
+    .word-bubble {
+        @apply w-fit break-inside-auto p-1 px-3 rounded-lg shadow-lg bg-white
+    }
 }

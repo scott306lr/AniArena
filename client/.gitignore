@@ -33,5 +33,23 @@ yarn-error.log*
 # vercel
 .vercel
 
+# graphql-let
+.cache
+*.graphql.d.ts
+*.graphqls.d.ts
+.cache
+
+lib/resolvers-types.ts
+lib/graphql-operations.ts
+
 # typescript
 *.tsbuildinfo
+
+# yarn https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

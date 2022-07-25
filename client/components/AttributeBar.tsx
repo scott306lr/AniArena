@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 
 interface Props {
     attribute: string,
@@ -7,8 +7,8 @@ interface Props {
 }
 
 function AttributeBar({attribute, max, val}: Props): ReactElement {
-    const [leftStyle, setLeftStyle] = React.useState({width: '100%', backgroundColor: 'rgb(34 197 94)'})
-    React.useEffect(() => {
+    const [leftStyle, setLeftStyle] = useState({width: '100%', backgroundColor: 'rgb(34 197 94)'})
+    useEffect(() => {
         let length = (val/max)*100
         let color = ((length < 40)?'rgb(239 68 68)':'rgb(34 197 94)')
         setLeftStyle({width: length+'%', backgroundColor: color})

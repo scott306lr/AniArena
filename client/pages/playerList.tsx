@@ -1,11 +1,10 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import ActionButton from '../components/ActionButton';
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
 import SearchBar from '../components/SearchBar';
 import PlayerCard from '../components/PlayerCard';
-import Navbar from 'components/Navbar';
+import Navbar from '../components/Navbar';
 
 const PlayerList: NextPage = () => {
   const handleSearch = () => {console.log("search click")};

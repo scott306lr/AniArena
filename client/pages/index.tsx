@@ -1,7 +1,6 @@
-import Navbar from 'components/Navbar';
+import Navbar from '../components/Navbar';
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react';
-import Head from 'next/head'
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
 

@@ -1,10 +1,9 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import AttributeBar from '../components/AttributeBar';
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
 import React from 'react'
-import Navbar from 'components/Navbar';
+import Navbar from '../components/Navbar';
 
 const Battle: NextPage = () => {
     const [hpMax, setHpMax] = React.useState(15);

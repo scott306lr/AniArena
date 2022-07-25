@@ -40,7 +40,7 @@ function Navbar() {
                 </Link>
 
                 {session ? (
-                    <a onClick={() => signOut()}>
+                    <a onClick={() => signOut({ callbackUrl: "/" })}>
                         <Avatar className="h-12 w-12" imgsrc={session.user.image}/>
                     </a>
                 ) : (

@@ -30,6 +30,39 @@ const Characters: NextPage = () => {
     const resetClick = () => {console.log("reset clicked")};
     // Todo: fetch data here
 
+    const Avatars = [
+        {
+            name: "Kirito",
+            imgsrc: "https://images-ext-1.discordapp.net/external/x08twzHAcDIWcqHEPgEIdfLNoIGST3tHUdti0Ww3b00/https/mudae.net/uploads/1232276/v6uL2AsAjYy0QE0-4OKy~0P98O5C.png"
+        },
+        {
+            name: "Megumin",
+            imgsrc: "https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"
+        },
+        {
+            name: "Saber",
+            imgsrc: "https://media.discordapp.net/attachments/872026548692209738/872045678669484062/nkmBV7R.png"
+        }
+    ]
+    
+    const Skills = [
+        {
+            name: "Explosion",
+            type: "攻擊",
+            description: "黑より黑く 闇より暗き漆黑に ，無謬の境界に落ちし理，無行の歪みとなりて，現出せよ！Explosion！"
+        },
+        {
+            name: "Explosion",
+            type: "防禦",
+            description: "防禦魔法！"
+        },
+        {
+            name: "Explosion",
+            type: "攻擊",
+            description: "黑より黑く 闇より暗き漆黑に ，無謬の境界に落ちし理，無行の歪みとなりて，現出せよ！Explosion！"
+        }
+    ]
+
     return (
         <div>
             <Navbar />
@@ -41,15 +74,13 @@ const Characters: NextPage = () => {
                     {/*      Add click event */}
                     <div className="grid place-content-center p-2">
                         <ul className="md:grid flex flex-wrap bg-white rounded-lg shadow-lg p-2 space-y-2 hover:scale-110 transition-all">
-                            <li>
-                                <Avatar imgsrc="https://images-ext-1.discordapp.net/external/x08twzHAcDIWcqHEPgEIdfLNoIGST3tHUdti0Ww3b00/https/mudae.net/uploads/1232276/v6uL2AsAjYy0QE0-4OKy~0P98O5C.png" />
-                            </li>
-                            <li>
-                                <Avatar imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png" />
-                            </li>
-                            <li>
-                                <Avatar imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045678669484062/nkmBV7R.png" />
-                            </li>
+                            {
+                                Avatars.map((avatar, index) => (
+                                    <li key={index} className="md:w-1/2 md:h-1/2">
+                                        <Avatar imgsrc={avatar.imgsrc} />
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
 
@@ -89,15 +120,13 @@ const Characters: NextPage = () => {
                     {/*Todo: change it to filter map  */}
                     <div className="grid lg:w-1/3 place-content-center">
                         <ul className="grid gap-4">
-                            <li>
-                                <SkillCard name="Explosion" type="攻擊" description="黑より黑く 闇より暗き漆黑に ，無謬の境界に落ちし理，無行の歪みとなりて，現出せよ！Explosion！" imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
-                            </li>
-                            <li>
-                                <SkillCard name="Explosion" type="防禦" description="防禦魔法！" imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
-                            </li>
-                            <li>
-                                <SkillCard name="Explosion" type="攻擊" description="黑より黑く 闇より暗き漆黑に ，無謬の境界に落ちし理，無行の歪みとなりて，現出せよ！Explosion！" imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
-                            </li>
+                            {
+                                Skills.map((skill, index) => (
+                                    <li key={index} className="grid w-full">
+                                        <SkillCard name={skill.name} type={skill.type} description={skill.description} imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
                 </div>

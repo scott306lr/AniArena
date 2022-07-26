@@ -34,10 +34,9 @@ yarn-error.log*
 .vercel
 
 # graphql-let
-.cache
-*.graphql.d.ts
-*.graphqls.d.ts
-.cache
++ *.graphql.d.ts
++ *.graphqls.d.ts
++ .cache
 
 lib/resolvers-types.ts
 lib/graphql-operations.ts

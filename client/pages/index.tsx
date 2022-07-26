@@ -1,8 +1,10 @@
+import React from 'react'
 import Navbar from '../components/Navbar';
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react';
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
+
 
 const Home: NextPage = () => {
   const { data: session } = useSession()

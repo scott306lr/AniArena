@@ -10,4 +10,5 @@ module.exports = {
       { subsequentTransformer: 'babel-jest' },
     ],
   },
+  testEnvironment: 'jest-environment-jsdom',
 }

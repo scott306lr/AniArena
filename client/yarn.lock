@@ -7879,7 +7879,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-auth@npm:^4.10.2":
+"next-auth@npm:latest":
   version: 4.10.2
   resolution: "next-auth@npm:4.10.2"
   dependencies:
@@ -9046,7 +9046,7 @@ __metadata:
     graphql-tag: ^2.12.6
     jest: ^27.2.5
     next: latest
-    next-auth: ^4.10.2
+    next-auth: latest
     postcss: ^8.4.14
     react: latest
     react-dom: latest

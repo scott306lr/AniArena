@@ -4,11 +4,26 @@ import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react';
 import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
-
+import { db } from "../firebase";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 
 const Home: NextPage = () => {
   const { data: session } = useSession()
   
+  const addNewPost = async () => {
+    const docRef = await addDoc(collection(db, "posts"), {
+      title: "Hello World",
+    });
+    console.log("Document written with ID: ", docRef.id);
+  }
+
+  const fetchAccounts = async () => {
+    onSnapshot(collection(db, "accounts"), (querySnapshot) => {
+      const docs = querySnapshot.docs.map((doc) => doc.data());
+      console.log(docs);
+    });
+  }
+
   return (
     <div>
       <Navbar />
@@ -24,6 +39,9 @@ const Home: NextPage = () => {
             <WordBallon text={`ID: ${session?.user.email}`} />
             <WordBallon text={`NAME: ${session?.user.name}`}  />
           </div>
+
+          <button className='action-btn' onClick={addNewPost}>Add new post</button>
+          <button className='action-btn' onClick={fetchAccounts}>Fetch accounts</button>
         </div>
 
       </main>

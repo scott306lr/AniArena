@@ -1,35 +1,50 @@
 import '../styles/globals.css';
-import { AppProps } from 'next/app'
+import { withTRPC } from '@trpc/next';
+import { AppType } from 'next/dist/shared/lib/utils';
+import { AppRouter } from './api/trpc/[trpc]';
+import React from 'react'
 
-import { ApolloProvider } from '@apollo/client'
-import { useApollo } from '../lib/apollo'
+
 import { SessionProvider } from "next-auth/react"
 
-// const variants = {
-//   hidden: { opacity: 0, x: 0, y: 0 },
-//   enter: { opacity: 1, x: 0, y: 0 },
-//   exit: { opacity: 0, x: 0, y: 0 },
-// }
-// const transition = {
-//   times: [0, 0.1, 0.9, 1]
-// }
-// <motion.div key={router.route} initial="hidden" animate="enter" exit="exit" transition={transition}  variants={variants} >
-
-
-function App({ 
+const MyApp: AppType = ({ 
   Component, 
-  router ,
-  pageProps: { session, initialApolloState, ...pageProps }, 
-}: AppProps) {
-  const apolloClient = useApollo(initialApolloState)
-
+  pageProps, 
+}) => {
   return (
-    <SessionProvider session={session} refetchInterval={540} refetchOnWindowFocus={false}>
-      <ApolloProvider client={apolloClient}>  
-        <Component {...pageProps}/>
-      </ApolloProvider>
+    <SessionProvider session={pageProps.session} refetchInterval={540} refetchOnWindowFocus={false}>
+      <Component {...pageProps}/>
     </SessionProvider>
   )
+};
+
+function getBaseUrl() {
+  if (typeof window !== 'undefined') {
+    return '';
+  }
+  // reference for vercel.com
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  // assume localhost
+  return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
-export default App
+export default withTRPC<AppRouter>({
+  config({ ctx }) {
+    /**
+     * If you want to use SSR, you need to use the server's full URL
+     * @link https://trpc.io/docs/ssr
+     */
+    return {
+      url: `${getBaseUrl()}/api/trpc`,
+      /**
+       * @link https://react-query-v3.tanstack.com/reference/QueryClient
+       */
+      // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+    };
+  },
+  ssr: false,
+})(MyApp);
+

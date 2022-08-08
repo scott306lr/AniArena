@@ -26,7 +26,7 @@ function SignIntoProvider({providers}: Props) {
 export default SignIntoProvider
 
 // SSR
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
   const providers = await getProviders();
 
   return {

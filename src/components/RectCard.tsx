@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 interface Props{
@@ -8,7 +9,7 @@ interface Props{
 function RectCard({imgsrc} : Props) {
     return (
         <div className="char-img">
-            <img src={imgsrc} className="rounded-lg" />
+            <Image className="rounded-lg" src={imgsrc} alt="rect-card"/>
         </div>
     )
 }

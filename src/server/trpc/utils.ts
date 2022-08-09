@@ -21,3 +21,5 @@ export const authedProcedure = t.procedure.use(({ ctx, next }) => {
     },
   });
 });
+
+// restriction to certain information on specifict roles can be done here. 

@@ -6,11 +6,14 @@ import RectCard from '../components/RectCard';
 import WordBallon from '../components/WordBallon';
 import { db } from "../utils/firebase";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
   const { data: session } = useSession()
   console.log(session);
+
   const addNewPost = async () => {
+    const { data: secretMessage } = trpc.proxy.auth.getSecretMessage.useQuery();
     const docRef = await addDoc(collection(db, "posts"), {
       title: "Hello World",
     });
@@ -36,11 +39,11 @@ const Home: NextPage = () => {
           </div>
           {/* section 3 */}
           <div className="space-y-4">
-            <WordBallon text={`ID: ${session?.user.email}`} />
-            <WordBallon text={`NAME: ${session?.user.name}`}  />
+            <WordBallon text={`ID: ${session?.user?.email}`} />
+            <WordBallon text={`NAME: ${session?.user?.name}`}  />
           </div>
 
-          <button className='action-btn' onClick={addNewPost}>Add new post</button>
+          <button className='action-btn' onClick={addNewPost}>Add new post (protected)</button>
           <button className='action-btn' onClick={fetchAccounts}>Fetch accounts</button>
         </div>
 

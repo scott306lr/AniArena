@@ -1,11 +1,11 @@
-import { Attribute, Attribute_JSON, IntAttribute } from "../../AniClasses/Attribute"
+import { Attribute, Attribute_JSON } from "../../src/utils/AniClasses/Attribute"
 
 describe('Attribute Test', () => {
-    let attribute_JSON;
+    let attr: Attribute_JSON;
     beforeEach( () => {
-        attribute_JSON = {
-            Level: 5,
-            Exp: 8,
+        attr = {
+            level: 5,
+            exp: 8,
             HP: 67,
             AP: 20,
             APRegen: 7
@@ -13,7 +13,7 @@ describe('Attribute Test', () => {
     })
 
     it('Reset', () => {
-        let attribute = new Attribute(attribute_JSON);
+        let attribute = new Attribute(attr);
         let exp = attribute.exp.get();
         attribute.exp.set(3);
         attribute.reset();
@@ -21,8 +21,8 @@ describe('Attribute Test', () => {
     });
 
     it('Reset with new data', () => {
-        let attribute = new Attribute(attribute_JSON);
-        let newdata = JSON.parse(JSON.stringify(attribute_JSON));
+        let attribute = new Attribute(attr);
+        let newdata = JSON.parse(JSON.stringify(attr));
         newdata.HP = 1000;
         newdata.exp = 1000;
         attribute.reset(newdata);
@@ -34,10 +34,10 @@ describe('Attribute Test', () => {
 
     it('Deep Copy', () => {
 
-        let attribute = new Attribute(attribute_JSON);
+        let attribute = new Attribute(attr);
         let exp = attribute.exp.get();
 
-        attribute_JSON.Exp = -1;
+        attr.exp = -1;
         attribute.reset();
 
     

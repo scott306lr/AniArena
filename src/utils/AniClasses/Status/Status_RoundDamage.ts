@@ -22,7 +22,7 @@ export class Status_RoundDamage extends Status{
         this.owner?.arena.logger.log(this.owner, `${this.declaration}`)
 
         this.owner?.getDamage(this.damage, this.caster)
-     
+
         this.countdown -= 1;
         if(this.countdown <= 0){
             this.remove();

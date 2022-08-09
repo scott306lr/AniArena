@@ -1,11 +1,11 @@
-import { Combater } from "../../AniClasses/Combater"
-import { Player_JSON } from "../../AniClasses/Player"
-import { Arena } from "../../AniClasses/Arena";
-import { Skill_Fireball } from "../../AniClasses/Skill/Skill_Fireball"
+import { Combater } from "../../src/utils/AniClasses/Combater"
+import { Player_JSON } from "../../src/utils/AniClasses/Player"
+import { Arena } from "../../src/utils/AniClasses/Arena";
+import { Skill_Fireball } from "../../src/utils/AniClasses/Skill/Skill_Fireball"
 
 
 describe('Skill Test', () =>{
-    let arena;
+    let arena: Arena;
     let player1: Player_JSON;
     let player2: Player_JSON;
     let combater_engineer: Combater;

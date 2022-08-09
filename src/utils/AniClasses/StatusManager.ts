@@ -51,7 +51,7 @@ export class StatusManager{
      * @param eventCode which event is happening.
      * @param eventTrigger who trigger this event.
      */
-    trigger(eventCode: EventCode, eventTrigger: Combater | undefined){
+    trigger(eventCode: EventCode, eventTrigger: Combater | null){
         this.statusList.forEach(item => item.trigger(eventCode, eventTrigger));
     }
 

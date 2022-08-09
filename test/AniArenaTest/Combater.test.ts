@@ -1,11 +1,11 @@
-import { Player_JSON } from "../../AniClasses/Player"
-import { Combater } from "../../AniClasses/Combater"
-import { Arena } from "../../AniClasses/Arena"
-import { EventCode } from "../../AniClasses/StatusManager";
-import { Damage, DamageType } from "../../AniClasses/Damage";
+import { Player_JSON } from "../../src/utils/AniClasses/Player"
+import { Combater } from "../../src/utils/AniClasses/Combater"
+import { Arena } from "../../src/utils/AniClasses/Arena"
+import { EventCode } from "../../src/utils/AniClasses/StatusManager";
+import { Damage, DamageType } from "../../src/utils/AniClasses/Damage";
 
 describe("Combater Test", () => {
-    let arena;
+    let arena: Arena;
     let player1: Player_JSON;
     let player2: Player_JSON;
     let combater_engineer: Combater;
@@ -45,7 +45,7 @@ describe("Combater Test", () => {
         expect(combater_bot.player.email).toBe(player1.email);
 
         let hp = combater_bot.attribute.HP.get();
-        combater_bot.loseHP(3, undefined);
+        combater_bot.loseHP(3, null);
         expect(combater_bot.attribute.HP.get()).toBe(hp - 3);
         combater_bot.reset();
         expect(combater_bot.attribute.HP.get()).toBe(hp);
@@ -57,7 +57,7 @@ describe("Combater Test", () => {
     
     // it.todo("Combater.newRound() regenerate AP, chooseSkill, trigger event");
     it("Combater.newRound()", () => {
-        combater_bot.loseAP(10, undefined);
+        combater_bot.loseAP(10, null);
 
         let ap = combater_bot.attribute.AP.get();
         let apr = combater_bot.attribute.APRegen.get();
@@ -69,7 +69,7 @@ describe("Combater Test", () => {
 
         expect(chooseSkillSpy).toHaveBeenCalled();
         expect(combater_bot.attribute.AP.get()).toBe(ap + apr);
-        expect(triggerSpy).toHaveBeenCalledWith(EventCode.AfterNewRound, undefined);
+        expect(triggerSpy).toHaveBeenCalledWith(EventCode.AfterNewRound, null);
 
     });
     
@@ -85,9 +85,8 @@ describe("Combater Test", () => {
     it("Combater.castSkill()", () => {
         combater_engineer.loadSkill("Skill_NormalAttack");
         let skill = combater_engineer.chooseSkill();
-        
 
-        let skillSpy = jest.spyOn(skill, "cast");
+        let skillSpy = jest.spyOn(skill!, "cast");
         let triggerSpy = jest.spyOn(combater_engineer.statusManager, "trigger");
 
         combater_engineer.castSkill(combater_bot);
@@ -101,7 +100,7 @@ describe("Combater Test", () => {
     // it.todo("Combater.chooseSkill() randomly select a skill that combaters meet it requirement");
     it("Combater.chooseSkill()", () => {
         combater_engineer.loadSkill("Skill_NormalAttack");
-        expect(combater_engineer.nextSkill).toBe(undefined);
+        expect(combater_engineer.nextSkill).toBe(null);
         combater_engineer.chooseSkill();
         expect(combater_engineer.nextSkill).toBeDefined();
     })
@@ -111,7 +110,7 @@ describe("Combater Test", () => {
         combater_engineer.loadSkill("Skill_NormalAttack");
         let skill = combater_engineer.chooseSkill();
         expect(combater_engineer.isReady()).toBe(true);
-        combater_engineer.loseAP(20, undefined);
+        combater_engineer.loseAP(20, null);
         expect(combater_engineer.isReady()).toBe(false);
     })
 

@@ -15,21 +15,21 @@ export type Status_JSON = {
 export type StatusState = {
     name: string,
     image: string,
-    countdown: number | undefined,
-    description: string | undefined,
+    countdown: number | null,
+    description: string | null,
     tags: Tag[]
 }
 
 
 export abstract class Status{
     caster: Combater;
-    owner: Combater | undefined;
+    owner: Combater | null;
     damage: Damage = new Damage(1, DamageType.physical);
     countdown: number;
 
     dataJson: Status_JSON;
-    description: string | undefined;
-    declaration: string | undefined;
+    description: string | null;
+    declaration: string | null;
     tags: Tag[];
 
     exited = 0;
@@ -40,11 +40,11 @@ export abstract class Status{
     abstract eventCode: EventCode;
     
 
-    constructor(caster: Combater, damage?: Damage, countdown: number = 0, description?: string, declaration?: string)
+    constructor(caster: Combater, damage?: Damage, countdown: number = 0, description: string | null = null, declaration: string | null = null)
     {
+        this.owner = null;
         this.caster = caster;
-
-        this.damage = (damage === undefined)? this.damage: damage.clone();
+        this.damage = (!damage)? this.damage: damage.clone();
         this.countdown = countdown;
         this.description = description;
         this.declaration = declaration;
@@ -52,8 +52,8 @@ export abstract class Status{
         this.name = this.constructor.name;
         
         this.dataJson = this.fetch(this.name);
-        this.description = (this.description === undefined)? this.dataJson.description: this.description;
-        this.declaration = (this.declaration === undefined)? this.dataJson.declaration: this.declaration;
+        this.description = (!this.description)? this.dataJson.description: this.description;
+        this.declaration = (!this.declaration)? this.dataJson.declaration: this.declaration;
         this.tags = this.dataJson.tags;
     }
 
@@ -83,7 +83,7 @@ export abstract class Status{
      * Activate status if trigger pass some conditions.
      * @param eventTrigger who trigger this status
      */
-    abstract activate(eventTrigger: Combater | undefined): void;
+    abstract activate(eventTrigger: Combater | null): void;
     
     
     /**
@@ -98,7 +98,7 @@ export abstract class Status{
      * @param eventCode 
      * @param eventTrigger 
      */
-    trigger(eventCode: EventCode, eventTrigger: Combater | undefined){
+    trigger(eventCode: EventCode, eventTrigger: Combater | null){
         if(eventCode == this.eventCode){
             this.activate(eventTrigger);
         }

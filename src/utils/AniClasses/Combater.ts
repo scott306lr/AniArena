@@ -6,6 +6,7 @@ import { Skill } from "./Skill/Skill";
 import { SkillLoader } from "./Skill/SkillLoader";
 import { Arena, CombaterState } from "./Arena";
 import { EventCode, StatusManager } from "./StatusManager";
+import { getRandomElement } from "./utils";
 
 
 export class Combater{
@@ -13,7 +14,7 @@ export class Combater{
     private character: Character_JSON;
     attribute: Attribute;
     skills: Skill[];
-    nextSkill: Skill;
+    nextSkill: Skill | null;
     statusManager: StatusManager;
     arena: Arena;
     
@@ -30,8 +31,8 @@ export class Combater{
         this.nextSkill = this.chooseSkill();
     }
 
-    reset(player_JSON?: Player_JSON | undefined){
-        if(player_JSON != undefined){
+    reset(player_JSON: Player_JSON | null = null){
+        if(player_JSON !== null){
             this.player = JSON.parse(JSON.stringify(player_JSON));
         }
         this.character = this.fetchCharacter(this.player.combater.character);
@@ -65,51 +66,50 @@ export class Combater{
 
     newRound(){
         this.getAP(this.attribute.APRegen.get(), this);
-        this.statusManager.trigger(EventCode.AfterNewRound, undefined);
+        this.statusManager.trigger(EventCode.AfterNewRound, null);
         this.chooseSkill();
     }
 
     loadSkill(skillname: string): boolean{
-        let skill = SkillLoader(this, skillname);
-        if(skill === undefined){
-            return false;
-        }
+        const skill = SkillLoader(this, skillname);
+        if (!skill) return false;
+
         this.skills.push(skill);
         return true;
     }
 
     castSkill(object: Combater): boolean{
-        if( this.nextSkill.isCastable() === false ){
-            return false;
-        }
+        if (!this.nextSkill?.isCastable()) return false;
+
         this.statusManager.trigger(EventCode.BeforeCastSkill, this);
         this.nextSkill.cast(object, true);
         this.statusManager.trigger(EventCode.AfterCastSkill, this);
         return true;
     }
 
-    chooseSkill(): Skill{
-        let RequirementFilter = (item: Skill, index: number, array: Skill[]) => { return item.isCastable(false);}
-        let meetSkills = this.skills.filter(RequirementFilter);
+    chooseSkill(): Skill | null {
+        const RequirementFilter = (item: Skill, index: number, array: Skill[]) => { return item.isCastable(false);}
+        const meetSkills = this.skills.filter(RequirementFilter);
 
-        let randomIndex = Math.floor(Math.random()*meetSkills.length);
-        this.nextSkill = meetSkills[randomIndex];
+        const randomSkill = getRandomElement(meetSkills);
+        if (!randomSkill) return null
+
+        this.nextSkill = randomSkill;
         return this.nextSkill;
     }
 
-    getPriority(): number{
-        return this.nextSkill.dataJSON.cost.AP;
+    getPriority(): number | null {
+        if (!this.nextSkill) return null
+        return this.nextSkill?.dataJSON.cost.AP;
     }
 
     isReady(): boolean{
-        if(this.nextSkill === undefined){
-            return false;
-        }
+        if(!this.nextSkill) return false;
         return this.nextSkill.isCastable();
     }
 
 
-    damage: Damage | undefined;
+    // damage: Damage | null;
 
     dealDamage(damage: Damage, object: Combater): boolean{
         this.damage = damage.clone();
@@ -121,11 +121,11 @@ export class Combater{
         return true;
     }
     
-    getDamage(damage: Damage, source: Combater | undefined): boolean{
+    getDamage(damage: Damage, source: Combater | null): boolean{
         this.damage = damage.clone();
         this.statusManager.trigger(EventCode.BeforeGetDamage, source);
 
-        this.loseHP(this.damage.value, undefined);
+        this.loseHP(this.damage.value, null);
         this.arena.logger.log(this, `${this.player.nickname}受到${this.damage.getString()}`)
         
         this.statusManager.trigger(EventCode.AfterLoseHP, source);
@@ -133,7 +133,7 @@ export class Combater{
         return true;
     }
 
-    loseHP(value : number, caller: Combater | undefined): boolean{
+    loseHP(value : number, caller: Combater | null): boolean{
         if(value < 0){
             return false;
         }
@@ -162,7 +162,7 @@ export class Combater{
         return true;
     }
 
-    loseAP(value : number, caller: Combater | undefined): boolean{
+    loseAP(value : number, caller: Combater | null): boolean{
         if(value < 0){
             return false;
         }
@@ -177,7 +177,7 @@ export class Combater{
 
     }
 
-    getAP(value: number, caller: Combater | undefined): boolean{
+    getAP(value: number, caller: Combater | null): boolean{
         if(value < 0){
             return false;
         }

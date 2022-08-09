@@ -1,8 +1,8 @@
-import { Player_JSON } from "../../AniClasses/Player"
-import { Combater } from "../../AniClasses/Combater"
-import { Arena } from "../../AniClasses/Arena"
-import { EventCode } from "../../AniClasses/StatusManager";
-import { Damage, DamageType } from "../../AniClasses/Damage";
+import { Player_JSON } from "../../src/utils/AniClasses/Player"
+import { Combater } from "../../src/utils/AniClasses/Combater"
+import { Arena } from "../../src/utils/AniClasses/Arena"
+import { EventCode } from "../../src/utils/AniClasses/StatusManager";
+import { Damage, DamageType } from "../../src/utils/AniClasses/Damage";
 
 describe("Arena Test", () => {
     let arena: Arena;

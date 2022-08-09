@@ -1,14 +1,14 @@
-import { Status_Damage } from "../../AniClasses/Status/Status_Damage"
-import { Combater } from "../../AniClasses/Combater"
-import { Player_JSON } from "../../AniClasses/Player"
-import { Arena } from "../../AniClasses/Arena";
-import { Status_RoundDamage } from "../../AniClasses/Status/Status_RoundDamage";
-import { Damage, DamageType } from "../../AniClasses/Damage";
-import { Status_Invincible } from "../../AniClasses/Status/Status_Invincible";
+import { Status_Damage } from "../../src/utils/AniClasses/Status/Status_Damage"
+import { Combater } from "../../src/utils/AniClasses/Combater"
+import { Player_JSON } from "../../src/utils/AniClasses/Player"
+import { Arena } from "../../src/utils/AniClasses/Arena";
+import { Status_RoundDamage } from "../../src/utils/AniClasses/Status/Status_RoundDamage";
+import { Damage, DamageType } from "../../src/utils/AniClasses/Damage";
+import { Status_Invincible } from "../../src/utils/AniClasses/Status/Status_Invincible";
 
 
 describe("Status Test", () => {
-    let arena;
+    let arena: Arena;
     let player1: Player_JSON;
     let player2: Player_JSON;
     let combater_engineer: Combater;

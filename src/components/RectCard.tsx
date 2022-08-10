@@ -8,8 +8,8 @@ interface Props{
 
 function RectCard({imgsrc} : Props) {
     return (
-        <div className="char-img">
-            <Image className="rounded-lg" src={imgsrc} alt="rect-card"/>
+        <div className="relative char-img w-52 h-72">
+            <Image className="rounded-lg" src={imgsrc} layout="fill" alt="rect-card"/>
         </div>
     )
 }

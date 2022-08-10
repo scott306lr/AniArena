@@ -10,7 +10,6 @@ import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
   const { data: session } = useSession()
-  console.log(session);
 
   const addNewPost = async () => {
     const { data: secretMessage } = trpc.proxy.auth.getSecretMessage.useQuery();

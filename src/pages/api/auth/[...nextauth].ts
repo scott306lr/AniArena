@@ -1,8 +1,10 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider  from "next-auth/providers/google";
+
+// Prisma adapter for NextAuth, optional and can be removed
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "../../../server/db/client";
 import { env } from "../../../env/server.mjs";
-import FirestoreAdapter from "../../../server/adapter/firebase-adapter"
-import { db } from "../../../utils/firebase.js";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -14,8 +16,8 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-
   // Configure one or more authentication providers
+  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
@@ -23,18 +25,6 @@ export const authOptions: NextAuthOptions = {
     }),
     // ...add more providers here
   ],
-
-  // adapter: FirestoreAdapter({
-  //   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  //   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  //   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  //   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  //   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  //   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  // }),
-  adapter: FirestoreAdapter(db),
-  //debug: true,
-  
   pages: {
     signIn: "/auth/signin"
   },

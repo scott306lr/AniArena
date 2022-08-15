@@ -52,7 +52,7 @@ const PlayerList: NextPage = () => {
           </div>
           {/* section 3 */}
           <div className="space-y-4">
-            <WordBallon text="ID: i an characters" />
+            <WordBallon text="ID: 22261744" />
             <WordBallon text="Name: Admin" />
           </div>
         </div>

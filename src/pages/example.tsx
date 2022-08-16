@@ -5,8 +5,6 @@ import { trpc } from "../utils/trpc";
 import { useState } from "react";
 
 const Home: NextPage = () => {
-  const [name, setName] = useState("")
-  const {data: hellotxt, isLoading} = trpc.proxy.auth.getSecretTest.useQuery({myname: name})
 
   return (
     <>
@@ -54,21 +52,8 @@ const Home: NextPage = () => {
         </div>
         <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
           <AuthShowcase/>
-          <div>
-            <div className='flex items-center justify-center w-full pt-6 text-2xl text-blue-500'>
-              { !isLoading ? <p>{hellotxt}</p> : <p>Loading..</p>}
-            </div>
-            <input 
-              type="text" 
-              disabled={isLoading}
-              onKeyDown={(e) => {
-                if (e.key == "Enter"){
-                  setName(e.currentTarget.value);
-                  e.currentTarget.value = "";
-                }
-              }}
-            />
-          </div>
+          <HelloSomeone/>
+          <MeProfile/>
         </div>
       </main>
     </>
@@ -77,13 +62,47 @@ const Home: NextPage = () => {
 
 export default Home;
 
+const MeProfile: React.FC = () => {
+  // const {data} = trpc.proxy.me.getSession.useQuery();
+  const {data: myProfile, isLoading} = trpc.proxy.me.getProfile.useQuery();
+  return (
+    <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
+      <p className="text-2xl">{myProfile?.name}</p>
+      <p className="text-lg">{myProfile?.description}</p>
+    </div>
+  )
+}
+
+const HelloSomeone: React.FC = () => {
+  const [name, setName] = useState("")
+  const {data: hellotxt, isLoading} = trpc.proxy.auth.getSecretTest.useQuery({myname: name})
+
+  return (
+    <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
+      <div className='flex items-center justify-center w-full p-4 text-2xl text-blue-500'>
+        { !isLoading ? <p>{hellotxt}</p> : <p>Loading..</p>}
+      </div>
+      <input 
+        type="text" 
+        disabled={isLoading}
+        onKeyDown={(e) => {
+          if (e.key == "Enter"){
+            setName(e.currentTarget.value);
+            e.currentTarget.value = "";
+          }
+        }}
+      />
+    </div>
+  )
+}
+
 // Component to showcase protected routes using Auth
 const AuthShowcase: React.FC = () => {
   const { data: secretMessage } = trpc.proxy.auth.getSecretMessage.useQuery();
   const { data: sessionData } = useSession();
 
   return (
-    <div>
+    <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
       {sessionData && <p>Logged in as {sessionData?.user?.name}</p>}
       {secretMessage && <p>{secretMessage}</p>}
       <button

@@ -11,11 +11,21 @@ const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
 };
 
+// doc: https://alpha.trpc.io/docs/nextjs#config-callback
+// for queryClientConfig: https://react-query-v3.tanstack.com/reference/QueryClient
 export const trpc = setupTRPC<AppRouter>({
   config() {
     return {
       url: `${getBaseUrl()}/api/trpc`,
       transformer: superjson,
+      queryClientConfig: { 
+        // refetchOnWindowFocus: true,
+        // refetchOnReconnect: true,
+        defaultOptions: { 
+          queries: { staleTime: 60 * 5 }  // fetch cache fetched data instead for 5 seconds
+          
+        } 
+      }
     };
   },
   ssr: false,

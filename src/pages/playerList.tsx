@@ -45,19 +45,23 @@ type ProfilesFromServer = inferQueryOutput<"getInfo.getAllProfiles"> | undefined
 const MyPlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
   return (
     <>
-      { props.profiles ? props.profiles.map((profile) => {
-          return(
-            <li key={profile.combaterId} className="grid w-full">
-              { profile?.combater &&
-                <PlayerCard 
-                  key={profile.combaterId} 
-                  name={profile.name} 
-                  text={profile.description} 
-                  imgsrc={profile.combater.character.image}/>
-              }
-            </li> 
-          )
-        }) : <div>{"Sad, no available players currently."}<br />{"Probably there's a connection error?"}</div>
+      { props.profiles ? 
+        <ul className="grid w-full">
+          {
+            props.profiles.map((profile, index) => {
+              return(
+                <li key={index}>
+                  { profile?.combater &&
+                    <PlayerCard 
+                      name={profile.name} 
+                      text={profile.description} 
+                      imgsrc={profile.combater.character.image}/>
+                  }
+                </li> 
+              )
+            })
+          }
+        </ul> : <div>{"Sad, no available players currently."}<br />{"Probably there's a connection error?"}</div>
       }
     </>
   )

@@ -17,7 +17,7 @@ export default defineNextConfig({
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['media.discordapp.net', 'images-ext-1.discordapp.net', 'lh3.googleusercontent.com'],
+    domains: ['media.discordapp.net', 'images-ext-1.discordapp.net', 'lh3.googleusercontent.com', 'mudae.net', 'imgur.com'],
     formats: ['image/avif', 'image/webp'],
   },
 });

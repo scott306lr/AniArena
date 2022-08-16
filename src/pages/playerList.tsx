@@ -5,29 +5,13 @@ import WordBallon from '../components/WordBallon';
 import SearchBar from '../components/SearchBar';
 import PlayerCard from '../components/PlayerCard';
 import Navbar from '../components/Navbar';
+import { inferQueryOutput, trpc } from '../utils/trpc';
 
 const PlayerList: NextPage = () => {
+  const { data: profiles, isLoading } = trpc.proxy.getInfo.getAllProfiles.useQuery();
   const handleSearch = () => {console.log("search click")};
   const handleBattle = () => {console.log("Battle!")};
 
-  // TODO: get player list from server, with infinite scroll
-  const players = [
-    {
-      username: "Bob", 
-      text: "hello I'm Bob" ,
-      imgsrc: "https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"
-    },
-    {
-      username: "Alice",
-      text: "hello I'm Alice",
-      imgsrc: "https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"
-    },
-    {
-      username: "Charlie",
-      text: "hello I'm Charlie",
-      imgsrc: "https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"
-    }
-  ]
   return (
     <div>
       <Navbar />
@@ -38,13 +22,7 @@ const PlayerList: NextPage = () => {
           {/* section 2 */}
           <div className="grid gap-4 lg:w-1/4 w-5/6">
               <SearchBar onClick={() => handleSearch}/>
-              {
-                players.map((player, index) => (
-                  <li key={index} className="grid w-full">
-                    <PlayerCard key={player.username} name={player.username} text={player.text} imgsrc={player.imgsrc}/>
-                  </li>
-                ))
-              }
+              { isLoading ? <div>loading...</div> : <MyPlayerList profiles={profiles}/>}
           </div>
           <div className="grid items-center gap-4">
             <RectCard imgsrc="https://images-ext-1.discordapp.net/external/x08twzHAcDIWcqHEPgEIdfLNoIGST3tHUdti0Ww3b00/https/mudae.net/uploads/1232276/v6uL2AsAjYy0QE0-4OKy~0P98O5C.png" />
@@ -59,6 +37,29 @@ const PlayerList: NextPage = () => {
 
       </main>
     </div>
+  )
+}
+
+type ProfilesFromServer = inferQueryOutput<"getInfo.getAllProfiles"> | undefined;
+
+const MyPlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
+  return (
+    <>
+      { props.profiles ? props.profiles.map((profile) => {
+          return(
+            <li key={profile.combaterId} className="grid w-full">
+              { profile?.combater &&
+                <PlayerCard 
+                  key={profile.combaterId} 
+                  name={profile.name} 
+                  text={profile.description} 
+                  imgsrc={profile.combater.character.image}/>
+              }
+            </li> 
+          )
+        }) : <div>{"Sad, no available players currently."}<br />{"Probably there's a connection error?"}</div>
+      }
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar';
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react';
@@ -8,21 +8,6 @@ import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
   const { data: session } = useSession()
-
-  // const addNewPost = async () => {
-  //   const { data: secretMessage } = trpc.proxy.auth.getSecretMessage.useQuery();
-  //   const docRef = await addDoc(collection(db, "posts"), {
-  //     title: "Hello World",
-  //   });
-  //   console.log("Document written with ID: ", docRef.id);
-  // }
-
-  // const fetchAccounts = async () => {
-  //   onSnapshot(collection(db, "accounts"), (querySnapshot) => {
-  //     const docs = querySnapshot.docs.map((doc) => doc.data());
-  //     console.log(docs);
-  //   });
-  // }
 
   return (
     <div>
@@ -40,10 +25,9 @@ const Home: NextPage = () => {
             <WordBallon text={`NAME: ${session?.user?.name}`}  />
           </div>
 
-          {/* <button className='action-btn' onClick={addNewPost}>Add new post (protected)</button>
-          <button className='action-btn' onClick={fetchAccounts}>Fetch accounts</button> */}
+          {/* <button className='action-btn' onClick={addNewPost}>Add new post (protected)</button> */}
+          {/* <button className='action-btn' onClick={() => getHelloTxt.useQuery({myname: "Scott"})}>Fetch accounts</button> */}
         </div>
-
       </main>
     </div>
   )

@@ -2,9 +2,11 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
+import { useState } from "react";
 
 const Home: NextPage = () => {
-  const hello = trpc.proxy.example.hello.useQuery({ text: "from tRPC" });
+  const [name, setName] = useState("")
+  const {data: hellotxt, isLoading} = trpc.proxy.auth.getSecretTest.useQuery({myname: name})
 
   return (
     <>
@@ -50,10 +52,24 @@ const Home: NextPage = () => {
             documentation="https://www.prisma.io/docs/"
           />
         </div>
-        <div className="flex items-center justify-center w-full pt-6 text-2xl text-blue-500">
-          {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
+        <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
+          <AuthShowcase/>
+          <div>
+            <div className='flex items-center justify-center w-full pt-6 text-2xl text-blue-500'>
+              { !isLoading ? <p>{hellotxt}</p> : <p>Loading..</p>}
+            </div>
+            <input 
+              type="text" 
+              disabled={isLoading}
+              onKeyDown={(e) => {
+                if (e.key == "Enter"){
+                  setName(e.currentTarget.value);
+                  e.currentTarget.value = "";
+                }
+              }}
+            />
+          </div>
         </div>
-        <AuthShowcase/>
       </main>
     </>
   );

@@ -3,15 +3,17 @@
 
 generator client {
     provider = "prisma-client-js"
+    previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-    provider = "sqlite" //"mysql"//
+    provider = "mysql" //"mysql"//
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading: 
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
+    referentialIntegrity = "prisma"
 }
 
 // Necessary for Next auth
@@ -21,12 +23,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? //@db.Text
-    access_token      String? //@db.Text
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? //@db.Text
+    id_token          String? @db.Text
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -49,6 +51,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    player        Player?
 }
 
 model VerificationToken {
@@ -65,15 +68,14 @@ model Player {
     id                  String      @id @default(cuid())
     createdAt           DateTime    @default(now())
     updatedAt           DateTime    @updatedAt
+    user                User        @relation(fields: [userId], references: [id])
+    userId              String      @unique
 
     name                String
-    description         String?
-    unlockedChar        Character[] @relation(name:"unlockedChar")
-    
-    combater            Character   @relation(name:"combater", fields: [combaterId], references: [id])
-    combaterId          Int
-    combaterAttr        String
+    description         String?     @db.Text
+    combater            Combater?  
 
+    unlockedChar        Character[] @relation(name:"unlockedCharacters")
     createdBattles      BattleLog[] @relation(name: "createdBattles")
     attendBattles       BattleLog[] @relation(name: "attendBattles")
 
@@ -81,19 +83,33 @@ model Player {
     comments            Comment[]
 }
 
+model Combater {
+    id              String      @id @default(cuid())
+    createdAt       DateTime    @default(now())
+    updatedAt       DateTime    @updatedAt
+
+    player          Player      @relation(fields: [playerId], references: [id])
+    playerId        String      @unique
+
+    character       Character   @relation(fields: [characterId], references: [id])
+    characterId     Int         @unique
+
+    attr            Json
+}
+
 model Character {
     id              Int         @id @default(autoincrement())
     createdAt       DateTime    @default(now())
     updatedAt       DateTime    @updatedAt
 
-    name            String
-    image           String
-    description     String?
-    orgAttr         String
+    name            String      
+    image           String      
+    description     String?     @db.Text
+    orgAttr         Json
     skills          Skill[]
     
-    usedBy          Player[]    @relation(name:"combater")
-    unlockedBy      Player[]    @relation(name:"unlockedChar")
+    unlockedBy      Player[]    @relation(name:"unlockedCharacters")
+    usedOn          Combater[]
 }
 
 model Skill {
@@ -101,15 +117,14 @@ model Skill {
     createdAt       DateTime    @default(now())
     updatedAt       DateTime    @updatedAt
     
-    name            String
-    image           String
-    description     String?
+    name            String      
+    image           String?      
+    description     String?     @db.Text
     tags            Tag[]
     Character       Character[] 
 
-    declaration     String?
-    requirement     String
-    cost            Int
+    requirement     Json
+    cost            Json
 }
 
 model Tag {
@@ -117,9 +132,9 @@ model Tag {
     createdAt       DateTime    @default(now())
     updatedAt       DateTime    @updatedAt
 
-    name            String
-    color           String
-    forSkills       Skill[]
+    name            String      
+    color           String      
+    onSkills        Skill[]
 }
 
 model BattleLog {
@@ -127,11 +142,11 @@ model BattleLog {
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
 
-    creator     Player      @relation(name: "createdBattles", fields: [creatorId], references: [id])
+    creator     Player      @relation(name: "createdBattles", fields: [creatorId], references: [id], onDelete: Cascade)
     attendants  Player[]    @relation(name: "attendBattles")
     creatorId   String
 
-    content     String
+    content     Json
     likes       Player[]    @relation(name: "likes")
     comments    Comment[]   
 }
@@ -142,9 +157,10 @@ model Comment {
     updatedAt   DateTime    @updatedAt
 
     creator     Player      @relation(fields: [creatorId], references: [id])
-    battleLog   BattleLog   @relation(fields: [battleLogId], references: [id])
-    creatorId   String
+    creatorId   String 
+    
+    battleLog   BattleLog   @relation(fields: [battleLogId], references: [id], onDelete: Cascade)    
     battleLogId Int
 
-    content     String
+    content     String      @db.Text
 }

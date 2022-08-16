@@ -2,9 +2,9 @@ import React, { ReactElement } from 'react'
 import Avatar from './Avatar'
 
 interface Props {
-    imgsrc: string,
+    imgsrc: string | null,
     name: string,
-    text: string
+    text: string | null
 }
 
 function PlayerCard({ imgsrc, name, text }: Props): ReactElement {

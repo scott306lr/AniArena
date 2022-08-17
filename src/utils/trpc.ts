@@ -3,6 +3,7 @@ import { setupTRPC } from "@trpc/next";
 import type { inferProcedureInput, inferProcedureOutput } from "@trpc/server";
 import type { AppRouter } from "../server/trpc/router";
 import superjson from "superjson";
+import { httpBatchLink, loggerLink } from "@trpc/client";
 
 const getBaseUrl = () => {
   if (typeof window !== "undefined") return ""; // browser should use relative url
@@ -16,16 +17,23 @@ const getBaseUrl = () => {
 export const trpc = setupTRPC<AppRouter>({
   config() {
     return {
-      url: `${getBaseUrl()}/api/trpc`,
+      // url: `${getBaseUrl()}/api/trpc`,
       transformer: superjson,
       queryClientConfig: { 
-        // refetchOnWindowFocus: true,
-        // refetchOnReconnect: true,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: true,
         defaultOptions: { 
-          queries: { staleTime: 60 * 5 }  // fetch cache fetched data instead for 5 seconds
+          queries: { staleTime: 1000 * 10 }  // fetch cache instead for 10 seconds
           
         } 
-      }
+      },
+      links: [
+        loggerLink(),
+        httpBatchLink({
+          url: `${getBaseUrl()}/api/trpc`,
+        }),
+
+      ],
     };
   },
   ssr: false,

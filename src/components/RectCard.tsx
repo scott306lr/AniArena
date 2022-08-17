@@ -9,7 +9,7 @@ interface Props{
 function RectCard({imgsrc} : Props) {
     return (
         <div className="relative char-img w-52 h-72">
-            <Image className="rounded-lg" src={imgsrc} layout="fill" alt="rect-card"/>
+            <Image className="rounded-lg" src={imgsrc} layout="fill" alt="rect-card" priority/>
         </div>
     )
 }

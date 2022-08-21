@@ -13,6 +13,7 @@ export const meAuthRouter = t.router({
       }
     })
   }),
+
   // getCombater: authedProcedure.input(z.object({myname: z.string()})).query(({ ctx, input }) => {
   //   console.log("Loggin ctx.session, input, from getSecretTest")
   //   console.log(ctx.session, input)

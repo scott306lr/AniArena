@@ -10,16 +10,35 @@ export const meAuthRouter = t.router({
     return ctx.prisma.player.findFirstOrThrow({
       where: {
         userId: ctx.session.user.id,
+      },
+      include: {
+        combater: {
+          include: {
+            character: true
+          },
+        }
+      }
+    })
+  }),
+  postName: authedProcedure.input(z.object({name: z.string()})).query(({ ctx, input }) => {
+    return ctx.prisma.player.update({
+      where: {
+        userId: ctx.session.user.id,
+      },
+      data: {
+        name: input.name,
+      }
+    })
+  }),
+  postDescription: authedProcedure.input(z.object({description: z.string()})).query(({ ctx, input }) => {
+    return ctx.prisma.player.update({
+      where: {
+        userId: ctx.session.user.id,
+      },
+      data: {
+        description: input.description,
       }
     })
   }),
 
-  // getCombater: authedProcedure.input(z.object({myname: z.string()})).query(({ ctx, input }) => {
-  //   console.log("Loggin ctx.session, input, from getSecretTest")
-  //   console.log(ctx.session, input)
-  //   if (!input?.myname || input.myname == "") 
-  //     return "hello, enter your name pls.";
-  //   else
-  //     return `hello ${input?.myname}`;
-  // }),
 });

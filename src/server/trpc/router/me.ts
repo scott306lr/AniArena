@@ -40,7 +40,7 @@ export const meAuthRouter = t.router({
 
     return myProfile;
   }),
-  postName: authedProcedure.input(z.object({name: z.string()})).query(({ ctx, input }) => {
+  postName: authedProcedure.input(z.object({name: z.string()})).mutation(({ ctx, input }) => {
     return ctx.prisma.player.update({
       where: {
         userId: ctx.session.user.id,
@@ -50,7 +50,7 @@ export const meAuthRouter = t.router({
       }
     })
   }),
-  postDescription: authedProcedure.input(z.object({description: z.string()})).query(({ ctx, input }) => {
+  postDescription: authedProcedure.input(z.object({description: z.string()})).mutation(({ ctx, input }) => {
     return ctx.prisma.player.update({
       where: {
         userId: ctx.session.user.id,

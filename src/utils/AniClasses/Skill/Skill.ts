@@ -115,10 +115,10 @@ export abstract class Skill{
         if(isCost){
             for(let key in this.cost){
                 if(key === "HP"){
-                    this.owner.loseHP(this.cost.HP, undefined);
+                    this.owner.loseHP(this.cost.HP, null);
                 }
                 else if(key === "AP"){
-                    this.owner.loseAP(this.cost.AP, undefined);
+                    this.owner.loseAP(this.cost.AP, null);
                 }
             }
         }

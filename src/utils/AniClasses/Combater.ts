@@ -1,4 +1,4 @@
-import { Damage } from "./Damage";
+import { Damage, DamageType } from "./Damage";
 import { Character_JSON } from "./Character"
 import { Attribute_JSON, Attribute, AttributeState } from "./Attribute";
 import { Player_JSON } from "./Player";
@@ -17,6 +17,7 @@ export class Combater{
     nextSkill: Skill | null;
     statusManager: StatusManager;
     arena: Arena;
+    damage: Damage;
     
 
     constructor(player_JSON: Player_JSON, arena: Arena){
@@ -29,6 +30,7 @@ export class Combater{
         this.character.skills.forEach(skillName => this.loadSkill(skillName));
         this.arena = arena;
         this.nextSkill = this.chooseSkill();
+        this.damage = new Damage(0, DamageType.physical);
     }
 
     reset(player_JSON: Player_JSON | null = null){
@@ -79,7 +81,7 @@ export class Combater{
     }
 
     castSkill(object: Combater): boolean{
-        if (!this.nextSkill?.isCastable()) return false;
+        if (this.nextSkill === null || !this.nextSkill?.isCastable()) return false;
 
         this.statusManager.trigger(EventCode.BeforeCastSkill, this);
         this.nextSkill.cast(object, true);
@@ -98,8 +100,8 @@ export class Combater{
         return this.nextSkill;
     }
 
-    getPriority(): number | null {
-        if (!this.nextSkill) return null
+    getPriority(): number {
+        if (!this.nextSkill) return Infinity;
         return this.nextSkill?.dataJSON.cost.AP;
     }
 

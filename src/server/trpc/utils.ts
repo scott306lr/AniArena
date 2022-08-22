@@ -1,6 +1,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import type { Context } from "./context";
 import superjson from "superjson";
+import { Prisma } from "@prisma/client";
 
 export const t = initTRPC<{ ctx: Context }>()({
   transformer: superjson,
@@ -21,3 +22,14 @@ export const authedProcedure = t.procedure.use(({ ctx, next }) => {
     },
   });
 });
+
+export const checkRequirement = (requirement: Prisma.JsonObject, attr: Prisma.JsonObject) => {
+  for (const key in requirement) {
+    const a = requirement[key] 
+    const b = attr[key]
+    if (a != null && b != null && a > b){// should always be true
+      return false;
+    }
+  }
+  return true;
+}

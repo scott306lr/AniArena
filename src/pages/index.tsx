@@ -24,9 +24,6 @@ const Home: NextPage = () => {
             <WordBallon text={`ID: ${session?.user?.email}`} />
             <WordBallon text={`NAME: ${session?.user?.name}`}  />
           </div>
-
-          {/* <button className='action-btn' onClick={addNewPost}>Add new post (protected)</button> */}
-          {/* <button className='action-btn' onClick={() => getHelloTxt.useQuery({myname: "Scott"})}>Fetch accounts</button> */}
         </div>
       </main>
     </div>

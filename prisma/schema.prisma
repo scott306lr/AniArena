@@ -76,7 +76,7 @@ model Player {
 
     name                String
     description         String?     @db.Text
-    combater            Combater?  
+    combater            Combater?   
 
     unlockedChar        Character[] @relation(name:"unlockedCharacters")
     createdBattles      BattleLog[] @relation(name: "createdBattles")
@@ -95,7 +95,7 @@ model Combater {
     playerId        String      @unique
 
     character       Character   @relation(fields: [characterId], references: [id])
-    characterId     Int         @unique
+    characterId     Int         
 
     attr            Json
 }

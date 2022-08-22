@@ -55,7 +55,7 @@ const Battle: NextPage = () => {
 
             </main>
         </div>
-  )
+    )
 }
 
 export default Battle

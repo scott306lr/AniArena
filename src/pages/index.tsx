@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar';
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react';
 import RectCard from '../components/RectCard';
-import WordBallon from '../components/WordBallon';
 import { inferQueryOutput, trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
@@ -17,7 +16,9 @@ const Home: NextPage = () => {
         <div className="flex items-center justify-center m-8 gap-8">
           {
             (isLoading || myProfile == null) ?
-              <WordBallon text="Loading..." /> :
+            <p className='word-bubble'>
+              {"Loading..."}
+            </p> :
             <div className="flex flex-col items-center justify-center m-8 gap-8">
               <UserProfile profile={myProfile}/>
               <CharProfile combater={myProfile.combater}/>
@@ -42,7 +43,11 @@ const UserProfile: React.FC<{profile: ProfileType}> = (props) => {
 
 const CharProfile: React.FC<{combater:ProfileType["combater"]}> = (props) => {
   if (props.combater == null) {
-    return <WordBallon text="No profile" />
+    return (
+      <p className='word-bubble'>
+        {"No profile"}
+      </p>
+    )
   }
 
   return (
@@ -53,7 +58,9 @@ const CharProfile: React.FC<{combater:ProfileType["combater"]}> = (props) => {
       {
         props.combater.character.skills.map((skill, index) => {
           return (
-            <WordBallon text={`${skill.name}: ${skill.description}`} key={index}/>
+            <li key={index} className="word-bubble">
+              {`${skill.name}: ${skill.description}`}
+            </li>
           )
         })
       }

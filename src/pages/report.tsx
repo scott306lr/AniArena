@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import AttributeBar from '../components/AttributeBar';
 import RectCard from '../components/RectCard';
-import WordBallon from '../components/WordBallon';
 import React from 'react'
 import Navbar from '../components/Navbar';
 import { inferQueryOutput, trpc } from '../utils/trpc';

@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import AttributeBar from '../components/AttributeBar';
 import RectCard from '../components/RectCard';
-import WordBallon from '../components/WordBallon';
 import React from 'react'
 import Navbar from '../components/Navbar';
 import Avatar from '../components/Avatar';
@@ -26,7 +25,9 @@ const Battle: NextPage = () => {
                         <div>
                             <div className='hidden lg:grid gap-4'>
                                 <RectCard imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
-                                <WordBallon text="其名惠惠，職業乃大法師，使役最強之攻擊魔法：爆裂魔法之人！" />
+                                <p className='word-bubble'>
+                                    {"其名惠惠，職業乃大法師，使役最強之攻擊魔法：爆裂魔法之人！"}
+                                </p>
                             </div>
                             <div className='lg:hidden'>
                                 <Avatar className="h-12 w-12" imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
@@ -43,7 +44,9 @@ const Battle: NextPage = () => {
                         <div>
                             <div className='hidden lg:grid gap-4'>
                                 <RectCard imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
-                                <WordBallon text="其名惠惠，職業乃大法師，使役最強之攻擊魔法：爆裂魔法之人！" />
+                                <p className='word-bubble'>
+                                    {"其名惠惠，職業乃大法師，使役最強之攻擊魔法：爆裂魔法之人！"}
+                                </p>
                             </div>
                             <div className='lg:hidden'>
                                 <Avatar className="h-12 w-12" imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
@@ -60,10 +63,14 @@ const Battle: NextPage = () => {
                     <div className="flex w-full lg:w-1/3">
                         <ul className="grid gap-4 h-fit p-2">
                             <li className="flex justify-start w-full pr-6">
-                                <WordBallon text="黑より黑く 闇より暗き漆黑に ，我が深紅の混淆を望みたもう，覺醒のとき來たれり，無謬の境界に落ちし理，無行の歪みとなりて，現出せよ！Explosion！"/>
+                                <p className='word-bubble'>
+                                    {"黑より黑く 闇より暗き漆黑に ，我が深紅の混淆を望みたもう，覺醒のとき來たれり，無謬の境界に落ちし理，無行の歪みとなりて，現出せよ！Explosion！"}
+                                </p>
                             </li>
                             <li className="flex justify-end w-full pl-6">
-                                <WordBallon text="亞絲娜！克萊茵！拜託幫我撐個十秒左右就好！Switch！Startbrust Steam！"/>
+                                <p className='word-bubble'>
+                                    {"亞絲娜！克萊茵！拜託幫我撐個十秒左右就好！Switch！Startbrust Steam！"}
+                                </p>
                             </li>
                         </ul>
                     </div>

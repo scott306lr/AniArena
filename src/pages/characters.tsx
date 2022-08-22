@@ -4,7 +4,6 @@ import ActionButton from '../components/ActionButton';
 import AttributeBar from '../components/AttributeBar';
 import Avatar from '../components/Avatar';
 import RectCard from '../components/RectCard';
-import WordBallon from '../components/WordBallon';
 import React, { useState } from 'react'
 import SkillCard from '../components/SkillCard';
 import AttributeAdjustor from '../components/AttributeAdjustor';
@@ -88,7 +87,9 @@ const Characters: NextPage = () => {
                     <div className="grid place-content-center">
                         <div className="grid w-min justify-items-center gap-4">
                             <RectCard imgsrc="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"/>
-                            <WordBallon text="其名惠惠，職業乃大法師，使役最強之攻擊魔法：爆裂魔法之人！"/>
+                                <p className='word-bubble'>
+                                    {"其名惠惠，職業乃大法師，使役最強之攻擊魔法：爆裂魔法之人！"}
+                                </p>
                             <div>
                                 <AttributeBar attribute="EXP" max={expMax} val={expVal}/>
                                 <button onClick={increaseExp} className='action-btn'>

@@ -15,9 +15,9 @@ function AttributeBar({attribute, max, val}: Props): ReactElement {
     }, [max, val])
 
     return (
-        <div className="grid h-fit justify-items-stretch w-64 border-solid border-2 gap-1 p-3 rounded-lg shadow-lg bg-white">
+        <div className="grid h-fit justify-items-stretch w-full border-solid border-2 gap-1 p-3 rounded-lg shadow-lg bg-white">
             {/* bar */}
-            <div className="flex">
+            <div className="flex w-full">
                 {/* Todo: change bar propotion accroding to max and val */}
                 <div className="h-fit w-full rounded-lg overflow-hidden bg-gray-500">
                     <div className="h-1 rounded-l-lg transition-all ease-linear" style={leftStyle}></div>

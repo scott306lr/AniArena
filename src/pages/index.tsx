@@ -34,12 +34,6 @@ const UserProfile: React.FC<{profile: ProfileType}> = (props) => {
   
   return (
     <div className='flex flex-col items-center justify-center '>
-      {/* <input 
-        className="word-bubble" 
-        type="text" 
-        disabled={true}
-        value={`Name: ${props.profile.name}`}
-      /> */}
       <PostableName orgText={props.profile.name}/>
       <PostableDescription orgText={props.profile.description}/>
     </div>
@@ -80,8 +74,7 @@ const PostableName: React.FC<{orgText: string}> = (props) => {
       const previousProfile = utils.me.getProfile.getData();
       utils.me.getProfile.setData(() => {
         return {...previousProfile, name: input.name} as ProfileType;
-      });
-    },
+      })},
     onSuccess: () => {utils.me.getProfile.refetch()}
   });
 
@@ -91,20 +84,14 @@ const PostableName: React.FC<{orgText: string}> = (props) => {
         className="word-bubble"
         type="text"
         disabled={!isEditing}
-        onChange={(e) => 
-          setText(e.target.value)
-        }
+        onChange={(e) => setText(e.target.value)}
         value={error ? "Error" : text}
       />
       <button 
         className='action-btn'
         onClick={() => {
-          if (text.trim() === "") {
-            return;
-          }
-          if (isEditing) {
-            mutateName({name: text.trim()})
-          }
+          if (text.trim() === "") return;
+          if (isEditing) mutateName({name: text.trim()})
           setEditing(prev => !prev);
         }}>
         { isLoading ? "Loading..." : (isEditing ? "Save" : "Edit") }
@@ -134,8 +121,7 @@ const PostableDescription: React.FC<{orgText: string | null}> = (props) => {
       const previousProfile = utils.me.getProfile.getData();
       utils.me.getProfile.setData(() => {
         return {...previousProfile, description: input.description} as ProfileType;
-      });
-    },
+      })},
     onSuccess: () => {utils.me.getProfile.refetch()}
   });
 
@@ -145,20 +131,14 @@ const PostableDescription: React.FC<{orgText: string | null}> = (props) => {
         className="word-bubble"
         type="text"
         disabled={!isEditing}
-        onChange={(e) => 
-          setText(e.target.value)
-        }
+        onChange={(e) => setText(e.target.value)}
         value={error ? "Error" : text}
       />
       <button 
         className='action-btn'
         onClick={() => {
-          if (text.trim() === "") {
-            return;
-          }
-          if (isEditing) {
-            mutateName({description: text.trim()})
-          }
+          if (text.trim() === "") return;
+          if (isEditing) mutateName({description: text.trim()})
           setEditing(prev => !prev);
         }}>
         { isLoading ? "Loading..." : (isEditing ? "Save" : "Edit") }

@@ -62,7 +62,7 @@ function Navbar() {
                             <div>測試</div>
                         </div>
                     </Link>
-                    <Link href="/reborn" passHref>
+                    <Link href="/makeProfile" passHref>
                         <div className='navItem'>
                             <IconContext.Provider value={{ size: "1.5em"}}>     
                                 <HiIdentification />

@@ -8,12 +8,8 @@ import { inferQueryOutput, trpc } from '../utils/trpc';
 
 const PlayerList: NextPage = () => {
   const { data: profiles, isLoading } = trpc.proxy.getInfo.getAllProfiles.useQuery();
-  const { mutate, isLoading: il} = trpc.proxy.arena.battle.useMutation();
   const handleSearch = () => {console.log("search click")};
   const handleBattle = () => {console.log("Battle!")};
-
-  console.log(blog)
-
   return (
     <div>
       <Navbar />
@@ -46,6 +42,8 @@ const PlayerList: NextPage = () => {
 type ProfilesFromServer = inferQueryOutput<"getInfo.getAllProfiles"> | undefined;
 
 const MyPlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
+  const { mutate, isLoading, data} = trpc.proxy.arena.battle.useMutation();
+  console.log(data)
   return (
     <>
       { props.profiles ? 
@@ -53,7 +51,10 @@ const MyPlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
           {
             props.profiles.map((profile, index) => {
               return(
-                <li key={index}>
+                <li onClick={() => {
+                  console.log("mutate, ", {with_id: profile.id})
+                  mutate({with_id: profile.id})
+                }} key={index}>
                   { profile?.combater &&
                     <PlayerCard 
                       name={profile.name} 

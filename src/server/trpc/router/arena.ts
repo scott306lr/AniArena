@@ -27,7 +27,7 @@ export const arenaAuthRouter = t.router({
 
     const player2 = await ctx.prisma.player.findFirstOrThrow({
       where: {
-        userId: input.with_id,
+        id: input.with_id,
       },
       include: {
         combater: {

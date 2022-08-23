@@ -20,7 +20,7 @@ const BattleList: NextPage = () => {
           {/* section 2 */}
           <div className="grid gap-4 lg:w-1/4 w-5/6">
               <SearchBar onClick={() => handleSearch}/>
-              { isLoading ? <div>loading...</div> : <MyPlayerList profiles={profiles}/>}
+              { isLoading ? <div>loading...</div> : <PlayerList profiles={profiles}/>}
           </div>
           <div className="grid items-center gap-4">
             <RectCard imgsrc="https://images-ext-1.discordapp.net/external/x08twzHAcDIWcqHEPgEIdfLNoIGST3tHUdti0Ww3b00/https/mudae.net/uploads/1232276/v6uL2AsAjYy0QE0-4OKy~0P98O5C.png" />
@@ -41,7 +41,7 @@ const BattleList: NextPage = () => {
 
 type ProfilesFromServer = inferQueryOutput<"getInfo.getAllProfiles"> | undefined;
 
-const MyPlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
+const PlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
   const { mutate, isLoading, data} = trpc.proxy.arena.battle.useMutation();
   console.log(data)
   return (

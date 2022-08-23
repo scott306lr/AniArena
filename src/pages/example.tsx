@@ -3,8 +3,8 @@ import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import { useEffect, useRef, useState } from "react";
-import { Popover } from '@reactour/popover'
-import { useRect } from '@reactour/utils'
+import { Dialog } from '@headlessui/react';
+import MyModal from "../components/Modal";
 
 const Home: NextPage = () => {
 
@@ -78,34 +78,17 @@ const MeProfile: React.FC = () => {
 
 const PopoverTest: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [updater, setUpdater] = useState([])
-  const ref = useRef(null)
-  const sizes = useRect(ref, updater)
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      setUpdater([])
-    })
-    return () => {
-      window.removeEventListener('scroll', () => {
-        setUpdater([])
-      })
-    }
-  }, [setUpdater])
 
   return (
     <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
-      <button onClick={() => setIsOpen(o => !o)}>
+      <button onClick={() => setIsOpen(prev => !prev)}>
         {isOpen ? 'Hide' : 'Show'} Popover
       </button>
-      {isOpen ? (
-        <Popover sizes={sizes}>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-            volutpat quam eu mauris euismod imperdiet.
-          </p>
-          <button onClick={() => setIsOpen(false)}>Hide me</button>
-        </Popover>
-      ) : null}
+      <MyModal title="I'm title" isOpen={isOpen} setIsOpen={setIsOpen}>
+        <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
+          <p className="text-2xl">I'm content</p>
+        </div>
+      </MyModal>
     </div>
   )
 }

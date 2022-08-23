@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import ActionButton from '../components/ActionButton';
 import RectCard from '../components/RectCard';
-import WordBallon from '../components/WordBallon';
 import SearchBar from '../components/SearchBar';
 import PlayerCard from '../components/PlayerCard';
 import Navbar from '../components/Navbar';
@@ -30,8 +29,9 @@ const PlayerList: NextPage = () => {
           </div>
           {/* section 3 */}
           <div className="space-y-4">
-            <WordBallon text="ID: 22261744" />
-            <WordBallon text="Name: Admin" />
+            <div className="word-bubble">
+              {"Name: Admin"}
+            </div>
           </div>
         </div>
 

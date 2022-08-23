@@ -86,7 +86,7 @@ const PopoverTest: React.FC = () => {
       </button>
       <MyModal title="I'm title" isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
-          <p className="text-2xl">I'm content</p>
+          <p className="text-2xl">{"I'm content"}</p>
         </div>
       </MyModal>
     </div>

@@ -8,6 +8,8 @@ import React, { useState } from 'react'
 import SkillCard from '../components/SkillCard';
 import AttributeAdjustor from '../components/AttributeAdjustor';
 import Navbar from '../components/Navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 // const variants = {
 //     hidden: { opacity: 0.2, x: -200, y: 0 },

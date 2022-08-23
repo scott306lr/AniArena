@@ -24,4 +24,8 @@
     .word-bubble {
         @apply w-fit break-inside-auto p-1 px-3 rounded-lg shadow-lg bg-white
     }
+
+    .navItem {
+        @apply grid px-2 rounded-lg hover:bg-gray-500 hover:ease-in-out duration-200 text-sm place-items-center
+    }
 }

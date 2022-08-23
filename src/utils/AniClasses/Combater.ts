@@ -1,12 +1,12 @@
 import { Damage, DamageType } from "./Damage";
-import { Character_JSON } from "./Character"
-import { Attribute_JSON, Attribute, AttributeState } from "./Attribute";
-import { Player_JSON } from "./Player";
+import { Character_JSON, Skill_JSON } from "./Types"
+import { Attribute, AttributeState } from "./Attribute";
+import { Player_JSON } from "./Types";
 import { Skill } from "./Skill/Skill";
-import { SkillLoader } from "./Skill/SkillLoader";
 import { Arena, CombaterState } from "./Arena";
 import { EventCode, StatusManager } from "./StatusManager";
 import { getRandomElement } from "./utils";
+import { Skillloader } from "./Skill/SkillLoader";
 
 
 export class Combater{
@@ -22,8 +22,8 @@ export class Combater{
 
     constructor(player_JSON: Player_JSON, arena: Arena){
         this.player = JSON.parse(JSON.stringify(player_JSON));
-        this.character = this.fetchCharacter(this.player.combater.character);
-        this.attribute = new Attribute(this.player.combater.attribute);
+        this.character = this.player.combater.character;
+        this.attribute = new Attribute(this.player.combater.attr);
         this.statusManager = new StatusManager(this);
         
         this.skills = [];
@@ -37,29 +37,13 @@ export class Combater{
         if(player_JSON !== null){
             this.player = JSON.parse(JSON.stringify(player_JSON));
         }
-        this.character = this.fetchCharacter(this.player.combater.character);
-        this.attribute = new Attribute(this.player.combater.attribute);
+        this.character = this.player.combater.character;
+        this.attribute = new Attribute(this.player.combater.attr);
         this.statusManager = new StatusManager(this);
 
         this.skills = [];
         this.character.skills.forEach(skillName => this.loadSkill(skillName));
         // this.arena = arena;
-    }
-
-    fetchCharacter(name: string): Character_JSON {
-        let ret = { name: "name",
-                    image: "image",
-                    description: "description",
-                    attribute: {
-                        level: 1,
-                        exp: 5,
-                        HP: 10,
-                        AP: 10,
-                        APRegen: 2
-                    },
-                    skills: [],
-                }
-        return ret;
     }
 
     interrupt(){
@@ -72,10 +56,9 @@ export class Combater{
         this.chooseSkill();
     }
 
-    loadSkill(skillname: string): boolean{
-        const skill = SkillLoader(this, skillname);
-        if (!skill) return false;
-
+    loadSkill(skill_JSON: Skill_JSON): boolean{
+        let skill = Skillloader(this, skill_JSON);
+        if (skill === undefined) return false;
         this.skills.push(skill);
         return true;
     }
@@ -128,7 +111,7 @@ export class Combater{
         this.statusManager.trigger(EventCode.BeforeGetDamage, source);
 
         this.loseHP(this.damage.value, null);
-        this.arena.logger.log(this, `${this.player.nickname}受到${this.damage.getString()}`)
+        this.arena.logger.log(this, `${this.player.name}受到${this.damage.getString()}`)
         
         this.statusManager.trigger(EventCode.AfterLoseHP, source);
 
@@ -203,7 +186,7 @@ export class Combater{
     getCombaterState(): CombaterState{
         let attributeStatue: AttributeState = this.attribute.get();
         let ret: CombaterState = {
-            nickname:  this.player.nickname.slice(),
+            nickname:  this.player.name.slice(),
             character: JSON.parse(JSON.stringify(this.character)),
             attribute: attributeStatue,
             status: this.statusManager.get(),

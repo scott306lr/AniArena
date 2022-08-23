@@ -1,7 +1,6 @@
-import { Attribute_JSON, AttributeState } from "./Attribute";
-import { Character_JSON } from "./Character";
+import { AttributeState } from "./Attribute";
 import { Combater } from "./Combater";
-import { Player_JSON } from "./Player";
+import { Character_JSON, Player_JSON } from "./Types";
 import { StatusState } from "./Status/Status";
 
 export class Arena{

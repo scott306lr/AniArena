@@ -8,6 +8,7 @@ import { inferQueryOutput, trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
   const { data: myProfile, isLoading } = trpc.proxy.me.getProfile.useQuery();
+  console.log(myProfile)
 
   return (
     <div>

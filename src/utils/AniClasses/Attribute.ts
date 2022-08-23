@@ -1,10 +1,4 @@
-export type Attribute_JSON = {
-    level: number;
-    exp: number;
-    HP: number;
-    AP: number;
-    APRegen: number;
-}
+import { Attribute_JSON } from "./Types";
 
 export type AttributeState = {
     level: number;

@@ -1,6 +1,6 @@
 import { Status_Damage } from "../../src/utils/AniClasses/Status/Status_Damage"
 import { Combater } from "../../src/utils/AniClasses/Combater"
-import { Player_JSON } from "../../src/utils/AniClasses/Player"
+import { Player_JSON } from "../../src/utils/AniClasses/Types"
 import { Arena } from "../../src/utils/AniClasses/Arena";
 import { Status_RoundDamage } from "../../src/utils/AniClasses/Status/Status_RoundDamage";
 import { Damage, DamageType } from "../../src/utils/AniClasses/Damage";
@@ -16,24 +16,50 @@ describe("Status Test", () => {
 
     beforeEach(()=>{
         player1 = {
-            email: "testemail@gmail.com",
-            nickname: "測試工程師",
+            name: "測試工程師",
             description: "我是測試工程師",
-            unlock_characters: ["測試魔法工程師"],
             combater: {
-                character: "測試魔法工程師",
-                attribute: {
+                character: {
+                    name: "魔法學徒",
+                    id: 1,
+                    image: null,
+                    description: '25歲的母胎單身之人，開始感覺到充沛的魔力湧出。',
+                    orgAttr: {
+                        level: 1,
+                        exp: 0,
+                        HP: 20,
+                        AP: 5,
+                        APRegen: 5
+                    },
+                    skills: [
+                        {
+                            "id": 1,
+                            "createdAt": "2022-08-22T10:38:38.623Z",
+                            "updatedAt": "2022-08-22T04:37:59.873Z",
+                            "name": "火球術",
+                            "image": null,
+                            "description": "儘管是最基礎的攻擊魔法，也要耗費三十年習得",
+                            "requirement": {
+                                "level": 0
+                            },
+                            "cost": {
+                                "AP": 5,
+                                "HP": 0
+                            }
+                        }
+                    ]
+                },
+                attr: {
                     level: 1,
                     exp: 0,
                     HP: 20,
                     AP: 5,
                     APRegen: 5
                 },
-                inherent_skills: [],
             }
         }
         player2 = JSON.parse(JSON.stringify(player1));
-        player2.nickname = "測試機器人";
+        player2.name = "測試機器人";
 
         arena = new Arena(player1, player2);
         combater_engineer = new Combater(player1, arena);

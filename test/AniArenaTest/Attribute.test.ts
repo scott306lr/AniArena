@@ -1,4 +1,5 @@
-import { Attribute, Attribute_JSON } from "../../src/utils/AniClasses/Attribute"
+import { Attribute } from "../../src/utils/AniClasses/Attribute"
+import { Attribute_JSON } from "../../src/utils/AniClasses/Types";
 
 describe('Attribute Test', () => {
     let attr: Attribute_JSON;

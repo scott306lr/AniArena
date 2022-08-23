@@ -1,4 +1,4 @@
-import { Player_JSON } from "../../src/utils/AniClasses/Player"
+import { Player_JSON, Skill_JSON } from "../../src/utils/AniClasses/Types"
 import { Combater } from "../../src/utils/AniClasses/Combater"
 import { Arena } from "../../src/utils/AniClasses/Arena"
 import { EventCode } from "../../src/utils/AniClasses/StatusManager";
@@ -10,27 +10,53 @@ describe("Combater Test", () => {
     let player2: Player_JSON;
     let combater_engineer: Combater;
     let combater_bot: Combater;
+    let normalAttack: Skill_JSON;
 
     beforeEach(()=>{
         player1 = {
-            email: "testemail@gmail.com",
-            nickname: "工程師",
-            description: "工程師",
-            unlock_characters: ["工程師"],
+            name: "測試工程師",
+            description: "我是測試工程師",
             combater: {
-                character: "工程師",
-                attribute: {
+                character: {
+                    name: "魔法學徒",
+                    id: 1,
+                    image: null,
+                    description: '25歲的母胎單身之人，開始感覺到充沛的魔力湧出。',
+                    orgAttr: {
+                        level: 1,
+                        exp: 0,
+                        HP: 20,
+                        AP: 5,
+                        APRegen: 5
+                    },
+                    skills: []
+                },
+                attr: {
                     level: 1,
                     exp: 0,
                     HP: 20,
                     AP: 5,
                     APRegen: 5
                 },
-                inherent_skills: [],
             }
         }
         player2 = JSON.parse(JSON.stringify(player1));
-        player2.nickname = "機器人";
+        player2.name = "機器人";
+
+        normalAttack = {
+            "id": 1,
+            "createdAt": "2022-08-22T10:38:38.623Z",
+            "updatedAt": "2022-08-22T04:37:59.873Z",
+            "name": "普通攻擊",
+            "image": null,
+            "description": "對敵人造成普通程度的物理傷害",
+            "requirement": {
+                "level": 0,
+            },
+            "cost": {
+                "AP": 3,
+            }
+        };
 
         arena = new Arena(player1, player2);
         combater_engineer = new Combater(player1, arena);
@@ -39,10 +65,10 @@ describe("Combater Test", () => {
 
     // it.todo("Combater.reset() reset all attribute and state");
     it("Combater.reset()", () => {
-        player1.email = "newvalue";
+        player1.description = "newvalue";
         combater_bot.reset(player1);
 
-        expect(combater_bot.player.email).toBe(player1.email);
+        expect(combater_bot.player.description).toBe(player1.description);
 
         let hp = combater_bot.attribute.HP.get();
         combater_bot.loseHP(3, null);
@@ -77,13 +103,13 @@ describe("Combater Test", () => {
     it("Combater.loadSkill()", () => {
         let length = combater_bot.skills.length;
         expect(length).toBe(0);
-        combater_bot.loadSkill("Skill_NormalAttack");
+        combater_bot.loadSkill(normalAttack);
         expect(combater_bot.skills.length).toBe(1);
     });
 
     // it.todo("combater.castSkill() cast a spell to object and trigger event");
     it("Combater.castSkill()", () => {
-        combater_engineer.loadSkill("Skill_NormalAttack");
+        combater_engineer.loadSkill(normalAttack);
         let skill = combater_engineer.chooseSkill();
 
         let skillSpy = jest.spyOn(skill!, "cast");
@@ -99,7 +125,7 @@ describe("Combater Test", () => {
 
     // it.todo("Combater.chooseSkill() randomly select a skill that combaters meet it requirement");
     it("Combater.chooseSkill()", () => {
-        combater_engineer.loadSkill("Skill_NormalAttack");
+        combater_engineer.loadSkill(normalAttack);
         expect(combater_engineer.nextSkill).toBe(null);
         combater_engineer.chooseSkill();
         expect(combater_engineer.nextSkill).toBeDefined();
@@ -107,7 +133,7 @@ describe("Combater Test", () => {
         
     // it.todo("Combater.isReady() check combater can cast spell or not.");
     it("Combater.isReady()", () => {
-        combater_engineer.loadSkill("Skill_NormalAttack");
+        combater_engineer.loadSkill(normalAttack);
         let skill = combater_engineer.chooseSkill();
         expect(combater_engineer.isReady()).toBe(true);
         combater_engineer.loseAP(20, null);
@@ -133,7 +159,5 @@ describe("Combater Test", () => {
     it.todo("Combater.loseAP() lose AP, trigger event");
     it.todo("Combater.getAP() get AP, trigger event");
     it.todo("Combater.getCombaterState() get combater inner state and information");
-
-
 
 })

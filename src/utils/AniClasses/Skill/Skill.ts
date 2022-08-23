@@ -1,65 +1,36 @@
-import { Skill_Fireball } from "./Skill_Fireball";
 import { Combater } from "../Combater";
-import { Status } from "../Status/Status"
 import { Tag } from "../Tag";
+import { Skill_JSON } from "../Types";
+import { Skill_Fireball } from "./Skill_Fireball";
+import { Skill_NormalAttack } from "./Skill_NormalAttack";
+
 
 export type Cost = {
-    HP: number;
-    AP: number;
+    HP?: number;
+    AP?: number;
 }
 
 export type Requirement = {
-    level: number;
+    level?: number;
+    AP?: number;
 }
-
-
-export type Skill_JSON = {
-    name: string;
-    image: string
-    description: string;
-    declaration: string; 
-    tags: Tag[];
-    cost: Cost;
-    requirement: Requirement;
-}
-
 
 export abstract class Skill{
     owner: Combater;
     dataJSON: Skill_JSON;
     description: string;
-    declaration: string;
+    declaration?: string;
     cost: Cost;
     requirement: Requirement;  
     name: string;
 
-    constructor(owner: Combater){
+    constructor(owner: Combater, skill_JSON:Skill_JSON){
         this.owner = owner;
         this.name = this.constructor.name;
-        this.dataJSON = this.fetch(this.name);
+        this.dataJSON = JSON.parse(JSON.stringify(skill_JSON));
         this.description = this.dataJSON.description;
-        this.declaration = this.dataJSON.declaration;
         this.cost = this.dataJSON.cost;
         this.requirement = this.dataJSON.requirement;
-    }
-
-    fetch(name: string): Skill_JSON{
-        // use stub or override it to test temporarily until database is online.
-        let ret:Skill_JSON = {
-            name: 'name',
-            image: 'image',
-            description: 'description',
-            declaration: 'declaration', 
-            tags: [Tag.mental],
-            cost: {
-                HP: 0,
-                AP: 5
-            },
-            requirement: {
-                level: 1
-            }
-        }
-        return ret;
     }
 
     // override if need
@@ -67,10 +38,16 @@ export abstract class Skill{
         for(let key in this.requirement){
             if(key === "level"){
                 let level = this.owner.attribute.level.get();
-                if(level < this.requirement[key]){
+                if(this.requirement.level != undefined && level < this.requirement.level){
                     return false;
                 }
             }
+            else if(key === "AP"){
+                let AP = this.owner.attribute.AP.get();
+                if(this.requirement.AP != undefined && AP < this.requirement.AP){
+                    return false;
+                }
+            } 
         }
 
 
@@ -80,13 +57,13 @@ export abstract class Skill{
         for(let key in this.cost){
             if(key === "HP"){
                 let HP = this.owner.attribute.HP.get();
-                if(HP < this.cost.HP){
+                if(this.cost.HP !== undefined && HP < this.cost.HP){
                     return false;
                 }
             }
             else if(key === "AP"){
                 let AP = this.owner.attribute.AP.get();
-                if(AP < this.cost.AP){
+                if(this.cost.AP !== undefined && AP < this.cost.AP){
                     return false;
                 }
             }
@@ -114,10 +91,10 @@ export abstract class Skill{
 
         if(isCost){
             for(let key in this.cost){
-                if(key === "HP"){
+                if(key === "HP" && this.cost.HP !== undefined){
                     this.owner.loseHP(this.cost.HP, null);
                 }
-                else if(key === "AP"){
+                else if(key === "AP" && this.cost.AP !== undefined){
                     this.owner.loseAP(this.cost.AP, null);
                 }
             }

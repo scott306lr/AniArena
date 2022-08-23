@@ -6,7 +6,9 @@ import RectCard from '../components/RectCard';
 import { inferQueryOutput, trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
-  const { data: myProfile, isLoading } = trpc.proxy.me.getProfile.useQuery();
+  const { data: myProfile, isLoading } = trpc.proxy.me.getProfile.useQuery({
+    refetchOnMount: false
+  });
   console.log(myProfile)
 
   return (
@@ -97,9 +99,11 @@ const PostableName: React.FC<{orgText: string}> = (props) => {
       />
       <button 
         className='action-btn'
+        disabled={isLoading}
         onClick={() => {
-          if (text.trim() === "") return;
-          if (isEditing) mutateName({name: text.trim()})
+          const ttext = text.trim()
+          if (ttext === "") return;
+          if (isEditing && ttext !== props.orgText) mutateName({name: ttext})
           setEditing(prev => !prev);
         }}>
         { isLoading ? "Loading..." : (isEditing ? "Save" : "Edit") }
@@ -144,9 +148,11 @@ const PostableDescription: React.FC<{orgText: string | null}> = (props) => {
       />
       <button 
         className='action-btn'
+        disabled={isLoading}
         onClick={() => {
-          if (text.trim() === "") return;
-          if (isEditing) mutateName({description: text.trim()})
+          const ttext = text.trim()
+          if (ttext === "") return;
+          if (isEditing && ttext !== props.orgText) mutateName({description: ttext})
           setEditing(prev => !prev);
         }}>
         { isLoading ? "Loading..." : (isEditing ? "Save" : "Edit") }

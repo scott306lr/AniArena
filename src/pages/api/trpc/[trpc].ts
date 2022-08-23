@@ -7,4 +7,5 @@ import { createContext } from "../../../server/trpc/context";
 export default createNextApiHandler({
   router: appRouter,
   createContext: createContext,
+  // responseMeta({ ctx, paths, type, errors }) {}, // server caching here
 });

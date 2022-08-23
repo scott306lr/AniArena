@@ -1,16 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import NavItem from './NavItem'
-
-import {
-    HomeIcon,
-    UsersIcon,
-    GlobeIcon,
-    PlayIcon,
-    LoginIcon,
-} from "@heroicons/react/solid"
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Avatar from './Avatar'
+import { RiSwordFill } from "react-icons/ri"
+import { FaCross, FaGlobeAsia } from "react-icons/fa"
+import { TiHome } from 'react-icons/ti'
+import { HiOutlineLogin } from 'react-icons/hi'
+import { IconContext } from 'react-icons'
 
 function Navbar() {
     const { data: session } = useSession()
@@ -25,24 +21,36 @@ function Navbar() {
                 {/* middle */}
                 <div className='flex'>
                     <Link href="/" passHref>
-                        <div>
-                            <NavItem Icon={HomeIcon} title="首頁"/>
+                        <div className='navItem'>
+                            <IconContext.Provider value={{ size: "1.5em"}}>
+                                <TiHome />
+                            </IconContext.Provider>
+                            <div>首頁</div>
                         </div>
                     </Link>
                     <Link href="/characters" passHref>
-                        <a>
-                            <NavItem Icon={UsersIcon} title="角色"/>
-                        </a>
+                        <div className='navItem'>
+                            <IconContext.Provider value={{ size: "1.5em"}}>
+                                <FaCross />
+                            </IconContext.Provider>
+                            <div>轉生</div>
+                        </div>
                     </Link>
                     <Link href="/playerList" passHref>
-                        <a>
-                            <NavItem Icon={GlobeIcon} title="排名"/>
-                        </a>
+                        <div className='navItem'>
+                            <IconContext.Provider value={{ size: "1.5em"}}>
+                                <FaGlobeAsia />
+                            </IconContext.Provider>
+                            <div>排名</div>
+                        </div>
                     </Link>
                     <Link href="/battle" passHref>
-                        <a>
-                            <NavItem Icon={PlayIcon} title="戰鬥" />
-                        </a>
+                        <div className='navItem'>
+                            <IconContext.Provider value={{ size: "1.5em"}}>     
+                                <RiSwordFill />
+                            </IconContext.Provider>
+                            <div>戰鬥</div>
+                        </div>
                     </Link>
                 </div>
                 
@@ -55,7 +63,12 @@ function Navbar() {
                         </a>
                     ) : (
                         <a onClick={() => signIn()}>
-                            <NavItem Icon={LoginIcon} title="登入" />
+                            <div className='navItem'>
+                                <IconContext.Provider value={{ size: "1.5em"}}>
+                                    <HiOutlineLogin/>
+                                </IconContext.Provider>
+                                <div>登入</div>
+                            </div>
                         </a>
                     )}
                 </div>

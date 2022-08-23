@@ -26,7 +26,7 @@ export type Attribute_JSON = {
     APRegen: number;
 }
 
-export type Character_JSON = Character
+export type Character_JSON = Character & { skills: Skill[]; }
 
 export type Combater_JSON = tCombater
 

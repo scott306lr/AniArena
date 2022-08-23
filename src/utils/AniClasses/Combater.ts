@@ -1,5 +1,5 @@
 import { Damage, DamageType } from "./Damage";
-import { Character_JSON, Skill_JSON } from "./Types"
+import { Attribute_JSON, Character_JSON, Skill_JSON } from "./Types"
 import { Attribute, AttributeState } from "./Attribute";
 import { Player_JSON } from "./Types";
 import { Skill } from "./Skill/Skill";
@@ -22,8 +22,11 @@ export class Combater{
 
     constructor(player_JSON: Player_JSON, arena: Arena){
         this.player = JSON.parse(JSON.stringify(player_JSON));
+        if(this.player.combater == null){
+            throw "combater is null or undefined!";
+        }
         this.character = this.player.combater.character;
-        this.attribute = new Attribute(this.player.combater.attr);
+        this.attribute = new Attribute(this.player.combater.attr as Attribute_JSON);
         this.statusManager = new StatusManager(this);
         
         this.skills = [];
@@ -37,8 +40,11 @@ export class Combater{
         if(player_JSON !== null){
             this.player = JSON.parse(JSON.stringify(player_JSON));
         }
+        if(this.player.combater == null){
+            throw "combater is null or undefined!";
+        }
         this.character = this.player.combater.character;
-        this.attribute = new Attribute(this.player.combater.attr);
+        this.attribute = new Attribute(this.player.combater.attr as Attribute_JSON);
         this.statusManager = new StatusManager(this);
 
         this.skills = [];
@@ -84,8 +90,8 @@ export class Combater{
     }
 
     getPriority(): number {
-        if (!this.nextSkill) return Infinity;
-        return this.nextSkill?.dataJSON.cost.AP;
+        if (this.nextSkill == null || this.nextSkill.cost.AP == null) return Infinity;
+        return this.nextSkill?.cost.AP;
     }
 
     isReady(): boolean{

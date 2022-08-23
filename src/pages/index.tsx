@@ -17,20 +17,14 @@ const Home: NextPage = () => {
         {/* sections */}
         <div className="flex items-center justify-center m-8 gap-8">
           {
-            (isLoading) ? (
-              <p className='word-bubble'>
-                {"Loading..."}
-              </p>
-            ) : (myProfile == null) ? (
-              <p className='word-bubble'>
-                {error.code === 'INTERNAL_SERVER_ERROR'}
-              </p>
-            ) : (
-              <div className="flex flex-col items-center justify-center m-8 gap-8">
-                <UserProfile profile={myProfile}/>
-                <CharProfile combater={myProfile.combater}/>
-              </div>
-            )
+            (isLoading || myProfile == null) ?
+            <p className='word-bubble'>
+              {"Loading..."}
+            </p> :
+            <div className="flex flex-col items-center justify-center m-8 gap-8">
+              <UserProfile profile={myProfile}/>
+              <CharProfile combater={myProfile.combater}/>
+            </div>
           }
         </div>
       </main>
@@ -42,7 +36,7 @@ type ProfileType = inferQueryOutput<"me.getProfile">;
 const UserProfile: React.FC<{profile: ProfileType}> = (props) => {
   
   return (
-    <div className='flex flex-col items-center justify-center '>
+    <div className='flex flex-col items-center justify-center bg-white/70 gap-4 p-8 rounded-md'>
       <PostableName orgText={props.profile.name}/>
       <PostableDescription orgText={props.profile.description}/>
     </div>

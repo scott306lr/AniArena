@@ -23,8 +23,8 @@ const Home: NextPage = () => {
               {"Loading..."}
             </p> :
             <div className="flex flex-col items-center justify-center m-8 gap-8">
-              <UserProfile profile={myProfile}/>
               <CharProfile combater={myProfile.combater}/>
+              <UserProfile profile={myProfile}/>
             </div>
           }
         </div>
@@ -37,7 +37,7 @@ type ProfileType = inferQueryOutput<"me.getProfile">;
 const UserProfile: React.FC<{profile: ProfileType}> = (props) => {
   
   return (
-    <div className='flex flex-col items-center justify-center '>
+    <div className='flex flex-col items-center justify-center bg-white/70 gap-4 p-8 rounded-md'>
       <PostableName orgText={props.profile.name}/>
       <PostableDescription orgText={props.profile.description}/>
     </div>

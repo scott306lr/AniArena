@@ -57,8 +57,8 @@ describe("Arena Test", () => {
 
         normalAttack = {
             "id": 1,
-            "createdAt": "2022-08-22T10:38:38.623Z",
-            "updatedAt": "2022-08-22T04:37:59.873Z",
+            "createdAt": new Date("2022-08-22T10:38:38.623Z"),
+            "updatedAt": new Date("2022-08-22T04:37:59.873Z"),
             "name": "普通攻擊",
             "image": null,
             "description": "對敵人造成普通程度的物理傷害",
@@ -72,8 +72,8 @@ describe("Arena Test", () => {
 
         fireball = {
             "id": 1,
-            "createdAt": "2022-08-22T10:38:38.623Z",
-            "updatedAt": "2022-08-22T04:37:59.873Z",
+            "createdAt": new Date("2022-08-22T10:38:38.623Z"),
+            "updatedAt": new Date("2022-08-22T04:37:59.873Z"),
             "name": "火球術",
             "image": null,
             "description": "儘管是最基礎的攻擊魔法，也要耗費三十年習得",

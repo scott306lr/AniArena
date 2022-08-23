@@ -28,9 +28,9 @@ export abstract class Skill{
         this.owner = owner;
         this.name = this.constructor.name;
         this.dataJSON = JSON.parse(JSON.stringify(skill_JSON));
-        this.description = this.dataJSON.description;
-        this.cost = this.dataJSON.cost;
-        this.requirement = this.dataJSON.requirement;
+        this.description = this.dataJSON.description as string;
+        this.cost = this.dataJSON.cost as Cost;
+        this.requirement = this.dataJSON.requirement as Requirement;
     }
 
     // override if need

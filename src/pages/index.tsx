@@ -6,7 +6,9 @@ import RectCard from '../components/RectCard';
 import { inferQueryOutput, trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
-  const { data: myProfile, isLoading } = trpc.proxy.me.getProfile.useQuery();
+  const { data: myProfile, isLoading } = trpc.proxy.me.getProfile.useQuery({
+    refetchOnMount: false
+  });
   console.log(myProfile)
 
   return (

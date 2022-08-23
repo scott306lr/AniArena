@@ -20,10 +20,13 @@ export const trpc = setupTRPC<AppRouter>({
       // url: `${getBaseUrl()}/api/trpc`,
       transformer: superjson,
       queryClientConfig: { 
-        refetchOnWindowFocus: false,
-        refetchOnReconnect: true,
         defaultOptions: { 
-          queries: { staleTime: 1000 * 10 }  // fetch cache instead for 10 seconds
+          queries: { 
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
+            staleTime: 1000 * 10 
+          }  // refetch cache instead for 10 seconds
           
         } 
       },

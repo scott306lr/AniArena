@@ -6,7 +6,7 @@ import PlayerCard from '../components/PlayerCard';
 import Navbar from '../components/Navbar';
 import { inferQueryOutput, trpc } from '../utils/trpc';
 
-const PlayerList: NextPage = () => {
+const BattleList: NextPage = () => {
   const { data: profiles, isLoading } = trpc.proxy.getInfo.getAllProfiles.useQuery();
   const handleSearch = () => {console.log("search click")};
   const handleBattle = () => {console.log("Battle!")};
@@ -71,4 +71,4 @@ const MyPlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
   )
 }
 
-export default PlayerList
+export default BattleList

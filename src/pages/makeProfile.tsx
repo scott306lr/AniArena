@@ -8,8 +8,9 @@ import React, { useState } from 'react'
 import SkillCard from '../components/SkillCard';
 import AttributeAdjustor from '../components/AttributeAdjustor';
 import Navbar from '../components/Navbar';
+import { trpc } from '../utils/trpc';
 
-const Characters: NextPage = () => {
+const MakeProfile: NextPage = () => {
     const [expMax, setExpMax] = useState(4);
     const [expVal, setExpVal] = useState(1);
     const [hp, setHp] = useState(7);
@@ -63,8 +64,6 @@ const Characters: NextPage = () => {
                 {/* sections */}
                 <div className="flex flex-wrap justify-center m-8 p-4 gap-8">
                     {/* middle characters section*/}
-                    {/*Todo: change it to filter map  */}
-                    {/*      Add click event */}
                     <div className="grid place-content-center p-2">
                         <ul className="md:grid flex flex-wrap bg-white rounded-lg shadow-lg p-2 space-y-2 hover:scale-110 transition-all">
                             {
@@ -130,4 +129,4 @@ const Characters: NextPage = () => {
     );
 }
 
-export default Characters
+export default MakeProfile

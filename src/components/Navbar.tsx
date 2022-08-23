@@ -5,8 +5,10 @@ import Avatar from './Avatar'
 import { RiSwordFill } from "react-icons/ri"
 import { FaCross, FaGlobeAsia } from "react-icons/fa"
 import { TiHome } from 'react-icons/ti'
-import { HiOutlineLogin } from 'react-icons/hi'
+import { HiOutlineLogin, HiBeaker, HiIdentification } from 'react-icons/hi'
 import { IconContext } from 'react-icons'
+
+
 
 function Navbar() {
     const { data: session } = useSession()
@@ -28,7 +30,7 @@ function Navbar() {
                             <div>首頁</div>
                         </div>
                     </Link>
-                    <Link href="/characters" passHref>
+                    <Link href="/reborn" passHref>
                         <div className='navItem'>
                             <IconContext.Provider value={{ size: "1.5em"}}>
                                 <FaCross />
@@ -36,7 +38,7 @@ function Navbar() {
                             <div>轉生</div>
                         </div>
                     </Link>
-                    <Link href="/playerList" passHref>
+                    <Link href="/battleList" passHref>
                         <div className='navItem'>
                             <IconContext.Provider value={{ size: "1.5em"}}>
                                 <FaGlobeAsia />
@@ -44,7 +46,7 @@ function Navbar() {
                             <div>排名</div>
                         </div>
                     </Link>
-                    <Link href="/battle" passHref>
+                    <Link href="/report" passHref>
                         <div className='navItem'>
                             <IconContext.Provider value={{ size: "1.5em"}}>     
                                 <RiSwordFill />
@@ -52,6 +54,23 @@ function Navbar() {
                             <div>戰鬥</div>
                         </div>
                     </Link>
+                    <Link href="/example" passHref>
+                        <div className='navItem'>
+                            <IconContext.Provider value={{ size: "1.5em"}}>     
+                                <HiBeaker />
+                            </IconContext.Provider>
+                            <div>測試</div>
+                        </div>
+                    </Link>
+                    <Link href="/reborn" passHref>
+                        <div className='navItem'>
+                            <IconContext.Provider value={{ size: "1.5em"}}>     
+                                <HiIdentification />
+                            </IconContext.Provider>
+                            <div>選角</div>
+                        </div>
+                    </Link>
+                    
                 </div>
                 
                 
@@ -59,7 +78,7 @@ function Navbar() {
                 <div>
                     {session ? (
                         <a onClick={() => signOut({ callbackUrl: "/" })}>
-                            <Avatar className="h-8 w-8" imgsrc={session.user.image}/>
+                            <Avatar className="h-8 w-8" imgsrc={session.user?.image}/>
                         </a>
                     ) : (
                         <a onClick={() => signIn()}>

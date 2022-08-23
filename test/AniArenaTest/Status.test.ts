@@ -16,13 +16,24 @@ describe("Status Test", () => {
 
     beforeEach(()=>{
         player1 = {
+            id: "cl74noa020210cbvhgy3p1ctx",
+            createdAt: new Date("2022-08-22T11:09:10.946Z"),
+            updatedAt: new Date("2022-08-22T11:05:49.163Z"),
+            userId: "cl747pr8k0018979tc4k8xj6k",
             name: "測試工程師",
             description: "我是測試工程師",
             combater: {
+                id: "cl74o63wj0020wpvhyekqhcqz",
+                createdAt: new Date("2022-08-22T11:23:02.851Z"),
+                updatedAt: new Date("2022-08-22T11:16:30.944Z"),
+                playerId: "cl74noa020210cbvhgy3p1ctx",
+                characterId: 1,
                 character: {
-                    name: "魔法學徒",
                     id: 1,
-                    image: null,
+                    createdAt: new Date("2022-08-22T11:09:10.946Z"),
+                    updatedAt: new Date("2022-08-22T11:05:49.163Z"),
+                    name: "魔法學徒",
+                    image: "",
                     description: '25歲的母胎單身之人，開始感覺到充沛的魔力湧出。',
                     orgAttr: {
                         level: 1,
@@ -34,8 +45,8 @@ describe("Status Test", () => {
                     skills: [
                         {
                             "id": 1,
-                            "createdAt": "2022-08-22T10:38:38.623Z",
-                            "updatedAt": "2022-08-22T04:37:59.873Z",
+                            "createdAt": new Date("2022-08-22T10:38:38.623Z"),
+                            "updatedAt": new Date("2022-08-22T04:37:59.873Z"),
                             "name": "火球術",
                             "image": null,
                             "description": "儘管是最基礎的攻擊魔法，也要耗費三十年習得",

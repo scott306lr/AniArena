@@ -8,8 +8,11 @@ import { inferQueryOutput, trpc } from '../utils/trpc';
 
 const PlayerList: NextPage = () => {
   const { data: profiles, isLoading } = trpc.proxy.getInfo.getAllProfiles.useQuery();
+  const { mutate, isLoading: il} = trpc.proxy.arena.battle.useMutation();
   const handleSearch = () => {console.log("search click")};
   const handleBattle = () => {console.log("Battle!")};
+
+  console.log(blog)
 
   return (
     <div>

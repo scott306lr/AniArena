@@ -14,7 +14,7 @@ const Battle: NextPage = () => {
 
     const [hp, setHp] = React.useState(7);
     // Todo: fetch data here
-    const {data: p1, isLoading, error} = trpc.proxy.arena.check_p1.useQuery({with_id: "testtest"});
+    // const {data: blog, isLoading, error} = trpc.proxy.arena.battle.useQuery({with_id: "testtest"});
     // console.log(p1)
     return (
         <div>
@@ -26,7 +26,6 @@ const Battle: NextPage = () => {
     )
 }
 
-type CheckP1 = inferQueryOutput<"arena.check_p1"> | undefined;
 
 const P1Skills: React.FC<{p1: CheckP1}> = (props) => {
     return (

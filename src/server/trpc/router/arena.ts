@@ -6,7 +6,7 @@ import { Arena } from "../../../utils/AniClasses/Arena";
 import { t, authedProcedure, checkRequirement } from "../utils";
 
 export const arenaAuthRouter = t.router({
-  battle: authedProcedure.input(z.object({with_id: z.string()})).query(async ({ ctx, input }) => {
+  battle: authedProcedure.input(z.object({with_id: z.string()})).mutation(async ({ ctx, input }) => {
     //player.combater.character.skills
     const player1 = await ctx.prisma.player.findFirstOrThrow({
       where: {
@@ -57,8 +57,10 @@ export const arenaAuthRouter = t.router({
       const attr = player2.combater?.attr as Prisma.JsonObject;
       return checkRequirement(requirement, attr)
     });
-    // const arena = new Arena(player1, player2)
-    // arena.start();
-    return {player1, player2}
+    
+    const arena = new Arena(player1, player2)
+    arena.start();
+
+    return arena.getLog();
   }),
 });

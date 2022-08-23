@@ -6,7 +6,7 @@ import { Skill } from "./Skill/Skill";
 import { Arena, CombaterState } from "./Arena";
 import { EventCode, StatusManager } from "./StatusManager";
 import { getRandomElement } from "./utils";
-import { Skillloader } from "./Skill/SkillLoader";
+import { SkillLoader } from "./Skill/SkillLoader";
 
 
 export class Combater{
@@ -57,7 +57,7 @@ export class Combater{
     }
 
     loadSkill(skill_JSON: Skill_JSON): boolean{
-        let skill = Skillloader(this, skill_JSON);
+        let skill = SkillLoader(this, skill_JSON);
         if (skill === undefined) return false;
         this.skills.push(skill);
         return true;

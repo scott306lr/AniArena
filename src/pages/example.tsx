@@ -2,7 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Popover } from '@reactour/popover'
+import { useRect } from '@reactour/utils'
 
 const Home: NextPage = () => {
 
@@ -54,6 +56,7 @@ const Home: NextPage = () => {
           <AuthShowcase/>
           <HelloSomeone/>
           <MeProfile/>
+          <PopoverTest/>
         </div>
       </main>
     </>
@@ -69,6 +72,40 @@ const MeProfile: React.FC = () => {
     <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
       <p className="text-2xl">{myProfile?.name}</p>
       <p className="text-lg">{myProfile?.description}</p>
+    </div>
+  )
+}
+
+const PopoverTest: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [updater, setUpdater] = useState([])
+  const ref = useRef(null)
+  const sizes = useRect(ref, updater)
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setUpdater([])
+    })
+    return () => {
+      window.removeEventListener('scroll', () => {
+        setUpdater([])
+      })
+    }
+  }, [setUpdater])
+
+  return (
+    <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
+      <button onClick={() => setIsOpen(o => !o)}>
+        {isOpen ? 'Hide' : 'Show'} Popover
+      </button>
+      {isOpen ? (
+        <Popover sizes={sizes}>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+            volutpat quam eu mauris euismod imperdiet.
+          </p>
+          <button onClick={() => setIsOpen(false)}>Hide me</button>
+        </Popover>
+      ) : null}
     </div>
   )
 }

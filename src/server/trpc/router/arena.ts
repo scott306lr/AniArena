@@ -58,7 +58,7 @@ export const arenaAuthRouter = t.router({
       return checkRequirement(requirement, attr)
     });
     
-    const arena = new Arena(player1, player2)
+    const arena = new Arena(player1, player2, 200);
     arena.start();
 
     return arena.getLog();

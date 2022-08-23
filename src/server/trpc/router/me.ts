@@ -60,5 +60,13 @@ export const meAuthRouter = t.router({
       }
     })
   }),
-
+  createProfile: authedProcedure.input(z.object({name: z.string(), description: z.string()})).mutation(async ({ ctx, input }) => {
+    return ctx.prisma.player.create({
+      data: {
+        name: input.name,
+        description: input.description,
+        userId: ctx.session.user.id,
+      }
+    })
+  }),
 });

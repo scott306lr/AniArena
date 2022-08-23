@@ -6,10 +6,9 @@ import RectCard from '../components/RectCard';
 import { inferQueryOutput, trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
-  const { data: myProfile, isLoading } = trpc.proxy.me.getProfile.useQuery({
-    refetchOnMount: false
-  });
+  const { data: myProfile, isLoading, error } = trpc.proxy.me.getProfile.useQuery();
   console.log(myProfile)
+  console.log(error)
 
   return (
     <div>
@@ -18,14 +17,20 @@ const Home: NextPage = () => {
         {/* sections */}
         <div className="flex items-center justify-center m-8 gap-8">
           {
-            (isLoading || myProfile == null) ?
-            <p className='word-bubble'>
-              {"Loading..."}
-            </p> :
-            <div className="flex flex-col items-center justify-center m-8 gap-8">
-              <UserProfile profile={myProfile}/>
-              <CharProfile combater={myProfile.combater}/>
-            </div>
+            (isLoading) ? (
+              <p className='word-bubble'>
+                {"Loading..."}
+              </p>
+            ) : (myProfile == null) ? (
+              <p className='word-bubble'>
+                {error.code === 'INTERNAL_SERVER_ERROR'}
+              </p>
+            ) : (
+              <div className="flex flex-col items-center justify-center m-8 gap-8">
+                <UserProfile profile={myProfile}/>
+                <CharProfile combater={myProfile.combater}/>
+              </div>
+            )
           }
         </div>
       </main>

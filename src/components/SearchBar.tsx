@@ -4,7 +4,7 @@ import {HiSearch} from 'react-icons/hi'
 
 
 interface Props {
-    onClick: ()=>{}
+    onClick: () => void
 }
 
 function SearchBar({onClick}: Props): ReactElement {

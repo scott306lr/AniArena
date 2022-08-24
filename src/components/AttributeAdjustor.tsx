@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react'
-import RoundButton from './RoundButton'
 
 interface Props {
     name: string,

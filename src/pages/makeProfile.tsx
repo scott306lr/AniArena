@@ -1,6 +1,4 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import ActionButton from '../components/ActionButton';
 import AttributeBar from '../components/AttributeBar';
 import Avatar from '../components/Avatar';
 import RectCard from '../components/RectCard';
@@ -8,7 +6,6 @@ import React, { useState } from 'react'
 import SkillCard from '../components/SkillCard';
 import AttributeAdjustor from '../components/AttributeAdjustor';
 import Navbar from '../components/Navbar';
-import { trpc } from '../utils/trpc';
 
 const MakeProfile: NextPage = () => {
     const [expMax, setExpMax] = useState(4);

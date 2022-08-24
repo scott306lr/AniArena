@@ -1,12 +1,10 @@
 import type { NextPage } from 'next'
-import ActionButton from '../components/ActionButton';
 import RectCard from '../components/RectCard';
 import SearchBar from '../components/SearchBar';
 import PlayerCard from '../components/PlayerCard';
 import Navbar from '../components/Navbar';
 import { inferQueryOutput, trpc } from '../utils/trpc';
 import { useEffect, useState } from 'react';
-import { profile } from 'console';
 
 const BattleList: NextPage = () => {
   
@@ -65,7 +63,9 @@ const PlayerProfile: React.FC<{profile: SelectedProfile}> = (props) => {
         <>
           <div className="grid items-center gap-4">
             <RectCard imgsrc={props.profile.combater?.character?.image} />
-            <ActionButton text="發起決鬥" onClick={() => handleBattle} />
+            <button onClick={handleBattle} className="action-btn">
+              {"發起決鬥"}
+            </button>
           </div>
           <div className='word-bubble'>{props.profile.name}</div>
         </>

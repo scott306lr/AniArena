@@ -1,6 +1,4 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import ActionButton from '../components/ActionButton';
 import AttributeBar from '../components/AttributeBar';
 import Avatar from '../components/Avatar';
 import RectCard from '../components/RectCard';

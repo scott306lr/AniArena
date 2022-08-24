@@ -64,7 +64,7 @@ const PlayerProfile: React.FC<{profile: SelectedProfile}> = (props) => {
           <div className="grid items-center gap-4">
             <RectCard imgsrc={props.profile.combater?.character?.image} />
             <button onClick={handleBattle} className="action-btn">
-              {"發起決鬥"}
+              {`發起決鬥 name: ${props.profile.name}`}
             </button>
           </div>
           <div className='word-bubble'>{props.profile.name}</div>

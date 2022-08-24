@@ -12,7 +12,7 @@ import { SkillLoader } from "./Skill/SkillLoader";
 export class Combater{
     player: Player_JSON;
     private character: Character_JSON;
-    attribute: Attribute;
+    attr: Attribute;
     skills: Skill[];
     nextSkill: Skill | null;
     statusManager: StatusManager;
@@ -26,7 +26,7 @@ export class Combater{
             throw "combater is null or undefined!";
         }
         this.character = this.player.combater.character;
-        this.attribute = new Attribute(this.player.combater.attr as Attribute_JSON);
+        this.attr = new Attribute(this.player.combater.attr as Attribute_JSON);
         this.statusManager = new StatusManager(this);
         
         this.skills = [];
@@ -44,7 +44,7 @@ export class Combater{
             throw "combater is null or undefined!";
         }
         this.character = this.player.combater.character;
-        this.attribute = new Attribute(this.player.combater.attr as Attribute_JSON);
+        this.attr = new Attribute(this.player.combater.attr as Attribute_JSON);
         this.statusManager = new StatusManager(this);
 
         this.skills = [];
@@ -57,7 +57,7 @@ export class Combater{
     }
 
     newRound(){
-        this.getAP(this.attribute.APRegen.get(), this);
+        this.getAP(this.attr.APRegen.get(), this);
         this.statusManager.trigger(EventCode.AfterNewRound, null);
         this.chooseSkill();
     }
@@ -130,9 +130,9 @@ export class Combater{
         }
         this.statusManager.trigger(EventCode.BeforeLoseHP, caller);
 
-        let currentHP = this.attribute.HP.get();
+        let currentHP = this.attr.HP.get();
         let newHP = Math.max(currentHP - value, 0);
-        this.attribute.HP.set(newHP);
+        this.attr.HP.set(newHP);
 
         this.statusManager.trigger(EventCode.AfterLoseHP, caller);
         return true;
@@ -144,10 +144,10 @@ export class Combater{
         }
         this.statusManager.trigger(EventCode.BeforeGetHP, caller);
         
-        let currentHP = this.attribute.HP.get();
-        let currentMaxHP = this.attribute.maxHP.get();
+        let currentHP = this.attr.HP.get();
+        let currentMaxHP = this.attr.maxHP.get();
         let newHP = Math.min(currentHP + value, currentMaxHP);
-        this.attribute.HP.set(newHP);
+        this.attr.HP.set(newHP);
 
         this.statusManager.trigger(EventCode.AfterGetHP, caller);
         return true;
@@ -159,9 +159,9 @@ export class Combater{
         }
         this.statusManager.trigger(EventCode.BeforeLoseAP, caller);
 
-        let currentAP = this.attribute.AP.get();
+        let currentAP = this.attr.AP.get();
         let newAP = Math.max(currentAP - value, 0);
-        this.attribute.AP.set(newAP);
+        this.attr.AP.set(newAP);
 
         this.statusManager.trigger(EventCode.AfterLoseAP, caller);
         return true;
@@ -174,10 +174,10 @@ export class Combater{
         }
 
         this.statusManager.trigger(EventCode.BeforeGetAP, caller);
-        let currentAP = this.attribute.AP.get();
-        let currentMaxAP = this.attribute.maxAP.get();
+        let currentAP = this.attr.AP.get();
+        let currentMaxAP = this.attr.maxAP.get();
         let newAP = Math.min(currentAP + value, currentMaxAP);
-        this.attribute.AP.set(newAP);
+        this.attr.AP.set(newAP);
         this.statusManager.trigger(EventCode.AfterGetAP, caller);
         return true;
     }
@@ -190,11 +190,11 @@ export class Combater{
      * @returns CombaterState
      */
     getCombaterState(): CombaterState{
-        let attributeStatue: AttributeState = this.attribute.get();
+        let attributeState: AttributeState = this.attr.get();
         let ret: CombaterState = {
-            nickname:  this.player.name.slice(),
+            name:  this.player.name.slice(),
             character: JSON.parse(JSON.stringify(this.character)),
-            attribute: attributeStatue,
+            attr: attributeState,
             status: this.statusManager.get(),
         }
         return ret;

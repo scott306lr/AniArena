@@ -5,32 +5,31 @@ import SearchBar from '../components/SearchBar';
 import PlayerCard from '../components/PlayerCard';
 import Navbar from '../components/Navbar';
 import { inferQueryOutput, trpc } from '../utils/trpc';
+import { useEffect, useState } from 'react';
+import { profile } from 'console';
 
 const BattleList: NextPage = () => {
+  
   const { data: profiles, isLoading } = trpc.proxy.getInfo.getAllProfiles.useQuery();
+  const [ selectedId, setSelectedId ] = useState<string>();
+  const handleSelect = (profileId: string) => {setSelectedId(profileId)};
   const handleSearch = () => {console.log("search click")};
-  const handleBattle = () => {console.log("Battle!")};
+
   return (
     <div>
       <Navbar />
       <main className="grid">
         
         {/* sections */}
-        <div className="flex flex-wrap items-center justify-center m-4 p-4 gap-8">
-          {/* section 2 */}
+        <div className="flex flex-wrap items-center justify-center m-4 gap-14">
+          {/* section: battle list */}
           <div className="grid gap-4 lg:w-1/4 w-5/6">
               <SearchBar onClick={() => handleSearch}/>
-              { isLoading ? <div>loading...</div> : <PlayerList profiles={profiles}/>}
+              { isLoading ? <div>loading...</div> : <PlayerList profiles={profiles} onClick={handleSelect}/>}
           </div>
-          <div className="grid items-center gap-4">
-            <RectCard imgsrc="https://images-ext-1.discordapp.net/external/x08twzHAcDIWcqHEPgEIdfLNoIGST3tHUdti0Ww3b00/https/mudae.net/uploads/1232276/v6uL2AsAjYy0QE0-4OKy~0P98O5C.png" />
-            <ActionButton text="發起決鬥" onClick={() => handleBattle} />
-          </div>
-          {/* section 3 */}
-          <div className="space-y-4">
-            <div className="word-bubble">
-              {"Name: Admin"}
-            </div>
+          {/* section: player profile */}
+          <div className="">
+            <PlayerProfile profiles={profiles} selectedId={selectedId} />
           </div>
         </div>
 
@@ -41,9 +40,43 @@ const BattleList: NextPage = () => {
 
 type ProfilesFromServer = inferQueryOutput<"getInfo.getAllProfiles"> | undefined;
 
-const PlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
+// To do: don't know how to pass a single item from profiles OAO.
+const PlayerProfile: React.FC<{profiles: ProfilesFromServer, selectedId: string|undefined}> = (props) => {
+  const playerProfile = props.profiles?.find(profile => profile.id === props.selectedId);
   const { mutate, isLoading, data} = trpc.proxy.arena.battle.useMutation();
-  console.log(data)
+
+  const handleBattle = () => {
+    console.log("Battle!");
+    if(props.selectedId != null){
+      mutate({with_id: props.selectedId})
+    };
+    console.log(data);
+    return ;
+  }
+  
+  return (
+    <>
+      { playerProfile ?
+        <div>
+          <div className="grid items-center gap-4">
+            <RectCard imgsrc={playerProfile.combater?.character.image} />
+            <ActionButton text="發起決鬥" onClick={handleBattle} />
+          </div>
+          <div className='word-bubble'>{playerProfile.name}</div>
+        </div>
+        :
+        <div>
+          
+        </div>
+
+      }
+    </>    
+  )
+}
+
+
+const PlayerList: React.FC<{profiles: ProfilesFromServer, onClick: Function}> = (props) => {
+  
   return (
     <>
       { props.profiles ? 
@@ -52,8 +85,8 @@ const PlayerList: React.FC<{profiles: ProfilesFromServer}> = (props) => {
             props.profiles.map((profile, index) => {
               return(
                 <li onClick={() => {
-                  console.log("mutate, ", {with_id: profile.id})
-                  mutate({with_id: profile.id})
+                  // console.log("mutate, ", {with_id: profile.id})
+                  props.onClick(profile.id);
                 }} key={index}>
                   { profile?.combater &&
                     <PlayerCard 

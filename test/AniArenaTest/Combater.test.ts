@@ -81,11 +81,11 @@ describe("Combater Test", () => {
 
         expect(combater_bot.player.description).toBe(player1.description);
 
-        let hp = combater_bot.attribute.HP.get();
+        let hp = combater_bot.attr.HP.get();
         combater_bot.loseHP(3, null);
-        expect(combater_bot.attribute.HP.get()).toBe(hp - 3);
+        expect(combater_bot.attr.HP.get()).toBe(hp - 3);
         combater_bot.reset();
-        expect(combater_bot.attribute.HP.get()).toBe(hp);
+        expect(combater_bot.attr.HP.get()).toBe(hp);
     });
 
     it.todo("Combater.fetchCharacter() get character from database");
@@ -96,8 +96,8 @@ describe("Combater Test", () => {
     it("Combater.newRound()", () => {
         combater_bot.loseAP(10, null);
 
-        let ap = combater_bot.attribute.AP.get();
-        let apr = combater_bot.attribute.APRegen.get();
+        let ap = combater_bot.attr.AP.get();
+        let apr = combater_bot.attr.APRegen.get();
 
         let chooseSkillSpy = jest.spyOn(combater_bot, "chooseSkill");
         let triggerSpy = jest.spyOn(combater_bot.statusManager, "trigger");
@@ -105,7 +105,7 @@ describe("Combater Test", () => {
 
 
         expect(chooseSkillSpy).toHaveBeenCalled();
-        expect(combater_bot.attribute.AP.get()).toBe(ap + apr);
+        expect(combater_bot.attr.AP.get()).toBe(ap + apr);
         expect(triggerSpy).toHaveBeenCalledWith(EventCode.AfterNewRound, null);
 
     });

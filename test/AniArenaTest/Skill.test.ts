@@ -79,12 +79,12 @@ describe('Skill Test', () =>{
 
         combater_engineer.loadSkill(normalAttack);
         combater_engineer.chooseSkill();
-        let botHP = combater_bot.attribute.HP.get();
-        let engineerAP = combater_engineer.attribute.AP.get();
+        let botHP = combater_bot.attr.HP.get();
+        let engineerAP = combater_engineer.attr.AP.get();
         combater_engineer.castSkill(combater_bot);
 
-        expect(combater_bot.attribute.HP.get()).toBe(botHP - 3);
-        expect(combater_engineer.attribute.AP.get()).toBe(engineerAP - 3);
+        expect(combater_bot.attr.HP.get()).toBe(botHP - 3);
+        expect(combater_engineer.attr.AP.get()).toBe(engineerAP - 3);
 
         // console.log(arena.logger.get());
 
@@ -112,19 +112,19 @@ describe('Skill Test', () =>{
         combater_engineer.loadSkill(fireball);
         combater_engineer.chooseSkill();
         
-        let botHP = combater_bot.attribute.HP.get();
-        let engineerAP = combater_engineer.attribute.AP.get();
+        let botHP = combater_bot.attr.HP.get();
+        let engineerAP = combater_engineer.attr.AP.get();
         combater_engineer.castSkill(combater_bot);
 
-        expect(combater_bot.attribute.HP.get()).toBe(botHP - 3);
-        expect(combater_engineer.attribute.AP.get()).toBe(engineerAP - 5);
+        expect(combater_bot.attr.HP.get()).toBe(botHP - 3);
+        expect(combater_engineer.attr.AP.get()).toBe(engineerAP - 5);
 
         combater_bot.newRound();
 
-        expect(combater_bot.attribute.HP.get()).toBe(botHP - 4);
+        expect(combater_bot.attr.HP.get()).toBe(botHP - 4);
 
         combater_bot.newRound();
-        expect(combater_bot.attribute.HP.get()).toBe(botHP - 4);
+        expect(combater_bot.attr.HP.get()).toBe(botHP - 4);
 
         console.log(arena.logger.get());
 

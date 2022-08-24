@@ -82,9 +82,9 @@ describe("Status Test", () => {
         let damage = new Damage(5, DamageType.physical)
         let testStatus = new Status_Damage(combater_bot,damage);
         
-        let originalHP = combater_bot.attribute.HP.get();
+        let originalHP = combater_bot.attr.HP.get();
         testStatus.apply(combater_bot);
-        let hurtHP = combater_bot.attribute.HP.get();
+        let hurtHP = combater_bot.attr.HP.get();
         expect(hurtHP).toBe(originalHP - damage.value);
         // console.log(arena.logger.get());
 
@@ -94,18 +94,18 @@ describe("Status Test", () => {
         let damage = new Damage(3, DamageType.magic);
         let testStatus = new Status_RoundDamage(combater_engineer, damage, 2, "中毒", `受中毒狀態影響`);
 
-        let originalHP = combater_bot.attribute.HP.get();
+        let originalHP = combater_bot.attr.HP.get();
         testStatus.apply(combater_bot);
         
-        expect(combater_bot.attribute.HP.get()).toBe(originalHP);
+        expect(combater_bot.attr.HP.get()).toBe(originalHP);
         expect(combater_bot.statusManager.statusList.length).toBe(1);
         //first round
         combater_bot.newRound();
-        expect(combater_bot.attribute.HP.get()).toBe(originalHP - damage.value);
+        expect(combater_bot.attr.HP.get()).toBe(originalHP - damage.value);
 
         //second round
         combater_bot.newRound();
-        expect(combater_bot.attribute.HP.get()).toBe(originalHP - 2*damage.value);
+        expect(combater_bot.attr.HP.get()).toBe(originalHP - 2*damage.value);
 
         expect(combater_bot.statusManager.statusList.length).toBe(0);
         // console.log(arena.logger.get());
@@ -117,12 +117,12 @@ describe("Status Test", () => {
         let testStatus = new Status_Invincible(combater_bot, undefined, 1);
 
         testStatus.apply(combater_bot);
-        let originalHP = combater_bot.attribute.HP.get();
+        let originalHP = combater_bot.attr.HP.get();
         combater_engineer.dealDamage(damage, combater_bot);
-        expect(combater_bot.attribute.HP.get()).toBe(originalHP);
+        expect(combater_bot.attr.HP.get()).toBe(originalHP);
 
         combater_engineer.dealDamage(damage, combater_bot);
-        expect(combater_bot.attribute.HP.get()).toBe(originalHP - damage.value);
+        expect(combater_bot.attr.HP.get()).toBe(originalHP - damage.value);
 
         // console.log(arena.logger.get());
 

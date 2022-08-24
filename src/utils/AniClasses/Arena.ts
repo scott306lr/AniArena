@@ -50,7 +50,15 @@ export class Arena{
                 
                 // Combater takes action
                 if( this.combater1.isReady() && this.combater2.isReady() ){
-                    if( this.combater1.getPriority() <= this.combater2.getPriority() ){
+                    if( this.combater1.getPriority() === this.combater2.getPriority() ){
+                        if(this.combater1.attr.AP.get() > this.combater2.attr.AP.get()){
+                            this.combater1.castSkill(this.combater2);
+                        }
+                        else{
+                            this.combater2.castSkill(this.combater1);
+                        }
+                    }
+                    else if( this.combater1.getPriority() < this.combater2.getPriority() ){
                         this.combater1.castSkill(this.combater2);
                     }
                     else {
@@ -79,27 +87,27 @@ export class Arena{
         let combater1_state = this.combater1.getCombaterState();
         let combater2_state = this.combater2.getCombaterState();
 
-        let combater1_HP = combater1_state.attribute.HP;
-        let combater2_HP = combater2_state.attribute.HP;
+        let combater1_HP = combater1_state.attr.HP;
+        let combater2_HP = combater2_state.attr.HP;
 
         if(combater1_HP <= 0 && combater2_HP <= 0){
-            this.logger.log(undefined, `${combater1_state.nickname}和${combater2_state.nickname}同時倒下了！`)
+            this.logger.log(undefined, `${combater1_state.name}和${combater2_state.name}同時倒下了！`)
             return true;
         }
         else if(combater1_HP <= 0){
-            this.logger.log(this.combater1, `${combater1_state.nickname}倒下了！`);
-            this.logger.log(this.combater2, `${combater2_state.nickname}獲得了勝利！`);
+            this.logger.log(this.combater1, `${combater1_state.name}倒下了！`);
+            this.logger.log(this.combater2, `${combater2_state.name}獲得了勝利！`);
             this.logger.setWinner(this.combater2);
             return true;
         }
         else if(combater2_HP <= 0){
-            this.logger.log(this.combater2, `${combater2_state.nickname}倒下了！`)
-            this.logger.log(this.combater1, `${combater1_state.nickname}獲得了勝利！`);
+            this.logger.log(this.combater2, `${combater2_state.name}倒下了！`)
+            this.logger.log(this.combater1, `${combater1_state.name}獲得了勝利！`);
             this.logger.setWinner(this.combater1);
             return true;
         }
         else if(this.round > this.maxRound){
-            this.logger.log(undefined, `${combater1_state.nickname}和${combater2_state.nickname}無法突破系統回合限制，戰鬥結束`)
+            this.logger.log(undefined, `${combater1_state.name}和${combater2_state.name}無法突破系統回合限制，戰鬥結束`)
             return true;
         }
         return false;
@@ -119,9 +127,9 @@ export class Arena{
 
 
 export type CombaterState = {
-    nickname: string,
+    name: string,
     character: Character_JSON,
-    attribute: AttributeState,
+    attr: AttributeState,
     status: StatusState[]
 
 }

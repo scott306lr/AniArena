@@ -18,7 +18,7 @@ function Navbar() {
 
             <div className="flex justify-between w-full lg:w-10/12 py-2 px-4 bg-white rounded-lg shadow-xl">
                 {/* left */}
-                <p className='font-bold text-lg self-center '>AniArena</p>
+                <p className='hidden sm:grid font-bold text-lg self-center '>AniArena</p>
                 
                 {/* middle */}
                 <div className='flex'>

@@ -37,13 +37,13 @@ export abstract class Skill{
     isCastable(isCost: boolean = true): boolean {
         for(let key in this.requirement){
             if(key === "level"){
-                let level = this.owner.attribute.level.get();
+                let level = this.owner.attr.level.get();
                 if(this.requirement.level != undefined && level < this.requirement.level){
                     return false;
                 }
             }
             else if(key === "AP"){
-                let AP = this.owner.attribute.AP.get();
+                let AP = this.owner.attr.AP.get();
                 if(this.requirement.AP != undefined && AP < this.requirement.AP){
                     return false;
                 }
@@ -56,13 +56,13 @@ export abstract class Skill{
         }
         for(let key in this.cost){
             if(key === "HP"){
-                let HP = this.owner.attribute.HP.get();
+                let HP = this.owner.attr.HP.get();
                 if(this.cost.HP !== undefined && HP < this.cost.HP){
                     return false;
                 }
             }
             else if(key === "AP"){
-                let AP = this.owner.attribute.AP.get();
+                let AP = this.owner.attr.AP.get();
                 if(this.cost.AP !== undefined && AP < this.cost.AP){
                     return false;
                 }

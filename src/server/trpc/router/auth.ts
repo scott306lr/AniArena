@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { t, authedProcedure } from "../utils";
+import { z } from 'zod';
+import { t, authedProcedure } from '../utils';
 
 export const authRouter = t.router({
   getSession: t.procedure.query(({ ctx }) => {
@@ -8,12 +8,10 @@ export const authRouter = t.router({
   getSecretMessage: authedProcedure.query(() => {
     return `You are logged in and can see this secret message!`;
   }),
-  getSecretTest: authedProcedure.input(z.object({myname: z.string()})).query(({ ctx, input }) => {
-    console.log("Loggin ctx.session, input, from getSecretTest")
-    console.log(ctx.session, input)
-    if (!input?.myname || input.myname == "") 
-      return "hello, enter your name pls.";
-    else
-      return `hello ${input?.myname}`;
+  getSecretTest: authedProcedure.input(z.object({ myname: z.string() })).query(({ ctx, input }) => {
+    console.log('Loggin ctx.session, input, from getSecretTest');
+    console.log(ctx.session, input);
+    if (!input?.myname || input.myname == '') return 'hello, enter your name pls.';
+    else return `hello ${input?.myname}`;
   }),
 });

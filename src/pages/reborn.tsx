@@ -7,6 +7,8 @@ import SkillCard from '../components/SkillCard';
 import AttributeAdjustor from '../components/AttributeAdjustor';
 import Navbar from '../components/Navbar';
 import { trpc } from '../utils/trpc';
+import { redirect } from 'next/dist/server/api-utils';
+import Link from 'next/link';
 
 const Reborn: NextPage = () => {
   const [selected, setSelected] = useState(0);
@@ -38,6 +40,7 @@ const Reborn: NextPage = () => {
 
   const { mutate: mutateName, isLoading, error } = trpc.proxy.me.reborn.useMutation();
 
+  
   const confirmClick = () => {
     console.log('confirm clicked');
     if (
@@ -93,9 +96,11 @@ const Reborn: NextPage = () => {
                 <button onClick={resetClick} className="action-btn">
                   {'重設'}
                 </button>
-                <button onClick={confirmClick} className="action-btn">
-                  {'確認'}
-                </button>
+                <Link href='/' passHref>
+                  <button onClick={confirmClick} className="action-btn">
+                    {'確認'}
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

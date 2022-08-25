@@ -48,7 +48,7 @@ function Navbar() {
               <IconContext.Provider value={{ size: '1.5em' }}>
                 <RiSwordFill />
               </IconContext.Provider>
-              <div>戰鬥</div>
+              <div>戰報</div>
             </div>
           </Link>
           <Link href="/example" passHref>

@@ -6,6 +6,34 @@ import { Arena } from "../../../utils/AniClasses/Arena";
 import { t, authedProcedure, checkRequirement } from "../utils";
 
 export const arenaAuthRouter = t.router({
+  getBattleLogs: t.procedure.query(({ ctx }) => {
+    return ctx.prisma.battleLog.findMany({
+      select: {
+        id: true,
+        creator: { select: { 
+          name:true, 
+          combater: { select: { character: {select: { image: true } } } } 
+        }},
+        won: true,
+        opponent: { select: { 
+          name:true,
+          combater: { select: { character: {select: { image: true } } } } 
+        }},
+        _count: {
+          select: { 
+            comments: true,
+            likes: true,
+        }},
+      }
+    })
+  }),
+
+  getBattleLog: t.procedure.input(z.object({id: z.number().int()})).query(({ ctx, input }) => {
+    return ctx.prisma.battleLog.findFirstOrThrow({
+      where: {id: input.id},
+    })
+  }),
+
   battle: authedProcedure.input(z.object({with_id: z.string()})).mutation(async ({ ctx, input }) => {
     //player.combater.character.skills
     const player1 = await ctx.prisma.player.findFirstOrThrow({
@@ -61,6 +89,15 @@ export const arenaAuthRouter = t.router({
     const arena = new Arena(player1, player2, 200);
     arena.start();
 
-    return arena.getLog();
+    // return arena.getLog();
+    const log = arena.getLog();
+    return ctx.prisma.battleLog.create({
+      data: {
+        creator: { connect: { id: player1.id } },
+        opponent: { connect: { id: player2.id } },
+        won: log ? log.winner?.id === player1.id : false,
+        content: JSON.parse(JSON.stringify(log)) as Prisma.JsonObject,
+      },
+    });
   }),
 });

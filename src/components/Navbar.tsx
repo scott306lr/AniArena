@@ -46,7 +46,7 @@ function Navbar() {
                             <div>排名</div>
                         </div>
                     </Link>
-                    <Link href="/report" passHref>
+                    <Link href="/reports" passHref>
                         <div className='navItem'>
                             <IconContext.Provider value={{ size: "1.5em"}}>     
                                 <RiSwordFill />

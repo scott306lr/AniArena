@@ -79,8 +79,8 @@ model Player {
     combater            Combater?   
 
     unlockedChar        Character[] @relation(name:"unlockedCharacters")
-    createdBattles      BattleLog[] @relation(name: "createdBattles")
-    attendedBattles       BattleLog[] @relation(name: "attendedBattles")
+    createdBattles      BattleLog[] @relation(name: "challenger")
+    challengedBattles   BattleLog[] @relation(name: "challenged")
 
     likes               BattleLog[] @relation(name: "likes")
     comments            Comment[]
@@ -145,9 +145,11 @@ model BattleLog {
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
 
-    creator     Player      @relation(name: "createdBattles", fields: [creatorId], references: [id], onDelete: Cascade)
-    attendants  Player[]    @relation(name: "attendedBattles")
+    creator     Player      @relation(name: "challenger", fields: [creatorId], references: [id], onDelete: Cascade)
     creatorId   String
+    opponent    Player      @relation(name: "challenged", fields: [opponentId], references: [id], onDelete: Cascade)
+    opponentId  String
+    won         Boolean    
 
     content     Json
     likes       Player[]    @relation(name: "likes")

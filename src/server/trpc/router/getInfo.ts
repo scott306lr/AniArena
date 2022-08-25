@@ -6,19 +6,9 @@ export const getInfoRouter = t.router({
     .input(z.object({id: z.string()}))
     .query(({ ctx, input }) => {
       return ctx.prisma.player.findMany({
-        where: {
-          id: input.id
-        },
+        where: {id: input.id},
         include: {
-          combater: {
-            select: {
-              character: {
-                select: {
-                  image: true,
-                }
-              }
-            },
-          }
+          combater: {select: {character: {select: {image: true}}}}
         }
       });
     }),
@@ -27,29 +17,17 @@ export const getInfoRouter = t.router({
     .query(({ ctx, input }) => {
       return ctx.prisma.player.findMany({
         where: {
-          name: {
-            contains: input.name,
-          },
+          name: { contains: input.name },
         },
       });
     }),
   getAllProfiles: t.procedure.query(({ ctx }) => {
     return ctx.prisma.player.findMany({
       where: {
-        NOT: {
-          combater: null,
-        },
+        NOT: { combater: null },
       },
       include: {
-        combater: {
-          select: {
-            character: {
-              select: {
-                image: true,
-              }
-            }
-          },
-        }
+        combater: {select: {character: {select: {image: true}}}}
       }
     });
   }),

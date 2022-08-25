@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
-import AttributeBar from '../components/AttributeBar';
-import RectCard from '../components/RectCard';
+import AttributeBar from '../../components/AttributeBar';
+import RectCard from '../../components/RectCard';
 import React from 'react'
-import Navbar from '../components/Navbar';
-import Avatar from '../components/Avatar';
+import Navbar from '../../components/Navbar';
+import Avatar from '../../components/Avatar';
+import { trpc } from '../../utils/trpc';
 
 const Report: NextPage = () => {
     const [hpMax, setHpMax] = React.useState(15);

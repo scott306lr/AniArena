@@ -192,6 +192,7 @@ export class Combater{
     getCombaterState(): CombaterState{
         let attributeState: AttributeState = this.attr.get();
         let ret: CombaterState = {
+            id : this.player.id,
             name:  this.player.name.slice(),
             character: JSON.parse(JSON.stringify(this.character)),
             attr: attributeState,

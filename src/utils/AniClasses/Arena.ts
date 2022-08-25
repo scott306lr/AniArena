@@ -127,6 +127,7 @@ export class Arena{
 
 
 export type CombaterState = {
+    id: string,
     name: string,
     character: Character_JSON,
     attr: AttributeState,
@@ -142,7 +143,7 @@ export type ActionLog = {
 export type CombatLog = {
     combater1: CombaterState;
     combater2: CombaterState;
-    winner: undefined | CombaterState;
+    winner?: CombaterState;
     logs: ActionLog[];
 }
 

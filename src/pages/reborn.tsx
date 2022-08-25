@@ -35,8 +35,19 @@ const Reborn: NextPage = () => {
       setAttr(unlockedChars[selected]?.orgAttr as attr);
     }
   };
+
+  const { mutate: mutateName, isLoading, error } = trpc.proxy.me.reborn.useMutation();
+
   const confirmClick = () => {
     console.log('confirm clicked');
+    if (
+      unlockedChars != undefined &&
+      unlockedChars[selected] != undefined &&
+      unlockedChars[selected]?.id != undefined
+    ) {
+      const id = Number(unlockedChars[selected]?.id);
+      mutateName({ characterId: id, attr: attr });
+    }
   };
 
   return (

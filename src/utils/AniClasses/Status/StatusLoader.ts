@@ -24,13 +24,13 @@ export function StatusLoader(
   // if skill is customized, this may help.
   switch (name) {
     case 'Status_Damage': {
-      return new Status_Damage(caster, owner, damage, countdown, description, declaration);
+      return new Status_Damage(caster, damage, countdown, description, declaration);
     }
     case 'Status_Invincible': {
-      return new Status_Invincible(caster, owner, damage, countdown, description, declaration);
+      return new Status_Invincible(caster, damage, countdown, description, declaration);
     }
     case 'Status_RoundDamage': {
-      return new Status_RoundDamage(caster, owner, damage, countdown, description, declaration);
+      return new Status_RoundDamage(caster, damage, countdown, description, declaration);
     }
     default: {
       return undefined;

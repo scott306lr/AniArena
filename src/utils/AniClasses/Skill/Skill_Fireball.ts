@@ -1,6 +1,5 @@
 import { Combater } from '../Combater';
 import { Damage, DamageType } from '../Damage';
-import { StatusLoader } from '../Status/StatusLoader';
 import { Status_Damage } from '../Status/Status_Damage';
 import { Status_RoundDamage } from '../Status/Status_RoundDamage';
 import { EventCode } from '../StatusManager';

@@ -70,4 +70,22 @@ export const meAuthRouter = t.router({
         },
       });
     }),
+  reborn: authedProcedure
+    .input(
+      z.object({ characterId: z.number(), attr: z.object({ HP: z.number(), AP: z.number(), APRegen: z.number() }) })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const playerResponse = await ctx.prisma.player.findFirstOrThrow({
+        where: { userId: ctx.session.user.id },
+        select: { id: true },
+      });
+
+      return ctx.prisma.combater.update({
+        where: { playerId: playerResponse.id },
+        data: {
+          characterId: input.characterId,
+          attr: input.attr,
+        },
+      });
+    }),
 });

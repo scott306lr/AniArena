@@ -10,19 +10,20 @@ export const arenaAuthRouter = t.router({
     return ctx.prisma.battleLog.findMany({
       select: {
         id: true,
-        creator: {
-          select: {
-            name: true,
-            combater: { select: { character: { select: { image: true } } } },
-          },
-        },
+        // creator: {
+        //   select: {
+        //     name: true,
+        //     combater: { select: { character: { select: { image: true } } } },
+        //   },
+        // },
         won: true,
-        opponent: {
-          select: {
-            name: true,
-            combater: { select: { character: { select: { image: true } } } },
-          },
-        },
+        // opponent: {
+        //   select: {
+        //     name: true,
+        //     combater: { select: { character: { select: { image: true } } } },
+        //   },
+        // },
+        content: true,
         _count: {
           select: {
             comments: true,

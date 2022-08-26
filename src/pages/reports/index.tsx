@@ -22,14 +22,20 @@ const Reports: NextPage = () => {
           <div className="grid place-content-center p-2">
             <ul className="flex flex-col h-auto bg-white rounded-lg shadow-lg p-2 space-y-2 hover:scale-110 transition-all">
               {BattleLogs &&
-                BattleLogs.map((log, index) => (
-                  <li key={index} className="flex h-auto md:w-1/2 md:h-1/2">
-                    <div className="flex h-auto border-2 border-gray-500">
-                      <Avatar imgsrc={log.creator.combater?.character.image} />
-                      <Avatar imgsrc={log.opponent.combater?.character.image} />
-                    </div>
-                  </li>
-                ))}
+                BattleLogs.map((log, index) => {
+                  if (log.content == null) {
+                    return null;
+                  }
+
+                  return (
+                    <li key={index} className="flex h-auto md:w-1/2 md:h-1/2">
+                      <div className="flex h-auto border-2 border-gray-500">
+                        <Avatar imgsrc={log.content?.combater1.character.image} />
+                        <Avatar imgsrc={log.content?.combater2.character.image} />
+                      </div>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </div>

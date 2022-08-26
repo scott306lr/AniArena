@@ -30,8 +30,15 @@ const Reports: NextPage = () => {
                   return (
                     <li key={index} className="flex h-auto md:w-1/2 md:h-1/2">
                       <div className="flex h-auto border-2 border-gray-500">
-                        <Avatar imgsrc={log.content?.combater1.character.image} />
-                        <Avatar imgsrc={log.content?.combater2.character.image} />
+                        <div className="flex flex-col justify-center">
+                          <h3>{log.content?.combater1.name}</h3>
+                          <Avatar imgsrc={log.content?.combater1.character.image} />
+                        </div>
+
+                        <div className="flex flex-col justify-center">
+                          <h3>{log.content?.combater2.name}</h3>
+                          <Avatar imgsrc={log.content?.combater2.character.image} />
+                        </div>
                       </div>
                     </li>
                   );

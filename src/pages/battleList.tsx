@@ -49,21 +49,21 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
     console.log(data);
   };
   return (
-    <div>
-      {props.profile == undefined ? (
+    <>
+      {props.profile == null ? (
         <div>loading...</div>
       ) : (
         <>
           <div className="grid items-center gap-4">
             <RectCard imgsrc={props.profile.combater?.character?.image} />
             <button onClick={handleBattle} className="button-primary">
-              {`發起決鬥 name: ${props.profile.name}`}
+              發起決鬥
             </button>
           </div>
           <div className="word-bubble">{props.profile.name}</div>
         </>
       )}
-    </div>
+    </>
   );
 };
 
@@ -73,7 +73,7 @@ const PlayerList: React.FC<{ profiles: ProfilesFromServer; setSelected: Dispatch
   return (
     <>
       {props.profiles ? (
-        <ul className="grid w-full">
+        <ul className="grid w-full gap-1">
           {props.profiles.map((profile, index) => {
             return (
               <li onClick={() => props.setSelected(index)} key={index}>

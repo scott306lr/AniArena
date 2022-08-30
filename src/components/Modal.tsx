@@ -8,19 +8,6 @@ interface IProps {
   children?: React.ReactNode;
 }
 
-// const Modal: React.FC<IProps> = (props) => {
-//     return (
-//         <div className={`fixed left-0 top-0 w-full h-screen bg-black overflow-auto z-10
-//             place-items-center transition ease-in-out duration-1000
-//              ${props.show ? "grid opacity-100" : "hidden opacity-0"}`} //active:opacity-100 active:visible
-//         >
-//             <div className={`min-h-0 w-auto m-5 bg-white rounded-lg ${props.show ? "opacity-1" : "opacity-0"}`}>
-//                 {props.children}
-//             </div>
-//         </div>
-//     )
-// }
-
 const Modal: React.FC<IProps> = (props) => {
   return (
     <Transition appear show={props.isOpen} as={Fragment}>
@@ -34,7 +21,7 @@ const Modal: React.FC<IProps> = (props) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black opacity-25" />
+          <div className="fixed inset-0 bg-black/25" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">

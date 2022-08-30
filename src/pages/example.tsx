@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import { useState } from 'react';
-import MyModal from '../components/Modal';
+import Modal from '../components/Modal';
 import Navbar from '../components/Navbar';
 import Image from 'next/future/image';
 
@@ -69,11 +69,11 @@ const PopoverTest: React.FC = () => {
   return (
     <div className="rounded-lg border-2 border-solid border-gray-500 p-4">
       <button onClick={() => setIsOpen((prev) => !prev)}>{isOpen ? 'Hide' : 'Show'} Popover</button>
-      <MyModal title="I'm title" isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Modal title="I'm title" isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="rounded-lg border-2 border-solid border-gray-500 p-4">
           <p className="text-2xl">{"I'm content"}</p>
         </div>
-      </MyModal>
+      </Modal>
     </div>
   );
 };

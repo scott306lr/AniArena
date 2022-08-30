@@ -31,7 +31,7 @@ const Reports: NextPage = () => {
                     <Link key={index} href={`/reports/${log.id}`} passHref>
                       <li className="hover-primary flex h-auto w-full border-2 border-gray-500">
                         <div className="flex flex-col justify-center">
-                          <h3>{content?.combater1.name}</h3>
+                          <h3 className="text-center text-lg">{content?.combater1.name}</h3>
                           <Avatar
                             imgsrc={content?.combater1.character.image}
                             org_width={225}
@@ -40,8 +40,8 @@ const Reports: NextPage = () => {
                           />
                         </div>
                         <div className="mx-3 h-full w-0.5 bg-gray-600" />
-                        <div className="flex flex-col justify-center ">
-                          <h3>{content?.combater2.name}</h3>
+                        <div className="flex flex-col justify-center">
+                          <h3 className="text-center text-lg">{content?.combater2.name}</h3>
                           <Avatar
                             imgsrc={content?.combater2.character.image}
                             org_width={225}

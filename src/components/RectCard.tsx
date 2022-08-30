@@ -7,7 +7,10 @@ interface Props {
 
 function RectCard({ imgsrc }: Props) {
   return (
-    <div className="char-img relative h-72 w-52">
+    <div
+      className="relative h-72 w-52 rounded-lg border-2 border-solid border-gray-700 bg-white 
+    p-0.5 shadow-xl transition-all ease-in-out hover:scale-105"
+    >
       {imgsrc ? (
         <Image className="rounded-lg" src={imgsrc} layout="fill" alt="rect-card" priority />
       ) : (

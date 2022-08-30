@@ -20,7 +20,7 @@ function Navbar() {
         {/* middle */}
         <div className="flex">
           <Link href="/" passHref>
-            <div className="navItem">
+            <div className="grid place-items-center rounded-lg px-2 text-sm duration-200 hover:bg-gray-500 hover:ease-in-out">
               <IconContext.Provider value={{ size: '1.5em' }}>
                 <TiHome />
               </IconContext.Provider>
@@ -28,7 +28,7 @@ function Navbar() {
             </div>
           </Link>
           <Link href="/reborn" passHref>
-            <div className="navItem">
+            <div className="grid place-items-center rounded-lg px-2 text-sm duration-200 hover:bg-gray-500 hover:ease-in-out">
               <IconContext.Provider value={{ size: '1.5em' }}>
                 <FaCross />
               </IconContext.Provider>
@@ -36,7 +36,7 @@ function Navbar() {
             </div>
           </Link>
           <Link href="/battleList" passHref>
-            <div className="navItem">
+            <div className="grid place-items-center rounded-lg px-2 text-sm duration-200 hover:bg-gray-500 hover:ease-in-out">
               <IconContext.Provider value={{ size: '1.5em' }}>
                 <FaGlobeAsia />
               </IconContext.Provider>
@@ -44,7 +44,7 @@ function Navbar() {
             </div>
           </Link>
           <Link href="/reports" passHref>
-            <div className="navItem">
+            <div className="grid place-items-center rounded-lg px-2 text-sm duration-200 hover:bg-gray-500 hover:ease-in-out">
               <IconContext.Provider value={{ size: '1.5em' }}>
                 <RiSwordFill />
               </IconContext.Provider>
@@ -52,7 +52,7 @@ function Navbar() {
             </div>
           </Link>
           <Link href="/example" passHref>
-            <div className="navItem">
+            <div className="grid place-items-center rounded-lg px-2 text-sm duration-200 hover:bg-gray-500 hover:ease-in-out">
               <IconContext.Provider value={{ size: '1.5em' }}>
                 <HiBeaker />
               </IconContext.Provider>
@@ -60,7 +60,7 @@ function Navbar() {
             </div>
           </Link>
           <Link href="/makeProfile" passHref>
-            <div className="navItem">
+            <div className="grid place-items-center rounded-lg px-2 text-sm duration-200 hover:bg-gray-500 hover:ease-in-out">
               <IconContext.Provider value={{ size: '1.5em' }}>
                 <HiIdentification />
               </IconContext.Provider>

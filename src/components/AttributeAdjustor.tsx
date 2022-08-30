@@ -9,7 +9,7 @@ interface Props {
 
 function AttributeAdjustor({ name, value, minusClick, addClick }: Props): ReactElement {
   return (
-    <div className="flex items-center justify-center w-fit place-self-center gap-8 rounded-lg bg-white p-2 shadow-lg hover:scale-110 transition-all">
+    <div className="flex w-fit items-center justify-center gap-8 place-self-center rounded-lg bg-white p-2 shadow-lg transition-all hover:scale-110">
       <button onClick={minusClick} className="round-btn">
         {' '}
         -{' '}

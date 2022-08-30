@@ -74,11 +74,11 @@ export class Arena {
   }
 
   private endCondition(): boolean {
-    let combater1_state = this.combater1.getCombaterState();
-    let combater2_state = this.combater2.getCombaterState();
+    const combater1_state = this.combater1.getCombaterState();
+    const combater2_state = this.combater2.getCombaterState();
 
-    let combater1_HP = combater1_state.attr.HP;
-    let combater2_HP = combater2_state.attr.HP;
+    const combater1_HP = combater1_state.attr.HP;
+    const combater2_HP = combater2_state.attr.HP;
 
     if (combater1_HP <= 0 && combater2_HP <= 0) {
       this.logger.log(undefined, `${combater1_state.name}和${combater2_state.name}同時倒下了！`);
@@ -150,7 +150,7 @@ export class Logger {
     if (logger !== undefined) {
       state = logger.getCombaterState();
     }
-    let actionLog: ActionLog = {
+    const actionLog: ActionLog = {
       logger: state,
       log: message,
     };

@@ -56,8 +56,8 @@ export class StatusManager {
   }
 
   get(): StatusState[] {
-    let ret: StatusState[] = [];
-    let pushEach = (item: Status) => ret.push(item.get());
+    const ret: StatusState[] = [];
+    const pushEach = (item: Status) => ret.push(item.get());
     this.statusList.forEach((item) => pushEach(item));
     return ret;
   }

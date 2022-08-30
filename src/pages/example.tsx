@@ -16,12 +16,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
-        <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
+      <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4">
+        <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
           Create <span className="text-purple-300">T3</span> App
         </h1>
         <p className="text-2xl text-gray-700">This stack uses:</p>
-        <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-3 lg:w-2/3">
+        <div className="mt-3 grid gap-3 pt-3 text-center md:grid-cols-3 lg:w-2/3">
           <TechnologyCard
             name="NextJS"
             description="The React framework for production"
@@ -53,7 +53,7 @@ const Home: NextPage = () => {
             documentation="https://www.prisma.io/docs/"
           />
         </div>
-        <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
+        <div className="mt-3 grid gap-3 pt-3 text-center md:grid-cols-2 lg:w-2/3">
           <AuthShowcase />
           <HelloSomeone />
           <MeProfile />
@@ -70,7 +70,7 @@ const MeProfile: React.FC = () => {
   // const {data} = trpc.proxy.me.getSession.useQuery();
   const { data: myProfile, isLoading } = trpc.proxy.me.getProfile.useQuery();
   return (
-    <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
+    <div className="rounded-lg border-2 border-solid border-gray-500 p-4">
       <p className="text-2xl">{myProfile?.name}</p>
       <p className="text-lg">{myProfile?.description}</p>
     </div>
@@ -81,10 +81,10 @@ const PopoverTest: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
+    <div className="rounded-lg border-2 border-solid border-gray-500 p-4">
       <button onClick={() => setIsOpen((prev) => !prev)}>{isOpen ? 'Hide' : 'Show'} Popover</button>
       <MyModal title="I'm title" isOpen={isOpen} setIsOpen={setIsOpen}>
-        <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
+        <div className="rounded-lg border-2 border-solid border-gray-500 p-4">
           <p className="text-2xl">{"I'm content"}</p>
         </div>
       </MyModal>
@@ -97,8 +97,8 @@ const HelloSomeone: React.FC = () => {
   const { data: hellotxt, isLoading } = trpc.proxy.auth.getSecretTest.useQuery({ myname: name });
 
   return (
-    <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
-      <div className="flex items-center justify-center w-full p-4 text-2xl text-blue-500">
+    <div className="rounded-lg border-2 border-solid border-gray-500 p-4">
+      <div className="flex w-full items-center justify-center p-4 text-2xl text-blue-500">
         {!isLoading ? <p>{hellotxt}</p> : <p>Loading..</p>}
       </div>
       <input
@@ -121,11 +121,11 @@ const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
 
   return (
-    <div className="p-4 border-solid border-2 border-gray-500 rounded-lg">
+    <div className="rounded-lg border-2 border-solid border-gray-500 p-4">
       {sessionData && <p>Logged in as {sessionData?.user?.name}</p>}
       {secretMessage && <p>{secretMessage}</p>}
       <button
-        className="px-4 py-2 border-2 border-blue-500 rounded-md"
+        className="rounded-md border-2 border-blue-500 px-4 py-2"
         onClick={sessionData ? () => signOut() : () => signIn()}
       >
         {sessionData ? 'Sign out' : 'Sign in'}
@@ -143,11 +143,11 @@ type TechnologyCardProps = {
 
 const TechnologyCard = ({ name, description, documentation }: TechnologyCardProps) => {
   return (
-    <section className="flex flex-col justify-center p-6 duration-500 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
+    <section className="flex flex-col justify-center rounded border-2 border-gray-500 p-6 shadow-xl duration-500 motion-safe:hover:scale-105">
       <h2 className="text-lg text-gray-700">{name}</h2>
       <p className="text-sm text-gray-600">{description}</p>
       <a
-        className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
+        className="mt-3 text-sm text-violet-500 underline decoration-dotted underline-offset-2"
         href={documentation}
         target="_blank"
         rel="noreferrer"

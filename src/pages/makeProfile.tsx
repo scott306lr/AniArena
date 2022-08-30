@@ -64,12 +64,12 @@ const MakeProfile: NextPage = () => {
       <Navbar />
       <main className="grid">
         {/* sections */}
-        <div className="flex flex-wrap justify-center m-8 p-4 gap-8">
+        <div className="m-8 flex flex-wrap justify-center gap-8 p-4">
           {/* middle characters section*/}
           <div className="grid place-content-center p-2">
-            <ul className="md:grid flex flex-wrap bg-white rounded-lg shadow-lg p-2 space-y-2 hover:scale-110 transition-all">
+            <ul className="flex flex-wrap space-y-2 rounded-lg bg-white p-2 shadow-lg transition-all hover:scale-110 md:grid">
               {Avatars.map((avatar, index) => (
-                <li key={index} className="md:w-1/2 md:h-1/2">
+                <li key={index} className="md:h-1/2 md:w-1/2">
                   <Avatar imgsrc={avatar.imgsrc} />
                 </li>
               ))}
@@ -110,7 +110,7 @@ const MakeProfile: NextPage = () => {
 
           {/* SkillCards Section */}
           {/*Todo: change it to filter map  */}
-          <div className="grid lg:w-1/3 place-content-center">
+          <div className="grid place-content-center lg:w-1/3">
             <ul className="grid gap-4">
               {Skills.map((skill, index) => (
                 <li key={index} className="grid w-full">

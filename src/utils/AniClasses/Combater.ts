@@ -50,7 +50,7 @@ export class Combater {
     // this.arena = arena;
   }
 
-  interrupt() {}
+  // interrupt() {}
 
   newRound() {
     this.getAP(this.attr.APRegen.get(), this);
@@ -59,7 +59,7 @@ export class Combater {
   }
 
   loadSkill(skill_JSON: Skill_JSON): boolean {
-    let skill = SkillLoader(this, skill_JSON);
+    const skill = SkillLoader(this, skill_JSON);
     if (skill === undefined) return false;
     this.skills.push(skill);
     return true;
@@ -127,8 +127,8 @@ export class Combater {
     }
     this.statusManager.trigger(EventCode.BeforeLoseHP, caller);
 
-    let currentHP = this.attr.HP.get();
-    let newHP = Math.max(currentHP - value, 0);
+    const currentHP = this.attr.HP.get();
+    const newHP = Math.max(currentHP - value, 0);
     this.attr.HP.set(newHP);
 
     this.statusManager.trigger(EventCode.AfterLoseHP, caller);
@@ -141,9 +141,9 @@ export class Combater {
     }
     this.statusManager.trigger(EventCode.BeforeGetHP, caller);
 
-    let currentHP = this.attr.HP.get();
-    let currentMaxHP = this.attr.maxHP.get();
-    let newHP = Math.min(currentHP + value, currentMaxHP);
+    const currentHP = this.attr.HP.get();
+    const currentMaxHP = this.attr.maxHP.get();
+    const newHP = Math.min(currentHP + value, currentMaxHP);
     this.attr.HP.set(newHP);
 
     this.statusManager.trigger(EventCode.AfterGetHP, caller);
@@ -156,8 +156,8 @@ export class Combater {
     }
     this.statusManager.trigger(EventCode.BeforeLoseAP, caller);
 
-    let currentAP = this.attr.AP.get();
-    let newAP = Math.max(currentAP - value, 0);
+    const currentAP = this.attr.AP.get();
+    const newAP = Math.max(currentAP - value, 0);
     this.attr.AP.set(newAP);
 
     this.statusManager.trigger(EventCode.AfterLoseAP, caller);
@@ -170,9 +170,9 @@ export class Combater {
     }
 
     this.statusManager.trigger(EventCode.BeforeGetAP, caller);
-    let currentAP = this.attr.AP.get();
-    let currentMaxAP = this.attr.maxAP.get();
-    let newAP = Math.min(currentAP + value, currentMaxAP);
+    const currentAP = this.attr.AP.get();
+    const currentMaxAP = this.attr.maxAP.get();
+    const newAP = Math.min(currentAP + value, currentMaxAP);
     this.attr.AP.set(newAP);
     this.statusManager.trigger(EventCode.AfterGetAP, caller);
     return true;
@@ -184,8 +184,8 @@ export class Combater {
    * @returns CombaterState
    */
   getCombaterState(): CombaterState {
-    let attributeState: AttributeState = this.attr.get();
-    let ret: CombaterState = {
+    const attributeState: AttributeState = this.attr.get();
+    const ret: CombaterState = {
       id: this.player.id,
       name: this.player.name.slice(),
       character: JSON.parse(JSON.stringify(this.character)),

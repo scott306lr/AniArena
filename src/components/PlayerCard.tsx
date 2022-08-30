@@ -9,10 +9,10 @@ interface Props {
 
 function PlayerCard({ imgsrc, name, text }: Props): ReactElement {
   return (
-    <div className="flex bg-white hover:bg-gray-500 rounded-lg shadow-lg p-2 my-2 gap-2 transition duration-200">
+    <div className="my-2 flex gap-2 rounded-lg bg-white p-2 shadow-lg transition duration-200 hover:bg-gray-500">
       <Avatar imgsrc={imgsrc} />
       <div>
-        <div className="font-bold text-lg">{name}</div>
+        <div className="text-lg font-bold">{name}</div>
         <div>{text}</div>
       </div>
     </div>

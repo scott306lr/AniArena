@@ -40,7 +40,6 @@ const Reborn: NextPage = () => {
 
   const { mutate: mutateName, isLoading, error } = trpc.proxy.me.reborn.useMutation();
 
-  
   const confirmClick = () => {
     console.log('confirm clicked');
     if (
@@ -60,14 +59,14 @@ const Reborn: NextPage = () => {
         {/* middle characters section*/}
         {/*      Add click event */}
         <div className="grid place-content-center p-2">
-          <ul className="flex flex-wrap bg-white rounded-lg shadow-lg">
+          <ul className="flex flex-wrap rounded-lg bg-white shadow-lg">
             {u_isLoading || unlockedChars == null ? (
               <div className="flex justify-center">
                 <div className="spinner"></div>
               </div>
             ) : (
               unlockedChars.map((character, index) => (
-                <li key={index} className="md:w-1/2 md:h-1/2" onClick={() => selectClick(index)}>
+                <li key={index} className="md:h-1/2 md:w-1/2" onClick={() => selectClick(index)}>
                   <Avatar imgsrc={character?.image} />
                 </li>
               ))
@@ -78,8 +77,8 @@ const Reborn: NextPage = () => {
         {u_isLoading || unlockedChars == null || unlockedChars[selected] == null ? (
           <div>loading...</div>
         ) : (
-          <div className="flex flex-wrap w-10/12 sm:w-auto m-4 p-4 gap-4 rounded-md bg-white shadow-lg justify-self-center justify-center">
-            <div className="grid gap-4 justify-items-center">
+          <div className="m-4 flex w-10/12 flex-wrap justify-center gap-4 justify-self-center rounded-md bg-white p-4 shadow-lg sm:w-auto">
+            <div className="grid justify-items-center gap-4">
               <RectCard imgsrc={unlockedChars[selected]?.image} />
               <div className="word-bubble">{unlockedChars[selected]?.description}</div>
             </div>
@@ -96,7 +95,7 @@ const Reborn: NextPage = () => {
                 <button onClick={resetClick} className="action-btn">
                   {'重設'}
                 </button>
-                <Link href='/' passHref>
+                <Link href="/" passHref>
                   <button onClick={confirmClick} className="action-btn">
                     {'確認'}
                   </button>

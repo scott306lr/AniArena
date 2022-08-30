@@ -8,10 +8,10 @@ interface Props {
 
 function SearchBar({ onClick }: Props): ReactElement {
   return (
-    <div className="flex bg-white rounded-lg p-2 gap-1 shadow-lg">
-      <input className="flex-grow bg-gray-200 rounded-lg p-1"></input>
-      <button className="hover:bg-gray-500 rounded-lg p-1 hover:ease-in-out duration-200" onClick={onClick}>
-        <HiSearch className="w-6 h-6" />
+    <div className="flex gap-1 rounded-lg bg-white p-2 shadow-lg">
+      <input className="flex-grow rounded-lg bg-gray-200 p-1"></input>
+      <button className="rounded-lg p-1 duration-200 hover:bg-gray-500 hover:ease-in-out" onClick={onClick}>
+        <HiSearch className="h-6 w-6" />
       </button>
     </div>
   );

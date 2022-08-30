@@ -1,12 +1,10 @@
 import type { NextPage } from 'next';
-import AttributeBar from '../../components/AttributeBar';
 import Avatar from '../../components/Avatar';
-import RectCard from '../../components/RectCard';
-import React, { useState } from 'react';
-import SkillCard from '../../components/SkillCard';
-import AttributeAdjustor from '../../components/AttributeAdjustor';
+import React from 'react';
 import Navbar from '../../components/Navbar';
 import { trpc } from '../../utils/trpc';
+import Link from 'next/link';
+import { CombatLog } from '../../utils/AniClasses/Arena';
 
 const Reports: NextPage = () => {
   const { data: BattleLogs, isLoading } = trpc.proxy.arena.getBattleLogs.useQuery();
@@ -17,29 +15,33 @@ const Reports: NextPage = () => {
       <Navbar />
       <main className="grid">
         {/* sections */}
-        <div className="flex justify-center m-8 p-4 gap-8">
+        <div className="m-8 flex justify-center gap-8 p-4">
           {/* middle characters section*/}
           <div className="grid place-content-center p-2">
-            <ul className="flex flex-col h-auto bg-white rounded-lg shadow-lg p-2 space-y-2 hover:scale-110 transition-all">
-              {BattleLogs &&
+            <ul className="flex h-auto flex-col space-y-2 rounded-lg bg-white p-2 shadow-lg transition-all hover:scale-110">
+              {isLoading != null &&
+                BattleLogs &&
                 BattleLogs.map((log, index) => {
-                  if (log.content == null) {
+                  const content = (log.content as unknown as CombatLog) || undefined;
+                  if (content == null) {
                     return null;
                   }
 
                   return (
-                    <li key={index} className="flex h-auto md:w-1/2 md:h-1/2">
-                      <div className="flex h-auto border-2 border-gray-500">
-                        <div className="flex flex-col justify-center">
-                          <h3>{log.content?.combater1.name}</h3>
-                          <Avatar imgsrc={log.content?.combater1.character.image} />
-                        </div>
+                    <li key={index} className="flex h-auto md:h-1/2 md:w-1/2">
+                      <Link href={`/reports/${log.id}`} passHref>
+                        <div className="flex h-auto border-2 border-gray-500">
+                          <div className="flex flex-col justify-center">
+                            <h3>{content?.combater1.name}</h3>
+                            <Avatar imgsrc={content?.combater1.character.image} />
+                          </div>
 
-                        <div className="flex flex-col justify-center">
-                          <h3>{log.content?.combater2.name}</h3>
-                          <Avatar imgsrc={log.content?.combater2.character.image} />
+                          <div className="flex flex-col justify-center">
+                            <h3>{content?.combater2.name}</h3>
+                            <Avatar imgsrc={content?.combater2.character.image} />
+                          </div>
                         </div>
-                      </div>
+                      </Link>
                     </li>
                   );
                 })}

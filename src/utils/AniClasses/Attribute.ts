@@ -60,7 +60,7 @@ export class Attribute {
   }
 
   get(): AttributeState {
-    let ret: AttributeState = {
+    const ret: AttributeState = {
       level: this.level.get(),
       exp: this.exp.get(),
       HP: this.HP.get(),

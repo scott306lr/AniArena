@@ -15,9 +15,9 @@ const BattleList: NextPage = () => {
       <Navbar />
       <main className="grid">
         {/* sections */}
-        <div className="flex flex-wrap items-center justify-center m-4 gap-14">
+        <div className="m-4 flex flex-wrap items-center justify-center gap-14">
           {/* section: battle list */}
-          <div className="grid gap-4 lg:w-1/4 w-5/6">
+          <div className="grid w-5/6 gap-4 lg:w-1/4">
             <SearchBar onClick={() => console.log('search click')} />
             {isLoading ? <div>loading...</div> : <PlayerList profiles={profiles} setSelected={setSelected} />}
           </div>

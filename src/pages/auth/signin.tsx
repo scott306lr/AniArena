@@ -10,7 +10,7 @@ function SignIntoProvider({ providers }: Props) {
   return (
     <div className="grid">
       <Navbar />
-      <div className="grid mx-5 my-8 px-8 py-16 gap-4 w-80 justify-self-center place-content-center bg-white/75 rounded-md ">
+      <div className="mx-5 my-8 grid w-80 place-content-center gap-4 justify-self-center rounded-md bg-white/75 px-8 py-16 ">
         <div className="text-center text-lg font-medium">歡迎回來！</div>
         <div className="text-center text-lg font-medium">請選擇登入方式</div>
         {Object.values(providers).map((provider) => (

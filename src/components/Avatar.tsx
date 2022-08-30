@@ -8,9 +8,9 @@ interface Props {
 
 function Avatar({ imgsrc, className }: Props) {
   return (
-    <div className="w-min h-min p-1 rounded-lg hover:bg-gray-500 hover:ease-in-out duration-200">
-      <div className="border-solid border-black border-2 rounded-full p-0.5">
-        <div className={`relative overflow-hidden h-24 w-24 rounded-full ${className}`}>
+    <div className="h-min w-min rounded-lg p-1 duration-200 hover:bg-gray-500 hover:ease-in-out">
+      <div className="rounded-full border-2 border-solid border-black p-0.5">
+        <div className={`relative h-24 w-24 overflow-hidden rounded-full ${className}`}>
           {imgsrc && <Image className="border-solid" src={imgsrc} layout="fill" alt="Avatar" />}
         </div>
       </div>

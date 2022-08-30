@@ -77,7 +77,7 @@ function Navbar() {
             </a> //origin_size={"width": 32, "height":32} scale_to={"width": 32, "height": 32} />
           ) : (
             <a onClick={() => signIn()}>
-              <div className="navItem">
+              <div className="grid place-items-center rounded-lg px-2 text-sm duration-200 hover:bg-gray-500 hover:ease-in-out">
                 <IconContext.Provider value={{ size: '1.5em' }}>
                   <HiOutlineLogin />
                 </IconContext.Provider>

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier '**/*.{js,jsx,ts,tsx}' --write",
+    "analyze": "ANALYZE=true pnpm build",
     "test": "jest",
     "postinstall": "prisma generate"
   },

@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 export const getInfoRouter = t.router({
   getProfileByID: t.procedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
-    return ctx.prisma.player.findMany({
+    return ctx.prisma.player.findFirstOrThrow({
       where: { id: input.id },
       include: {
         combater: { select: { character: { select: { image: true } } } },

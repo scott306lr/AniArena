@@ -1,13 +1,10 @@
 import type { NextPage } from 'next';
-import AttributeBar from '../components/AttributeBar';
 import Avatar from '../components/Avatar';
 import RectCard from '../components/RectCard';
 import React, { useState } from 'react';
-import SkillCard from '../components/SkillCard';
 import AttributeAdjustor from '../components/AttributeAdjustor';
 import Navbar from '../components/Navbar';
 import { trpc } from '../utils/trpc';
-import { redirect } from 'next/dist/server/api-utils';
 import Link from 'next/link';
 
 const Reborn: NextPage = () => {
@@ -67,7 +64,9 @@ const Reborn: NextPage = () => {
             ) : (
               unlockedChars.map((character, index) => (
                 <li key={index} className="md:h-1/2 md:w-1/2" onClick={() => selectClick(index)}>
-                  <Avatar imgsrc={character?.image} />
+                  <div className="hover-primary">
+                    <Avatar imgsrc={character?.image} org_width={225} org_height={350} className="h-24 w-24" />
+                  </div>
                 </li>
               ))
             )}
@@ -92,11 +91,11 @@ const Reborn: NextPage = () => {
                   minusClick={minusAPRegen}
                   addClick={addAPRegen}
                 />
-                <button onClick={resetClick} className="action-btn">
+                <button onClick={resetClick} className="button-primary">
                   {'重設'}
                 </button>
                 <Link href="/" passHref>
-                  <button onClick={confirmClick} className="action-btn">
+                  <button onClick={confirmClick} className="button-primary">
                     {'確認'}
                   </button>
                 </Link>

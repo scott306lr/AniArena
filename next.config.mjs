@@ -20,4 +20,5 @@ export default defineNextConfig({
     domains: ['media.discordapp.net', 'images-ext-1.discordapp.net', 'lh3.googleusercontent.com', 'mudae.net', 'imgur.com'],
     formats: ['image/avif', 'image/webp'],
   },
+  experimental: { images: { allowFutureImage: true } }
 });

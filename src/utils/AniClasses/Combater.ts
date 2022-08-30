@@ -75,7 +75,7 @@ export class Combater {
   }
 
   chooseSkill(): Skill | null {
-    const RequirementFilter = (item: Skill, index: number, array: Skill[]) => {
+    const RequirementFilter = (item: Skill) => {
       return item.isCastable(false);
     };
     const meetSkills = this.skills.filter(RequirementFilter);

@@ -8,12 +8,13 @@ import AttributeAdjustor from '../components/AttributeAdjustor';
 import Navbar from '../components/Navbar';
 
 const MakeProfile: NextPage = () => {
-  const [expMax, setExpMax] = useState(4);
+  // const [expMax, setExpMax] = useState(4);
+  const expMax = 4;
   const [expVal, setExpVal] = useState(1);
   const [hp, setHp] = useState(7);
 
-  const increaseExp = () => setExpVal((prev) => Math.min(expMax, expVal + 1));
-  const decreaseExp = () => setExpVal((prev) => Math.max(0, expVal - 1));
+  const increaseExp = () => setExpVal((prev) => Math.min(expMax, prev + 1));
+  const decreaseExp = () => setExpVal((prev) => Math.max(0, prev - 1));
   const addHp = () => setHp(hp + 1);
   const minusHp = () => setHp(Math.max(0, hp - 1));
 
@@ -70,7 +71,7 @@ const MakeProfile: NextPage = () => {
             <ul className="flex flex-wrap space-y-2 rounded-lg bg-white p-2 shadow-lg transition-all hover:scale-110 md:grid">
               {Avatars.map((avatar, index) => (
                 <li key={index} className="md:h-1/2 md:w-1/2">
-                  <Avatar imgsrc={avatar.imgsrc} />
+                  <Avatar imgsrc={avatar.imgsrc} org_width={225} org_height={350} className="h-24 w-24" />
                 </li>
               ))}
             </ul>
@@ -83,10 +84,10 @@ const MakeProfile: NextPage = () => {
               <p className="word-bubble">{'其名惠惠，職業乃大法師，使役最強之攻擊魔法：爆裂魔法之人！'}</p>
               <div>
                 <AttributeBar attribute="EXP" max={expMax} val={expVal} />
-                <button onClick={increaseExp} className="action-btn">
+                <button onClick={increaseExp} className="button-primary">
                   {'addExp'}
                 </button>
-                <button onClick={decreaseExp} className="action-btn">
+                <button onClick={decreaseExp} className="button-primary">
                   {'minusExp'}
                 </button>
               </div>
@@ -99,10 +100,10 @@ const MakeProfile: NextPage = () => {
               <AttributeAdjustor name="HP" value={hp} minusClick={minusHp} addClick={addHp} />
               <AttributeAdjustor name="HP" value={hp} minusClick={minusHp} addClick={addHp} />
               <AttributeAdjustor name="HP" value={hp} minusClick={minusHp} addClick={addHp} />
-              <button onClick={confirmClick} className="action-btn">
+              <button onClick={confirmClick} className="button-primary">
                 {'重設'}
               </button>
-              <button onClick={resetClick} className="action-btn">
+              <button onClick={resetClick} className="button-primary">
                 {'確認'}
               </button>
             </div>

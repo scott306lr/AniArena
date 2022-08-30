@@ -63,7 +63,12 @@ const PlayerInfo: React.FC<{ id: string }> = (props) => {
           <p className="word-bubble">{PlayerData.description}</p>
         </div>
         <div className="lg:hidden">
-          <Avatar className="h-12 w-12" imgsrc={PlayerData.combater?.character.image} />
+          <Avatar
+            imgsrc={PlayerData.combater?.character.image}
+            org_width={225}
+            org_height={350}
+            className="h-12 w-12"
+          />
         </div>
       </div>
       <div className="w-full">

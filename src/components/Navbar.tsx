@@ -73,8 +73,8 @@ function Navbar() {
         <div>
           {session ? (
             <a onClick={() => signOut({ callbackUrl: '/' })}>
-              <Avatar className="h-8 w-8" imgsrc={session.user?.image} />
-            </a>
+              <Avatar imgsrc={session.user?.image} org_width={225} org_height={350} className="h-12 w-12" />
+            </a> //origin_size={"width": 32, "height":32} scale_to={"width": 32, "height": 32} />
           ) : (
             <a onClick={() => signIn()}>
               <div className="navItem">

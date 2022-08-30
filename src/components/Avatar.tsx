@@ -1,21 +1,28 @@
-import Image from 'next/image';
+import Image from 'next/future/image';
 import React from 'react';
 
 interface Props {
   imgsrc?: string | null;
+  org_width: number;
+  org_height: number;
   className?: string;
 }
 
-function Avatar({ imgsrc, className }: Props) {
+const Avatar: React.FC<Props> = (prop) => {
+  if (prop.imgsrc == null) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="h-min w-min rounded-lg p-1 duration-200 hover:bg-gray-500 hover:ease-in-out">
-      <div className="rounded-full border-2 border-solid border-black p-0.5">
-        <div className={`relative h-24 w-24 overflow-hidden rounded-full ${className}`}>
-          {imgsrc && <Image className="border-solid" src={imgsrc} layout="fill" alt="Avatar" />}
-        </div>
-      </div>
-    </div>
+    <Image
+      className={`m-1 rounded-full border-2 border-black p-0.5 ${prop.className}`}
+      // layout="responsive"
+      width={prop.org_width} // 225
+      height={prop.org_height} // 350
+      src={prop.imgsrc}
+      alt="Avatar"
+    />
   );
-}
+};
 
 export default Avatar;

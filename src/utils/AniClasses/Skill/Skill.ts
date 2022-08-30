@@ -1,8 +1,5 @@
 import { Combater } from '../Combater';
-import { Tag } from '../Tag';
 import { Skill_JSON } from '../Types';
-import { Skill_Fireball } from './Skill_Fireball';
-import { Skill_NormalAttack } from './Skill_NormalAttack';
 
 export type Cost = {
   HP?: number;
@@ -33,15 +30,15 @@ export abstract class Skill {
   }
 
   // override if need
-  isCastable(isCost: boolean = true): boolean {
-    for (let key in this.requirement) {
+  isCastable(isCost = true): boolean {
+    for (const key in this.requirement) {
       if (key === 'level') {
-        let level = this.owner.attr.level.get();
+        const level = this.owner.attr.level.get();
         if (this.requirement.level != undefined && level < this.requirement.level) {
           return false;
         }
       } else if (key === 'AP') {
-        let AP = this.owner.attr.AP.get();
+        const AP = this.owner.attr.AP.get();
         if (this.requirement.AP != undefined && AP < this.requirement.AP) {
           return false;
         }
@@ -51,14 +48,14 @@ export abstract class Skill {
     if (isCost === false) {
       return true;
     }
-    for (let key in this.cost) {
+    for (const key in this.cost) {
       if (key === 'HP') {
-        let HP = this.owner.attr.HP.get();
+        const HP = this.owner.attr.HP.get();
         if (this.cost.HP !== undefined && HP < this.cost.HP) {
           return false;
         }
       } else if (key === 'AP') {
-        let AP = this.owner.attr.AP.get();
+        const AP = this.owner.attr.AP.get();
         if (this.cost.AP !== undefined && AP < this.cost.AP) {
           return false;
         }
@@ -78,13 +75,13 @@ export abstract class Skill {
    * cast helper, override if needs.
    * @param isCost if true, combater needs to pay attribute to cast spell.
    */
-  protected consume(isCost: boolean = true): boolean {
+  protected consume(isCost = true): boolean {
     if (this.isCastable(isCost) === false) {
       return false;
     }
 
     if (isCost) {
-      for (let key in this.cost) {
+      for (const key in this.cost) {
         if (key === 'HP' && this.cost.HP !== undefined) {
           this.owner.loseHP(this.cost.HP, null);
         } else if (key === 'AP' && this.cost.AP !== undefined) {

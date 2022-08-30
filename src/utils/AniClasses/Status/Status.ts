@@ -40,7 +40,7 @@ export abstract class Status {
   constructor(
     caster: Combater,
     damage?: Damage,
-    countdown: number = 0,
+    countdown = 0,
     description: string | null = null,
     declaration: string | null = null
   ) {
@@ -64,7 +64,7 @@ export abstract class Status {
    */
   fetch(name: string): Status_JSON {
     // console.log('temporily use stub simulate fetch data from database');
-    let ret: Status_JSON = {
+    const ret: Status_JSON = {
       name: 'name',
       image: 'image',
       description: 'description',
@@ -110,7 +110,7 @@ export abstract class Status {
    * description, imagelink, tags, and countdown
    */
   get(): StatusState {
-    let ret: StatusState = {
+    const ret: StatusState = {
       name: this.name,
       image: this.dataJson.image,
       countdown: this.countdown,

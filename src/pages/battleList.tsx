@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar';
 import PlayerCard from '../components/PlayerCard';
 import Navbar from '../components/Navbar';
 import { inferQueryOutput, trpc } from '../utils/trpc';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 const BattleList: NextPage = () => {
   const { data: profiles, isLoading } = trpc.proxy.getInfo.getAllProfiles.useQuery();
@@ -39,7 +39,7 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
   const { mutate, isLoading, data } = trpc.proxy.arena.battle.useMutation();
 
   const handleBattle = () => {
-    if (props.profile == null) {
+    if (isLoading || props.profile == null) {
       console.log('profile is null');
       return;
     }
@@ -56,7 +56,7 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
         <>
           <div className="grid items-center gap-4">
             <RectCard imgsrc={props.profile.combater?.character?.image} />
-            <button onClick={handleBattle} className="action-btn">
+            <button onClick={handleBattle} className="button-primary">
               {`發起決鬥 name: ${props.profile.name}`}
             </button>
           </div>
@@ -67,7 +67,9 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
   );
 };
 
-const PlayerList: React.FC<{ profiles: ProfilesFromServer; setSelected: Function }> = (props) => {
+const PlayerList: React.FC<{ profiles: ProfilesFromServer; setSelected: Dispatch<SetStateAction<number>> }> = (
+  props
+) => {
   return (
     <>
       {props.profiles ? (

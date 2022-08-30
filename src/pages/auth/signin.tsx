@@ -15,7 +15,7 @@ function SignIntoProvider({ providers }: Props) {
         <div className="text-center text-lg font-medium">請選擇登入方式</div>
         {Object.values(providers).map((provider) => (
           <div key={provider.name}>
-            <button className="action-btn" onClick={() => signIn(provider.id, { callbackUrl: '/' })}>
+            <button className="button-primary" onClick={() => signIn(provider.id, { callbackUrl: '/' })}>
               Sign in with {provider.name}
             </button>
           </div>

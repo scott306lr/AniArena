@@ -9,9 +9,17 @@ interface Props {
 
 function PlayerCard({ imgsrc, name, text }: Props): ReactElement {
   return (
-    <div className="my-2 flex gap-2 rounded-lg bg-white p-2 shadow-lg transition duration-200 hover:bg-gray-500">
-      <Avatar imgsrc={imgsrc} />
-      <div>
+    // <div className="my-2 flex gap-2 rounded-lg bg-white p-2 shadow-lg transition duration-200 hover:bg-gray-500">
+    //   <Avatar imgsrc={imgsrc} org_width={225} org_height={350} className="h-24 w-24" />
+    //   <div>
+    //     <div className="text-lg font-bold">{name}</div>
+    //     <div>{text}</div>
+    //   </div>
+    // </div>
+    // <div className="mt-3 grid grid-cols-3 gap-3 rounded-lg bg-white p-3 text-center shadow-lg transition duration-200 hover:bg-gray-500 md:grid-cols-2">
+    <div className="flex gap-3 rounded-lg bg-white p-3 text-center shadow-lg transition duration-200 hover:bg-gray-500">
+      <Avatar imgsrc={imgsrc} org_width={225} org_height={350} className="h-24 w-24 grow-0" />
+      <div className="col-span-2 flex grow flex-col items-center justify-center text-center">
         <div className="text-lg font-bold">{name}</div>
         <div>{text}</div>
       </div>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
 import RectCard from '../components/RectCard';
 import { inferQueryOutput, trpc } from '../utils/trpc';
 
@@ -95,7 +94,7 @@ const PostableName: React.FC<{ orgText: string }> = (props) => {
         value={error ? 'Error' : text}
       />
       <button
-        className="action-btn"
+        className="button-primary"
         disabled={isLoading}
         onClick={() => {
           const ttext = text.trim();
@@ -107,7 +106,7 @@ const PostableName: React.FC<{ orgText: string }> = (props) => {
         {isLoading ? 'Loading...' : isEditing ? 'Save' : 'Edit'}
       </button>
       <button
-        className={`action-btn ${!isEditing ? 'hidden' : 'block'}`}
+        className={`button-primary ${!isEditing ? 'hidden' : 'block'}`}
         onClick={() => {
           setText(props.orgText);
           setEditing(false);
@@ -153,7 +152,7 @@ const PostableDescription: React.FC<{ orgText: string | null }> = (props) => {
         value={error ? 'Error' : text}
       />
       <button
-        className="action-btn"
+        className="button-primary"
         disabled={isLoading}
         onClick={() => {
           const ttext = text.trim();
@@ -165,7 +164,7 @@ const PostableDescription: React.FC<{ orgText: string | null }> = (props) => {
         {isLoading ? 'Loading...' : isEditing ? 'Save' : 'Edit'}
       </button>
       <button
-        className={`action-btn ${!isEditing ? 'hidden' : 'block'}`}
+        className={`button-primary ${!isEditing ? 'hidden' : 'block'}`}
         onClick={() => {
           setText(props.orgText ?? '');
           setEditing(false);

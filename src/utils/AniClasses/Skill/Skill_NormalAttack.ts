@@ -1,7 +1,6 @@
 import { Combater } from '../Combater';
 import { Skill_JSON } from '../Types';
 import { Skill } from './Skill';
-import { Tag } from '../Tag';
 import { Damage, DamageType } from '../Damage';
 import { Status_Damage } from '../Status/Status_Damage';
 
@@ -34,13 +33,13 @@ export class Skill_NormalAttack extends Skill {
       return false;
     }
     this.declaration = '$name撿起石頭砸向$object';
-    let name = this.owner.player.name;
-    let objectName = object.player.name;
-    let message = this.declaration.replace('$name', name).replace('$object', objectName);
+    const name = this.owner.player.name;
+    const objectName = object.player.name;
+    const message = this.declaration.replace('$name', name).replace('$object', objectName);
     this.owner.arena.logger.log(this.owner, message);
 
-    let damage = new Damage(3, DamageType.physical);
-    let status = new Status_Damage(this.owner, damage);
+    const damage = new Damage(3, DamageType.physical);
+    const status = new Status_Damage(this.owner, damage);
     status.apply(object);
 
     return true;

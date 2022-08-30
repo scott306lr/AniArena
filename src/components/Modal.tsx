@@ -1,7 +1,6 @@
 // import React from 'react'
 import { Dialog, Transition } from '@headlessui/react';
-import { Props } from '@headlessui/react/dist/types';
-import { Fragment, useState, Dispatch, SetStateAction } from 'react';
+import { Fragment, Dispatch, SetStateAction } from 'react';
 interface IProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -35,7 +34,7 @@ const Modal: React.FC<IProps> = (props) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div className="fixed inset-0 bg-black opacity-25" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -49,7 +48,7 @@ const Modal: React.FC<IProps> = (props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                   {props.title}
                 </Dialog.Title>

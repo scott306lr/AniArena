@@ -1,10 +1,7 @@
 import { Combater } from '../Combater';
 import { Damage, DamageType } from '../Damage';
-import { Status_Damage } from '../Status/Status_Damage';
 import { Status_RoundDamage } from '../Status/Status_RoundDamage';
-import { EventCode } from '../StatusManager';
 import { Skill } from './Skill';
-import { Tag } from '../Tag';
 import { Skill_JSON } from '../Types';
 
 export class Skill_Fireball extends Skill {
@@ -18,12 +15,12 @@ export class Skill_Fireball extends Skill {
     }
 
     this.declaration = '$name開始詠唱，射出了一顆小火球';
-    let message = this.declaration.replace('$name', this.owner.player.name);
+    const message = this.declaration.replace('$name', this.owner.player.name);
     this.owner.arena.logger.log(this.owner, message);
 
-    let damage = new Damage(3, DamageType.magic);
+    const damage = new Damage(3, DamageType.magic);
     this.owner.dealDamage(damage, object);
-    let burn = new Status_RoundDamage(
+    const burn = new Status_RoundDamage(
       this.owner,
       new Damage(1, DamageType.magic),
       1,

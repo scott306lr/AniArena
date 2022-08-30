@@ -28,21 +28,29 @@ const Reports: NextPage = () => {
                   }
 
                   return (
-                    <li key={index} className="flex h-auto md:h-1/2 md:w-1/2">
-                      <Link href={`/reports/${log.id}`} passHref>
-                        <div className="flex h-auto border-2 border-gray-500">
-                          <div className="flex flex-col justify-center">
-                            <h3>{content?.combater1.name}</h3>
-                            <Avatar imgsrc={content?.combater1.character.image} />
-                          </div>
-
-                          <div className="flex flex-col justify-center">
-                            <h3>{content?.combater2.name}</h3>
-                            <Avatar imgsrc={content?.combater2.character.image} />
-                          </div>
+                    <Link key={index} href={`/reports/${log.id}`} passHref>
+                      <li className="hover-primary flex h-auto w-full border-2 border-gray-500">
+                        <div className="flex flex-col justify-center">
+                          <h3>{content?.combater1.name}</h3>
+                          <Avatar
+                            imgsrc={content?.combater1.character.image}
+                            org_width={225}
+                            org_height={350}
+                            className="h-24 w-24"
+                          />
                         </div>
-                      </Link>
-                    </li>
+                        <div className="mx-3 h-full w-0.5 bg-gray-600" />
+                        <div className="flex flex-col justify-center ">
+                          <h3>{content?.combater2.name}</h3>
+                          <Avatar
+                            imgsrc={content?.combater2.character.image}
+                            org_width={225}
+                            org_height={350}
+                            className="h-24 w-24"
+                          />
+                        </div>
+                      </li>
+                    </Link>
                   );
                 })}
             </ul>

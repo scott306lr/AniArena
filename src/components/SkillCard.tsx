@@ -30,7 +30,7 @@ function SkillCard({ imgsrc, name, type, description }: Props): ReactElement {
   return (
     <div className="flex gap-2 rounded-lg bg-white p-2 shadow-lg transition-all hover:-translate-y-2 hover:scale-105">
       <div>
-        <Avatar imgsrc={imgsrc} />
+        <Avatar imgsrc={imgsrc} org_width={225} org_height={350} className="h-24 w-24" />
       </div>
       <div className="py-2">
         <span style={typeStyle}>{type} </span>

@@ -2,10 +2,10 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
-import { useEffect, useRef, useState } from 'react';
-import { Dialog } from '@headlessui/react';
+import { useState } from 'react';
 import MyModal from '../components/Modal';
 import Navbar from '../components/Navbar';
+import Image from 'next/future/image';
 
 const Home: NextPage = () => {
   return (
@@ -20,44 +20,15 @@ const Home: NextPage = () => {
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
           Create <span className="text-purple-300">T3</span> App
         </h1>
-        <p className="text-2xl text-gray-700">This stack uses:</p>
-        <div className="mt-3 grid gap-3 pt-3 text-center md:grid-cols-3 lg:w-2/3">
-          <TechnologyCard
-            name="NextJS"
-            description="The React framework for production"
-            documentation="https://nextjs.org/"
-          />
-          <TechnologyCard
-            name="TypeScript"
-            description="Strongly typed programming language that builds on JavaScript, giving you better tooling at any scale"
-            documentation="https://www.typescriptlang.org/"
-          />
-          <TechnologyCard
-            name="TailwindCSS"
-            description="Rapidly build modern websites without ever leaving your HTML"
-            documentation="https://tailwindcss.com/"
-          />
-          <TechnologyCard
-            name="tRPC"
-            description="End-to-end typesafe APIs made easy"
-            documentation="https://trpc.io/"
-          />
-          <TechnologyCard
-            name="Next-Auth"
-            description="Authentication for Next.js"
-            documentation="https://next-auth.js.org/"
-          />
-          <TechnologyCard
-            name="Prisma"
-            description="Build data-driven JavaScript & TypeScript apps in less time"
-            documentation="https://www.prisma.io/docs/"
-          />
-        </div>
+        <p className="text-2xl text-gray-700">Example Cards:</p>
         <div className="mt-3 grid gap-3 pt-3 text-center md:grid-cols-2 lg:w-2/3">
           <AuthShowcase />
           <HelloSomeone />
           <MeProfile />
           <PopoverTest />
+        </div>
+        <div className="mt-3 grid gap-3 pt-3 text-center md:grid-cols-2 lg:w-2/3">
+          <RoundImage />
         </div>
       </main>
     </>
@@ -66,9 +37,24 @@ const Home: NextPage = () => {
 
 export default Home;
 
+const RoundImage: React.FC = () => {
+  return (
+    <div className="rounded-lg border-2 border-gray-500 p-4">
+      <Image
+        className="h-24 w-24 rounded-full border-2 border-black p-0.5"
+        // layout="responsive"
+        width={225}
+        height={350}
+        src="https://media.discordapp.net/attachments/872026548692209738/872045442450485288/6fm6YnX.png"
+        alt="testIMG"
+      />
+    </div>
+  );
+};
+
 const MeProfile: React.FC = () => {
   // const {data} = trpc.proxy.me.getSession.useQuery();
-  const { data: myProfile, isLoading } = trpc.proxy.me.getProfile.useQuery();
+  const { data: myProfile } = trpc.proxy.me.getProfile.useQuery();
   return (
     <div className="rounded-lg border-2 border-solid border-gray-500 p-4">
       <p className="text-2xl">{myProfile?.name}</p>
@@ -134,26 +120,26 @@ const AuthShowcase: React.FC = () => {
   );
 };
 
-// Technology component
-type TechnologyCardProps = {
-  name: string;
-  description: string;
-  documentation: string;
-};
+// // Technology component
+// type TechnologyCardProps = {
+//   name: string;
+//   description: string;
+//   documentation: string;
+// };
 
-const TechnologyCard = ({ name, description, documentation }: TechnologyCardProps) => {
-  return (
-    <section className="flex flex-col justify-center rounded border-2 border-gray-500 p-6 shadow-xl duration-500 motion-safe:hover:scale-105">
-      <h2 className="text-lg text-gray-700">{name}</h2>
-      <p className="text-sm text-gray-600">{description}</p>
-      <a
-        className="mt-3 text-sm text-violet-500 underline decoration-dotted underline-offset-2"
-        href={documentation}
-        target="_blank"
-        rel="noreferrer"
-      >
-        Documentation
-      </a>
-    </section>
-  );
-};
+// const TechnologyCard = ({ name, description, documentation }: TechnologyCardProps) => {
+//   return (
+//     <section className="flex flex-col justify-center rounded border-2 border-gray-500 p-6 shadow-xl duration-500 motion-safe:hover:scale-105">
+//       <h2 className="text-lg text-gray-700">{name}</h2>
+//       <p className="text-sm text-gray-600">{description}</p>
+//       <a
+//         className="mt-3 text-sm text-violet-500 underline decoration-dotted underline-offset-2"
+//         href={documentation}
+//         target="_blank"
+//         rel="noreferrer"
+//       >
+//         Documentation
+//       </a>
+//     </section>
+//   );
+// };

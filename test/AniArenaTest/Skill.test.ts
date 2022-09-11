@@ -1,7 +1,6 @@
 import { Combater } from '../../src/utils/AniClasses/Combater';
 import { Player_JSON, Skill_JSON } from '../../src/utils/AniClasses/Types';
 import { Arena } from '../../src/utils/AniClasses/Arena';
-import { Skill_Fireball } from '../../src/utils/AniClasses/Skill/Skill_Fireball';
 
 describe('Skill Test', () => {
   let arena: Arena;
@@ -59,7 +58,7 @@ describe('Skill Test', () => {
 
   it('Normal Attack', () => {
     // Normal Attack deal 3 physical damage and use 3 ap.
-    let normalAttack: Skill_JSON = {
+    const normalAttack: Skill_JSON = {
       id: 1,
       createdAt: new Date('2022-08-22T10:38:38.623Z'),
       updatedAt: new Date('2022-08-22T04:37:59.873Z'),
@@ -76,8 +75,8 @@ describe('Skill Test', () => {
 
     combater_engineer.loadSkill(normalAttack);
     combater_engineer.chooseSkill();
-    let botHP = combater_bot.attr.HP.get();
-    let engineerAP = combater_engineer.attr.AP.get();
+    const botHP = combater_bot.attr.HP.get();
+    const engineerAP = combater_engineer.attr.AP.get();
     combater_engineer.castSkill(combater_bot);
 
     expect(combater_bot.attr.HP.get()).toBe(botHP - 3);
@@ -87,7 +86,7 @@ describe('Skill Test', () => {
   });
 
   it('Fireball', () => {
-    let fireball: Skill_JSON = {
+    const fireball: Skill_JSON = {
       id: 1,
       createdAt: new Date('2022-08-22T10:38:38.623Z'),
       updatedAt: new Date('2022-08-22T04:37:59.873Z'),
@@ -106,8 +105,8 @@ describe('Skill Test', () => {
     combater_engineer.loadSkill(fireball);
     combater_engineer.chooseSkill();
 
-    let botHP = combater_bot.attr.HP.get();
-    let engineerAP = combater_engineer.attr.AP.get();
+    const botHP = combater_bot.attr.HP.get();
+    const engineerAP = combater_engineer.attr.AP.get();
     combater_engineer.castSkill(combater_bot);
 
     expect(combater_bot.attr.HP.get()).toBe(botHP - 3);

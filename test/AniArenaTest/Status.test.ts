@@ -77,21 +77,21 @@ describe('Status Test', () => {
   });
 
   it('apply damage', () => {
-    let damage = new Damage(5, DamageType.physical);
-    let testStatus = new Status_Damage(combater_bot, damage);
+    const damage = new Damage(5, DamageType.physical);
+    const testStatus = new Status_Damage(combater_bot, damage);
 
-    let originalHP = combater_bot.attr.HP.get();
+    const originalHP = combater_bot.attr.HP.get();
     testStatus.apply(combater_bot);
-    let hurtHP = combater_bot.attr.HP.get();
+    const hurtHP = combater_bot.attr.HP.get();
     expect(hurtHP).toBe(originalHP - damage.value);
     // console.log(arena.logger.get());
   });
 
   it('round damage', () => {
-    let damage = new Damage(3, DamageType.magic);
-    let testStatus = new Status_RoundDamage(combater_engineer, damage, 2, '中毒', `受中毒狀態影響`);
+    const damage = new Damage(3, DamageType.magic);
+    const testStatus = new Status_RoundDamage(combater_engineer, damage, 2, '中毒', `受中毒狀態影響`);
 
-    let originalHP = combater_bot.attr.HP.get();
+    const originalHP = combater_bot.attr.HP.get();
     testStatus.apply(combater_bot);
 
     expect(combater_bot.attr.HP.get()).toBe(originalHP);
@@ -109,11 +109,11 @@ describe('Status Test', () => {
   });
 
   it('invincible', () => {
-    let damage = new Damage(5, DamageType.magic);
-    let testStatus = new Status_Invincible(combater_bot, undefined, 1);
+    const damage = new Damage(5, DamageType.magic);
+    const testStatus = new Status_Invincible(combater_bot, undefined, 1);
 
     testStatus.apply(combater_bot);
-    let originalHP = combater_bot.attr.HP.get();
+    const originalHP = combater_bot.attr.HP.get();
     combater_engineer.dealDamage(damage, combater_bot);
     expect(combater_bot.attr.HP.get()).toBe(originalHP);
 

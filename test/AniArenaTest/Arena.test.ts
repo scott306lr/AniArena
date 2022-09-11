@@ -1,15 +1,12 @@
 import { Player_JSON, Skill_JSON } from '../../src/utils/AniClasses/Types';
-import { Combater } from '../../src/utils/AniClasses/Combater';
 import { Arena } from '../../src/utils/AniClasses/Arena';
-import { EventCode } from '../../src/utils/AniClasses/StatusManager';
-import { Damage, DamageType } from '../../src/utils/AniClasses/Damage';
 
 describe('Arena Test', () => {
   let arena: Arena;
   let player1: Player_JSON;
   let player2: Player_JSON;
-  let engineer: Combater;
-  let bot: Combater;
+  // let engineer: Combater;
+  // let bot: Combater;
   let normalAttack: Skill_JSON;
   let fireball: Skill_JSON;
 
@@ -87,15 +84,15 @@ describe('Arena Test', () => {
     };
 
     arena = new Arena(player1, player2);
-    engineer = new Combater(player1, arena);
-    bot = new Combater(player2, arena);
+    // engineer = new Combater(player1, arena);
+    // bot = new Combater(player2, arena);
   });
 
   it('start test', () => {
     arena.combater1.loadSkill(fireball);
     arena.combater2.loadSkill(normalAttack);
     arena.start();
-    let log = arena.getLog();
+    const log = arena.getLog();
     console.log(log);
     // for( let i = 0; i < log.logs.length; ++i){
     //     console.log(log.logs[i].logger);

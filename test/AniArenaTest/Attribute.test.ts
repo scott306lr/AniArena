@@ -14,16 +14,16 @@ describe('Attribute Test', () => {
   });
 
   it('Reset', () => {
-    let attribute = new Attribute(attr);
-    let exp = attribute.exp.get();
+    const attribute = new Attribute(attr);
+    const exp = attribute.exp.get();
     attribute.exp.set(3);
     attribute.reset();
     expect(attribute.exp.get()).toBe(exp);
   });
 
   it('Reset with new data', () => {
-    let attribute = new Attribute(attr);
-    let newdata = JSON.parse(JSON.stringify(attr));
+    const attribute = new Attribute(attr);
+    const newdata = JSON.parse(JSON.stringify(attr));
     newdata.HP = 1000;
     newdata.exp = 1000;
     attribute.reset(newdata);
@@ -33,8 +33,8 @@ describe('Attribute Test', () => {
   });
 
   it('Deep Copy', () => {
-    let attribute = new Attribute(attr);
-    let exp = attribute.exp.get();
+    const attribute = new Attribute(attr);
+    const exp = attribute.exp.get();
 
     attr.exp = -1;
     attribute.reset();

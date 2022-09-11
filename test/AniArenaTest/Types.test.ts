@@ -1,17 +1,18 @@
 import { Arena, CombatLog } from '../../src/utils/AniClasses/Arena';
+import { Player_JSON } from '../../src/utils/AniClasses/Types';
 
 describe('type test', () => {
-  const player_json1: any = {
+  const player_json1: Player_JSON = {
     id: 'cl74noa020210cbvhgy3p1ctx',
-    createdAt: '2022-08-22T11:09:10.946Z',
-    updatedAt: '2022-08-22T11:05:49.163Z',
+    createdAt: new Date('2022-08-22T11:09:10.946Z'),
+    updatedAt: new Date('2022-08-22T11:05:49.163Z'),
     userId: 'cl747pr8k0018979tc4k8xj6k',
     name: '須鄉',
     description: '我有管理者權限哈哈哈哈哈',
     combater: {
       id: 'cl74o63wj0020wpvhyekqhcqz',
-      createdAt: '2022-08-22T11:23:02.851Z',
-      updatedAt: '2022-08-22T11:16:30.944Z',
+      createdAt: new Date('2022-08-22T11:09:10.946Z'),
+      updatedAt: new Date('2022-08-22T11:05:49.163Z'),
       playerId: 'cl74noa020210cbvhgy3p1ctx',
       characterId: 1,
       attr: {
@@ -23,8 +24,8 @@ describe('type test', () => {
       },
       character: {
         id: 1,
-        createdAt: '2022-08-16T15:01:20.786Z',
-        updatedAt: '2022-08-16T15:00:23.088Z',
+        createdAt: new Date('2022-08-22T11:09:10.946Z'),
+        updatedAt: new Date('2022-08-22T11:05:49.163Z'),
         name: '瓦力',
         image:
           'https://images-ext-1.discordapp.net/external/NwoQ6n6EF_KlhjmSezDNFmFxXCLl2-gxTfDKNddYnC4/https/mudae.net/uploads/1928259/Ph5SE52fDdJjU9jN1VcU~xu2VUef.png',
@@ -39,8 +40,8 @@ describe('type test', () => {
         skills: [
           {
             id: 1,
-            createdAt: '2022-08-22T10:38:38.623Z',
-            updatedAt: '2022-08-22T04:37:59.873Z',
+            createdAt: new Date('2022-08-22T11:09:10.946Z'),
+            updatedAt: new Date('2022-08-22T11:05:49.163Z'),
             name: '火球術',
             image: null,
             description: '儘管是最基礎的攻擊魔法，也要耗費三十年習得',
@@ -57,17 +58,17 @@ describe('type test', () => {
     },
   };
 
-  const player_json2: any = {
+  const player_json2: Player_JSON = {
     id: 'cl74noa020210cbvhgy3p1ctx',
-    createdAt: '2022-08-22T11:09:10.946Z',
-    updatedAt: '2022-08-22T11:05:49.163Z',
+    createdAt: new Date('2022-08-22T11:09:10.946Z'),
+    updatedAt: new Date('2022-08-22T11:05:49.163Z'),
     userId: 'cl747pr8k0018979tc4k8xj6k',
     name: '工程師',
     description: '我有管理者權限哈哈哈哈哈',
     combater: {
       id: 'cl74o63wj0020wpvhyekqhcqz',
-      createdAt: '2022-08-22T11:23:02.851Z',
-      updatedAt: '2022-08-22T11:16:30.944Z',
+      createdAt: new Date('2022-08-22T11:09:10.946Z'),
+      updatedAt: new Date('2022-08-22T11:05:49.163Z'),
       playerId: 'cl74noa020210cbvhgy3p1ctx',
       characterId: 1,
       attr: {
@@ -79,8 +80,8 @@ describe('type test', () => {
       },
       character: {
         id: 1,
-        createdAt: '2022-08-16T15:01:20.786Z',
-        updatedAt: '2022-08-16T15:00:23.088Z',
+        createdAt: new Date('2022-08-22T11:09:10.946Z'),
+        updatedAt: new Date('2022-08-22T11:05:49.163Z'),
         name: '瓦力',
         image:
           'https://images-ext-1.discordapp.net/external/NwoQ6n6EF_KlhjmSezDNFmFxXCLl2-gxTfDKNddYnC4/https/mudae.net/uploads/1928259/Ph5SE52fDdJjU9jN1VcU~xu2VUef.png',
@@ -95,8 +96,8 @@ describe('type test', () => {
         skills: [
           {
             id: 1,
-            createdAt: '2022-08-22T10:38:38.623Z',
-            updatedAt: '2022-08-22T04:37:59.873Z',
+            createdAt: new Date('2022-08-22T11:09:10.946Z'),
+            updatedAt: new Date('2022-08-22T11:05:49.163Z'),
             name: '火球術',
             image: null,
             description: '儘管是最基礎的攻擊魔法，也要耗費三十年習得',
@@ -115,9 +116,9 @@ describe('type test', () => {
 
   it('type test', () => {
     console.log('type testing');
-    let arena = new Arena(player_json1, player_json2);
+    const arena = new Arena(player_json1, player_json2);
     arena.start();
-    let log: CombatLog = arena.getLog();
+    const log: CombatLog = arena.getLog();
     console.log(log);
     // if(log.logs !== undefined){
     //     for( let i = 0; i < log.logs.length; ++i){

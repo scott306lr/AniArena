@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import type { NextPage } from 'next';
 import RectCard from '../components/RectCard';
-import { inferQueryOutput, trpc } from '../utils/trpc';
+import { trpc } from '../utils/trpc';
+
+import type { inferProcedureOutput, inferProcedureInput } from '@trpc/server';
+import type { AppRouter } from '../server/trpc/router';
 
 const Home: NextPage = () => {
-  const { data: myProfile, isLoading, error } = trpc.proxy.me.getProfile.useQuery();
+  const { data: myProfile, isLoading, error } = trpc.me.getProfile.useQuery();
   console.log(myProfile);
   console.log(error);
 
@@ -29,7 +32,7 @@ const Home: NextPage = () => {
   );
 };
 
-type ProfileType = inferQueryOutput<'me.getProfile'>;
+type ProfileType = inferProcedureOutput<AppRouter['me']['getProfile']>;
 const UserProfile: React.FC<{ profile: ProfileType }> = (props) => {
   return (
     <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-white/70 p-8">
@@ -66,12 +69,12 @@ const PostableName: React.FC<{ orgText: string }> = (props) => {
 
   // mutation for updating name... trpc v10 has BAD documentation....
   // https://github.com/planetscale/beam/blob/main/pages/index.tsx is a good example
-  const utils = trpc.proxy.useContext();
+  const utils = trpc.useContext();
   const {
     mutate: mutateName,
     isLoading,
     error,
-  } = trpc.proxy.me.postName.useMutation({
+  } = trpc.me.postName.useMutation({
     onMutate: async (input) => {
       await utils.me.getProfile.cancel();
       const previousProfile = utils.me.getProfile.getData();
@@ -124,12 +127,12 @@ const PostableDescription: React.FC<{ orgText: string | null }> = (props) => {
 
   // mutation for updating name... trpc v10 has BAD documentation....
   // https://github.com/planetscale/beam/blob/main/pages/index.tsx is a good example
-  const utils = trpc.proxy.useContext();
+  const utils = trpc.useContext();
   const {
     mutate: mutateName,
     isLoading,
     error,
-  } = trpc.proxy.me.postDescription.useMutation({
+  } = trpc.me.postDescription.useMutation({
     onMutate: async (input) => {
       await utils.me.getProfile.cancel();
       const previousProfile = utils.me.getProfile.getData();

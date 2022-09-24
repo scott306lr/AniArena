@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { CombatLog } from '../../utils/AniClasses/Arena';
 
 const Reports: NextPage = () => {
-  const { data: BattleLogs, isLoading } = trpc.proxy.arena.getBattleLogs.useQuery();
+  const { data: BattleLogs, isLoading } = trpc.arena.getBattleLogs.useQuery();
   // Todo: fetch data here
 
   return (

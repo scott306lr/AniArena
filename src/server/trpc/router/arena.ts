@@ -3,7 +3,8 @@ import { TRPCError } from '@trpc/server';
 import { JSONValue } from 'superjson/dist/types';
 import { undefined, z } from 'zod';
 import { Arena } from '../../../utils/AniClasses/Arena';
-import { t, authedProcedure, checkRequirement } from '../utils';
+import { t, authedProcedure } from '../trpc';
+import { checkRequirement } from '../../../utils/AniClasses/utils';
 
 export const arenaAuthRouter = t.router({
   getBattleLogs: t.procedure.query(({ ctx }) => {

@@ -3,11 +3,14 @@ import RectCard from '../components/RectCard';
 import SearchBar from '../components/SearchBar';
 import PlayerCard from '../components/PlayerCard';
 import Navbar from '../components/Navbar';
-import { inferQueryOutput, trpc } from '../utils/trpc';
+import { trpc } from '../utils/trpc';
 import { Dispatch, SetStateAction, useState } from 'react';
 
+import type { inferProcedureOutput, inferProcedureInput } from '@trpc/server';
+import type { AppRouter } from '../server/trpc/router';
+
 const BattleList: NextPage = () => {
-  const { data: profiles, isLoading } = trpc.proxy.getInfo.getAllProfiles.useQuery();
+  const { data: profiles, isLoading } = trpc.getInfo.getAllProfiles.useQuery();
   const [selected, setSelected] = useState(0);
 
   return (
@@ -31,12 +34,12 @@ const BattleList: NextPage = () => {
   );
 };
 
-type ProfilesFromServer = inferQueryOutput<'getInfo.getAllProfiles'> | undefined;
-type SelectedProfile = inferQueryOutput<'getInfo.getAllProfiles'>[number] | undefined;
+type ProfilesFromServer = inferProcedureOutput<AppRouter['getInfo']['getAllProfiles']> | undefined;
+type SelectedProfile = inferProcedureOutput<AppRouter['getInfo']['getAllProfiles']>[number] | undefined;
 
 // Ensured that profile is not undefined before passing in, but checked again for typescript ensurance
 const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
-  const { mutate, isLoading, data } = trpc.proxy.arena.battle.useMutation();
+  const { mutate, isLoading, data } = trpc.arena.battle.useMutation();
 
   const handleBattle = () => {
     if (isLoading || props.profile == null) {

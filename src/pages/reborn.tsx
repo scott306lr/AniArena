@@ -10,7 +10,7 @@ import Link from 'next/link';
 const Reborn: NextPage = () => {
   const [selected, setSelected] = useState(0);
 
-  const { data: unlockedChars, isLoading: u_isLoading } = trpc.proxy.me.getUnlockedChar.useQuery();
+  const { data: unlockedChars, isLoading: u_isLoading } = trpc.me.getUnlockedChar.useQuery();
   // const {data: combater, isLoading: c_isLoading} = trpc.proxy.me.getCombater.useQuery();
 
   const [attr, setAttr] = useState({ HP: 0, AP: 0, APRegen: 0 } as attr);
@@ -35,7 +35,7 @@ const Reborn: NextPage = () => {
     }
   };
 
-  const { mutate: mutateName, isLoading, error } = trpc.proxy.me.reborn.useMutation();
+  const { mutate: mutateName, isLoading, error } = trpc.me.reborn.useMutation();
 
   const confirmClick = () => {
     console.log('confirm clicked');

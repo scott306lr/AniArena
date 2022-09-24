@@ -18,7 +18,7 @@ const Report: NextPage = () => {
   // Todo: fetch data here
   const router = useRouter();
   const BattleLogID = parseInt(router.query.id as string);
-  const { data: BattleLog, isLoading } = trpc.proxy.arena.getBattleLog.useQuery({ id: BattleLogID });
+  const { data: BattleLog, isLoading } = trpc.arena.getBattleLog.useQuery({ id: BattleLogID });
   return (
     <div>
       <Navbar />
@@ -49,7 +49,7 @@ const Report: NextPage = () => {
 };
 
 const PlayerInfo: React.FC<{ id: string }> = (props) => {
-  const { data: PlayerData, isLoading } = trpc.proxy.getInfo.getProfileByID.useQuery({ id: props.id });
+  const { data: PlayerData, isLoading } = trpc.getInfo.getProfileByID.useQuery({ id: props.id });
   // const { data: creatorProfile } = trpc.proxy.getInfo.getProfileByID({id: BattleLog?.creatorId})
   if (isLoading || PlayerData == null) {
     return <div>is Loading...</div>;

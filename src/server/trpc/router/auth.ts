@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { t, authedProcedure } from '../utils';
+import { t, authedProcedure } from "../trpc";
 
 export const authRouter = t.router({
   getSession: t.procedure.query(({ ctx }) => {
     return ctx.session;
   }),
   getSecretMessage: authedProcedure.query(() => {
-    return `You are logged in and can see this secret message!`;
+    return "You are logged in and can see this secret message!";
   }),
   getSecretTest: authedProcedure.input(z.object({ myname: z.string() })).query(({ ctx, input }) => {
     console.log('Loggin ctx.session, input, from getSecretTest');

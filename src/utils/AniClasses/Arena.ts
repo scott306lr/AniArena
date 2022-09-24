@@ -2,7 +2,6 @@ import { AttributeState } from './Attribute';
 import { Combater } from './Combater';
 import { Character_JSON, Player_JSON } from './Types';
 import { StatusState } from './Status/Status';
-import { inferQueryOutput } from '../trpc';
 
 export class Arena {
   player1: Player_JSON;

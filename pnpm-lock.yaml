@@ -20,6 +20,7 @@ specifiers:
   autoprefixer: ^10.4.7
   eslint: 8.22.0
   eslint-config-next: 12.3.1
+  eslint-config-prettier: ^8.5.0
   eslint-plugin-tailwindcss: ^3.6.2
   jest: ^29.0.3
   lodash: ^4.17.21
@@ -68,6 +69,7 @@ devDependencies:
   autoprefixer: 10.4.12_postcss@8.4.16
   eslint: 8.22.0
   eslint-config-next: 12.3.1_4rv7y5c6xz3vfxwhbrcxxi73bq
+  eslint-config-prettier: 8.5.0_eslint@8.22.0
   eslint-plugin-tailwindcss: 3.6.2
   jest: 29.0.3_@types+node@18.0.0
   postcss: 8.4.16
@@ -1989,6 +1991,15 @@ packages:
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
       - supports-color
+    dev: true
+
+  /eslint-config-prettier/8.5.0_eslint@8.22.0:
+    resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.22.0
     dev: true
 
   /eslint-import-resolver-node/0.3.6:

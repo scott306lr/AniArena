@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { t, authedProcedure } from "../trpc";
+import { t, authedProcedure } from '../trpc';
 import { checkRequirement } from '../../../utils/AniClasses/utils';
 
 export const meAuthRouter = t.router({

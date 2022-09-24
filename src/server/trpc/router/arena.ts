@@ -1,7 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
-import { JSONValue } from 'superjson/dist/types';
-import { undefined, z } from 'zod';
+import { z } from 'zod';
 import { Arena } from '../../../utils/AniClasses/Arena';
 import { t, authedProcedure } from '../trpc';
 import { checkRequirement } from '../../../utils/AniClasses/utils';

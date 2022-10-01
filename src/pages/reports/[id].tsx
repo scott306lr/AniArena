@@ -9,16 +9,11 @@ import { useRouter } from 'next/router';
 import { CombatLog } from '../../utils/AniClasses/Arena';
 
 const Report: NextPage = () => {
-  const [hpMax, setHpMax] = React.useState(15);
-  const [hpVal, setHpVal] = React.useState(10);
-  const increaseHp = () => setHpVal(Math.min(hpMax, hpVal + 1));
-  const decreaseHp = () => setHpVal(Math.max(0, hpVal - 1));
-
-  const [hp, setHp] = React.useState(7);
   // Todo: fetch data here
   const router = useRouter();
   const BattleLogID = parseInt(router.query.id as string);
   const { data: BattleLog, isLoading } = trpc.arena.getBattleLog.useQuery({ id: BattleLogID });
+  console.log('gtt', BattleLog);
   return (
     <div>
       <Navbar />
@@ -27,12 +22,12 @@ const Report: NextPage = () => {
         {BattleLog && (
           <div className="m-2 flex flex-wrap justify-center gap-4 p-2">
             {/* Character A status section */}
-            <div className="flex w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 lg:grid lg:w-min lg:gap-4">
+            <div className="relative md:sticky md:top-16 flex w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 lg:grid lg:w-min lg:gap-4 h-fit">
               <PlayerInfo id={BattleLog?.creatorId} />
             </div>
 
             {/* Character B status section */}
-            <div className="flex w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 lg:order-last lg:grid lg:w-min lg:gap-4">
+            <div className="relative md:sticky md:top-16 flex w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 lg:order-last lg:grid lg:w-min lg:gap-4 h-fit">
               <PlayerInfo id={BattleLog?.opponentId} />
             </div>
 
@@ -54,27 +49,24 @@ const PlayerInfo: React.FC<{ id: string }> = (props) => {
   if (isLoading || PlayerData == null) {
     return <div>is Loading...</div>;
   }
-
   return (
-    <div>
-      <div>
-        <div className="hidden gap-4 lg:grid">
+    <div className='scroll-auto grid gap-y-4'>
+        <div className='hidden md:grid'>
           <RectCard imgsrc={PlayerData.combater?.character.image} />
-          <p className="word-bubble">{PlayerData.description}</p>
         </div>
-        <div className="lg:hidden">
+        <div className='md:hidden'>
           <Avatar
-            imgsrc={PlayerData.combater?.character.image}
-            org_width={225}
-            org_height={350}
-            className="h-12 w-12"
-          />
+              imgsrc={PlayerData.combater?.character.image}
+              org_width={225}
+              org_height={350}
+              className="h-12 w-12"
+              />
         </div>
-      </div>
-      <div className="w-full">
-        <AttributeBar attribute="HP" max={10} val={5} />
-        <AttributeBar attribute="AP" max={10} val={4} />
-      </div>
+
+        <p className='word-bubble'>{PlayerData.name}</p>
+        <p className="word-bubble">{PlayerData.description}</p>
+        {/* <AttributeBar attribute="HP" max={10} val={5} />
+        <AttributeBar attribute="AP" max={10} val={4} /> */}
     </div>
   );
 };

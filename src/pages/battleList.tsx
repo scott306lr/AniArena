@@ -8,6 +8,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 import type { inferProcedureOutput, inferProcedureInput } from '@trpc/server';
 import type { AppRouter } from '../server/trpc/router';
+import { useRouter } from 'next/router'
 
 const BattleList: NextPage = () => {
   const { data: profiles, isLoading } = trpc.getInfo.getAllProfiles.useQuery();
@@ -40,6 +41,8 @@ type SelectedProfile = inferProcedureOutput<AppRouter['getInfo']['getAllProfiles
 // Ensured that profile is not undefined before passing in, but checked again for typescript ensurance
 const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
   const { mutate, isLoading, data } = trpc.arena.battle.useMutation();
+  const [hasClick, setHasClick] = useState(false);
+  const router = useRouter();
 
   const handleBattle = () => {
     if (isLoading || props.profile == null) {
@@ -49,8 +52,15 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
 
     console.log('Battle!');
     mutate({ with_id: props.profile.id });
-    console.log(data);
+    setHasClick(true);
   };
+
+  const handleRedirect = () => {
+    if(data){
+      router.push(`/reports/${data?.id}`);
+    }
+  } 
+
   return (
     <>
       {props.profile == null ? (
@@ -59,9 +69,15 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
         <>
           <div className="grid items-center gap-4">
             <RectCard imgsrc={props.profile.combater?.character?.image} />
-            <button onClick={handleBattle} className="button-primary">
-              發起決鬥
-            </button>
+            { hasClick ?
+              <button onClick={handleRedirect} className="button-primary">
+                查看戰報
+              </button>
+              :
+              <button onClick={handleBattle} className="button-primary">
+                發起決鬥
+              </button>
+            }
           </div>
           <div className="word-bubble">{props.profile.name}</div>
         </>

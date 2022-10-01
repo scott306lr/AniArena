@@ -13,7 +13,6 @@ const Report: NextPage = () => {
   const router = useRouter();
   const BattleLogID = parseInt(router.query.id as string);
   const { data: BattleLog, isLoading } = trpc.arena.getBattleLog.useQuery({ id: BattleLogID });
-  console.log('gtt', BattleLog);
   return (
     <div>
       <Navbar />

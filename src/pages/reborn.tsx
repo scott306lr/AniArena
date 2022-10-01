@@ -6,6 +6,7 @@ import AttributeAdjustor from '../components/AttributeAdjustor';
 import Navbar from '../components/Navbar';
 import { trpc } from '../utils/trpc';
 import Link from 'next/link';
+import { Router, useRouter } from 'next/router';
 
 const Reborn: NextPage = () => {
   const [selected, setSelected] = useState(0);
@@ -20,6 +21,7 @@ const Reborn: NextPage = () => {
   const minusAP = () => setAttr({ ...attr, AP: attr.AP - 1 });
   const addAPRegen = () => setAttr({ ...attr, APRegen: attr.APRegen + 1 });
   const minusAPRegen = () => setAttr({ ...attr, APRegen: attr.APRegen - 1 });
+  const router = useRouter();
 
   // console.log(props.character?.orgAttr)
   const selectClick = (index: number) => {
@@ -46,6 +48,9 @@ const Reborn: NextPage = () => {
     ) {
       const id = Number(unlockedChars[selected]?.id);
       mutateName({ characterId: id, attr: attr });
+      setTimeout(() => {router.push("/").then(() => router.reload())}, 0);
+      // router.push("/");
+
     }
   };
 

@@ -16,49 +16,53 @@ const Home: NextPage = () => {
     <div>
       <Navbar />
       <main className="grid">
-        {/* sections */}
-        <div className="m-8 flex items-center justify-center gap-8">
-          {isLoading || myProfile == null ? (
-            <p className="word-bubble">{'Loading...'}</p>
-          ) : (
-            <div className="m-8 flex flex-col items-center justify-center gap-8">
-              <UserProfile profile={myProfile} />
+        {isLoading || myProfile == null ? (
+          <p className="word-bubble">{'Loading...'}</p>
+        ) : (
+          <div className="m-8 flex flex-col items-center justify-center gap-8">
+            {/* sections */}
+
+            <section className="flex w-3/6 flex-col items-center justify-center gap-2 rounded-md bg-white/70 p-8 pt-4">
+              <h1 className="text-2xl font-bold">{'使用角色'}</h1>
               <CharProfile combater={myProfile.combater} />
-            </div>
-          )}
-        </div>
+            </section>
+            <section className="flex w-3/6 flex-col items-center justify-center gap-2 rounded-md bg-white/70 p-8 pt-4">
+              <h1 className="text-2xl font-bold">{'個人資料'}</h1>
+
+              <PostableName orgText={myProfile.name} />
+              <PostableDescription orgText={myProfile.description} />
+            </section>
+          </div>
+        )}
       </main>
     </div>
   );
 };
 
 type ProfileType = inferProcedureOutput<AppRouter['me']['getProfile']>;
-const UserProfile: React.FC<{ profile: ProfileType }> = (props) => {
-  return (
-    <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-white/70 p-8">
-      <PostableName orgText={props.profile.name} />
-      <PostableDescription orgText={props.profile.description} />
-    </div>
-  );
-};
-
 const CharProfile: React.FC<{ combater: ProfileType['combater'] }> = (props) => {
   if (props.combater == null) {
     return <p className="word-bubble">{'No profile'}</p>;
   }
 
   return (
-    <div className="flex flex-col items-center justify-center ">
-      <h2 className="p-2 text-center text-xl"> {props.combater.character.name} </h2>
-      <RectCard imgsrc={props.combater.character.image} />
-      <p className="p-2 text-center text-lg"> {'可使用技能:'} </p>
-      {props.combater.character.skills.map((skill, index) => {
-        return (
-          <li key={index} className="word-bubble">
-            {`${skill.name}: ${skill.description}`}
-          </li>
-        );
-      })}
+    <div className="flex justify-center gap-4">
+      <div className="flex h-full flex-col items-center justify-center">
+        <h2 className="p-2 text-center text-2xl"> {props.combater.character.name} </h2>
+        <RectCard imgsrc={props.combater.character.image} />
+      </div>
+      <div className="flex grow items-center">
+        <div className="flex h-full flex-col py-16">
+          <p className="p-2 text-center text-lg"> {'可使用技能:'} </p>
+          {props.combater.character.skills.map((skill, index) => {
+            return (
+              <li key={index} className="word-bubble">
+                {`${skill.name}: ${skill.description}`}
+              </li>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
@@ -89,6 +93,7 @@ const PostableName: React.FC<{ orgText: string }> = (props) => {
 
   return (
     <div className="flex items-center justify-center">
+      <h3 className="text-xl">{'我的暱稱：'}</h3>
       <input
         className="word-bubble"
         type="text"
@@ -147,6 +152,7 @@ const PostableDescription: React.FC<{ orgText: string | null }> = (props) => {
 
   return (
     <div className="flex items-center justify-center">
+      <h3 className="text-xl">{'個人狀態：'}</h3>
       <input
         className="word-bubble"
         type="text"

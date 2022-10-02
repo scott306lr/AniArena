@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 const BattleList: NextPage = () => {
   const { data: profiles, isLoading } = trpc.getInfo.getAllProfiles.useQuery();
   const [selected, setSelected] = useState(0);
+  const selectedProfile = profiles?.[selected];
 
   return (
     <div>
@@ -26,9 +27,7 @@ const BattleList: NextPage = () => {
             {isLoading ? <div>loading...</div> : <PlayerList profiles={profiles} setSelected={setSelected} />}
           </div>
           {/* section: player profile */}
-          <div className="">
-            {isLoading || profiles == null ? <div>loading...</div> : <PlayerProfile profile={profiles[selected]} />}
-          </div>
+          <div className="">{isLoading ? <div>loading...</div> : <PlayerProfile profile={selectedProfile} />}</div>
         </div>
       </main>
     </div>
@@ -45,7 +44,7 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
   const router = useRouter();
 
   const handleBattle = () => {
-    if (isLoading || props.profile == null) {
+    if (props.profile == null) {
       console.log('profile is null');
       return;
     }
@@ -67,19 +66,19 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
         <div>loading...</div>
       ) : (
         <>
-          <div className="grid items-center gap-4">
+          <div className="grid items-center gap-2">
+            <h1 className="text-center text-2xl">{props.profile.name}</h1>
             <RectCard imgsrc={props.profile.combater?.character?.image} />
             {hasClick ? (
-              <button onClick={handleRedirect} className="button-primary">
+              <button disabled={isLoading} onClick={handleRedirect} className="button-primary text-lg">
                 查看戰報
               </button>
             ) : (
-              <button onClick={handleBattle} className="button-primary">
+              <button disabled={isLoading} onClick={handleBattle} className="button-primary text-lg">
                 發起決鬥
               </button>
             )}
           </div>
-          <div className="word-bubble">{props.profile.name}</div>
         </>
       )}
     </>

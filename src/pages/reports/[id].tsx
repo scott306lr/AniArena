@@ -128,7 +128,8 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
                   {round.type === 'effected' ? (
                     <>
                       <p className="text-blue-500">||</p>
-                      &nbsp; round.log
+                      &nbsp;
+                      {round.log}
                     </>
                   ) : is_me ? (
                     <>

@@ -12,7 +12,7 @@ export class Damage {
     if (value < 0) {
       value = 0;
     }
-    this.value = value;
+    this.value = Math.round(value);
     this.type = type;
   }
 

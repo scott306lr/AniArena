@@ -20,14 +20,16 @@ const BattleList: NextPage = () => {
       <Navbar />
       <main className="grid">
         {/* sections */}
-        <div className="m-4 flex flex-wrap items-center justify-center gap-14">
+        <div className="m-4 grid grid-cols-2 items-center justify-items-center">
           {/* section: battle list */}
-          <div className="grid w-5/6 gap-4 lg:w-1/4">
+          <div className="grid w-fit gap-4">
             <SearchBar onClick={() => console.log('search click')} />
             {isLoading ? <div>loading...</div> : <PlayerList profiles={profiles} setSelected={setSelected} />}
           </div>
           {/* section: player profile */}
-          <div className="">{isLoading ? <div>loading...</div> : <PlayerProfile profile={selectedProfile} />}</div>
+          <div className="grid w-fit items-center justify-center gap-2">
+            {isLoading ? <div>loading...</div> : <PlayerProfile profile={selectedProfile} />}
+          </div>
         </div>
       </main>
     </div>
@@ -66,19 +68,17 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
         <div>loading...</div>
       ) : (
         <>
-          <div className="grid items-center gap-2">
-            <h1 className="text-center text-2xl">{props.profile.name}</h1>
-            <RectCard imgsrc={props.profile.combater?.character?.image} />
-            {hasClick ? (
-              <button disabled={isLoading} onClick={handleRedirect} className="button-primary text-lg">
-                查看戰報
-              </button>
-            ) : (
-              <button disabled={isLoading} onClick={handleBattle} className="button-primary text-lg">
-                發起決鬥
-              </button>
-            )}
-          </div>
+          <h1 className="flex justify-center text-center text-2xl">{props.profile.name}</h1>
+          <RectCard imgsrc={props.profile.combater?.character?.image} />
+          {hasClick ? (
+            <button disabled={isLoading} onClick={handleRedirect} className="button-primary text-lg">
+              查看戰報
+            </button>
+          ) : (
+            <button disabled={isLoading} onClick={handleBattle} className="button-primary text-lg">
+              發起決鬥
+            </button>
+          )}
         </>
       )}
     </>
@@ -94,7 +94,7 @@ const PlayerList: React.FC<{ profiles: ProfilesFromServer; setSelected: Dispatch
         <ul className="grid w-full gap-1">
           {props.profiles.map((profile, index) => {
             return (
-              <li className="flex" onClick={() => props.setSelected(index)} key={index}>
+              <li className="h-auto w-auto" onClick={() => props.setSelected(index)} key={index}>
                 {profile?.combater && (
                   <PlayerCard
                     name={profile.name}

@@ -111,4 +111,5 @@ const BattleIcon: React.FC<{ type: string | undefined }> = (props) => {
   }
 }
 
+
 export default Report;

@@ -17,9 +17,9 @@ function PlayerCard({ imgsrc, name, text }: Props): ReactElement {
     //   </div>
     // </div>
     // <div className="mt-3 grid grid-cols-3 gap-3 rounded-lg bg-white p-3 text-center shadow-lg transition duration-200 hover:bg-gray-500 md:grid-cols-2">
-    <div className="flex w-auto gap-3 rounded-lg bg-white p-3 text-center shadow-lg transition duration-200 hover:bg-gray-500">
+    <div className="flex w-full gap-3 rounded-lg bg-white p-3 text-center shadow-lg transition duration-200 hover:bg-gray-500">
       <Avatar imgsrc={imgsrc} org_width={225} org_height={350} className="h-24 w-24 flex-none" />
-      <div className="col-span-2 grid content-center items-center text-center">
+      <div className="flex flex-1 flex-col items-center justify-center text-center">
         <div className="truncate text-lg font-bold">{name}</div>
         <div className="text-clip">{text}</div>
       </div>

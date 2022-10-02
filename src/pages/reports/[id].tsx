@@ -88,6 +88,7 @@ const Report: NextPage = () => {
   );
 };
 
+//TODO: Replace input data with info from BattleLog, to show correct character.
 const PlayerInfo: React.FC<{ id: string }> = (props) => {
   const { data: PlayerData, isLoading } = trpc.getInfo.getProfileByID.useQuery({ id: props.id });
   // const { data: creatorProfile } = trpc.proxy.getInfo.getProfileByID({id: BattleLog?.creatorId})

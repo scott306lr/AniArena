@@ -20,12 +20,13 @@ const BattleList: NextPage = () => {
       <Navbar />
       <main className="grid">
         {/* sections */}
-        <div className="m-4 grid grid-cols-2 items-center justify-items-center">
+        <div className="m-4 flex justify-center text-center">
           {/* section: battle list */}
           <div className="grid w-fit gap-4">
             <SearchBar onClick={() => console.log('search click')} />
             {isLoading ? <div>loading...</div> : <PlayerList profiles={profiles} setSelected={setSelected} />}
           </div>
+          <div className="w-1/12"></div>
           {/* section: player profile */}
           <div className="grid w-fit items-center justify-center gap-2">
             {isLoading ? <div>loading...</div> : <PlayerProfile profile={selectedProfile} />}
@@ -94,7 +95,7 @@ const PlayerList: React.FC<{ profiles: ProfilesFromServer; setSelected: Dispatch
         <ul className="grid w-full gap-1">
           {props.profiles.map((profile, index) => {
             return (
-              <li className="h-auto w-auto" onClick={() => props.setSelected(index)} key={index}>
+              <li className="flex h-auto w-full" onClick={() => props.setSelected(index)} key={index}>
                 {profile?.combater && (
                   <PlayerCard
                     name={profile.name}

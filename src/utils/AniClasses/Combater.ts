@@ -114,7 +114,7 @@ export class Combater {
     this.statusManager.trigger(EventCode.BeforeGetDamage, source);
 
     this.loseHP(this.damage.value, null);
-    this.arena.logger.log(this, LogType.effected, `${this.player.name}受到${this.damage.getString()}`);
+    this.arena.logger.log(this, LogType.hurt, `${this.player.name}受到${this.damage.getString()}`);
 
     this.statusManager.trigger(EventCode.AfterLoseHP, source);
 

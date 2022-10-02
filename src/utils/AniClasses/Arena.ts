@@ -123,6 +123,7 @@ export type CombaterState = {
 export enum LogType {
   attack = 'attack',
   action = 'action',
+  hurt = 'hurt',
   effected = 'effected',
   die = 'die',
   win = 'win',

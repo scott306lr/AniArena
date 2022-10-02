@@ -7,7 +7,7 @@ import Avatar from '../../components/Avatar';
 import { trpc } from '../../utils/trpc';
 import { useRouter } from 'next/router';
 import { CombatLog } from '../../utils/AniClasses/Arena';
-import { GiHearts, GiBroadsword, GiQueenCrown, GiDeathSkull, GiTrophy, GiBrokenHeart } from 'react-icons/gi';
+import { GiHearts, GiBroadsword, GiQueenCrown, GiHarryPotterSkull, GiTrophy, GiBrokenHeart } from 'react-icons/gi';
 
 const Report: NextPage = () => {
   // Todo: fetch data here
@@ -79,8 +79,12 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
                 key={index}
                 className={`flex w-full ${round.logger?.id === creatorID ? 'justify-start pr-6' : 'justify-end pl-6'}`}
               >
-                <p className="word-bubble flex items-center justify-center">
-                  {<BattleIcon type={round.type}/>}
+                <p
+                  className={`word-bubble flex items-center justify-center ${
+                    round.type === 'effected' && 'bg-gray-300'
+                  }`}
+                >
+                  {round.type !== 'effected' && <BattleIcon type={round.type} />}
                   &nbsp;
                   {round.log}
                 </p>
@@ -94,21 +98,19 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
 };
 
 const BattleIcon: React.FC<{ type: string | undefined }> = (props) => {
-  if( props.type === 'effected'){
-    return <GiBrokenHeart />
+  if (props.type === 'hurt') {
+    return <GiBrokenHeart />;
+  } else if (props.type === 'attack') {
+    return <GiBroadsword />;
+  } else if (props.type === 'die') {
+    return <GiHarryPotterSkull />;
+  } else if (props.type === 'win') {
+    return <GiQueenCrown />;
+    // } else if (props.type === 'effected') {
+    //   return <GiQueenCrown />;
+  } else {
+    return <div>undefined</div>;
   }
-  else if( props.type === 'attack'){
-    return <GiBroadsword />
-  }
-  else if (props.type === 'die'){
-    return <GiDeathSkull />
-  }
-  else if (props.type === 'win'){
-    return <GiQueenCrown />
-  }
-  else if (props.type === undefined){
-    return <div>undefined</div>
-  }
-}
+};
 
 export default Report;

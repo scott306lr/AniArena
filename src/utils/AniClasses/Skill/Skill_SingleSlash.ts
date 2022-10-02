@@ -19,7 +19,7 @@ export class Skill_SingleSlash extends Skill {
     const objectName = object.player.name;
     this.declaration = `${name}對${objectName}使用單發斜斬發動突襲！`;
     this.owner.arena.logger.log(this.owner, LogType.attack, this.declaration);
-    const damage = new Damage(Math.round(this.owner.attr.maxHP.get()/10), DamageType.physical);
+    const damage = new Damage(Math.round(this.owner.attr.maxHP.get() / 10), DamageType.physical);
     const status = new Status_Damage(this.owner, damage);
     status.apply(object);
 

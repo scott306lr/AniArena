@@ -73,7 +73,7 @@ export const meAuthRouter = t.router({
     }),
   reborn: authedProcedure
     .input(
-      z.object({ characterId: z.number(), attr: z.object({ HP: z.number(), AP: z.number(), APRegen: z.number() }) })
+      z.object({ characterId: z.number(), attr: z.object({ HP: z.number(), AP: z.number(), APRegen: z.number(), level: z.number(), exp: z.number() }) })
     )
     .mutation(async ({ ctx, input }) => {
       const playerResponse = await ctx.prisma.player.findFirstOrThrow({

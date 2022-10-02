@@ -14,7 +14,7 @@ const Reborn: NextPage = () => {
   const { data: unlockedChars, isLoading: u_isLoading } = trpc.me.getUnlockedChar.useQuery();
   // const {data: combater, isLoading: c_isLoading} = trpc.proxy.me.getCombater.useQuery();
 
-  const [attr, setAttr] = useState({ HP: 0, AP: 0, APRegen: 0 } as attr);
+  const [attr, setAttr] = useState({ HP: 0, AP: 0, APRegen: 0, exp: 20, level: 3 } as attr);
   const addHP = () => setAttr({ ...attr, HP: attr.HP + 1 });
   const minusHP = () => setAttr({ ...attr, HP: attr.HP - 1 });
   const addAP = () => setAttr({ ...attr, AP: attr.AP + 1 });
@@ -121,4 +121,6 @@ type attr = {
   AP: number;
   HP: number;
   APRegen: number;
+  exp: number;
+  level: number;
 };

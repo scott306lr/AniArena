@@ -52,7 +52,7 @@ const CharProfile: React.FC<{ combater: ProfileType['combater'] }> = (props) => 
         <RectCard imgsrc={props.combater.character.image} />
       </div>
       <div className="flex grow items-center">
-        <div className="flex h-full flex-col py-16">
+        <div className="flex h-full flex-col gap-y-2 py-16">
           <p className="p-2 text-center text-lg"> {'可使用技能:'} </p>
           {props.combater.character.skills.map((skill, index) => {
             return (

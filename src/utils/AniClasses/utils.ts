@@ -6,6 +6,7 @@ export const checkRequirement = (requirement: Prisma.JsonObject, attr: Prisma.Js
   for (const key in requirement) {
     const a = requirement[key];
     const b = attr[key];
+    // console.log(key, a, b, attr);
     if (a != null && b != null && a > b) {
       // should always be true
       return false;

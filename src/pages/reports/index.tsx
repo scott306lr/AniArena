@@ -10,7 +10,11 @@ import type { inferProcedureOutput, inferProcedureInput } from '@trpc/server';
 import type { AppRouter } from '../../server/trpc/router';
 
 const Reports: NextPage = () => {
+  //Recent
   const { data: battleLogs, isLoading } = trpc.arena.getBattleLogs.useQuery();
+
+  //Popular
+  const { data: battleLogsP, isLoading: isLoadingP } = trpc.arena.getBattleLogs.useQuery();
   // Todo: fetch data here
 
   return (
@@ -21,6 +25,7 @@ const Reports: NextPage = () => {
         <section className="m-8 flex justify-center gap-8 p-4">
           {/* middle characters section*/}
           {!isLoading && battleLogs && <ReportList title={'近期戰報'} battleLogs={battleLogs} />}
+          {!isLoadingP && battleLogsP && <ReportList title={'熱門戰報'} battleLogs={battleLogsP} />}
         </section>
       </main>
     </div>

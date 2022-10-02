@@ -5,6 +5,7 @@ import { Skill_Fireball } from './Skill_Fireball';
 import { Skill_NormalAttack } from './Skill_NormalAttack';
 import { Skill_SingleSlash } from './Skill_SingleSlash';
 import { Skill_Explosion } from './Skill_Explosion';
+import { Skill_ParallelStab } from './Skill_ParallelStab';
 import { Skill_FuriousStab } from './Skill_FuriousStab';
 
 
@@ -20,6 +21,8 @@ export function SkillLoader(owner: Combater, skill_JSON: Skill_JSON): Skill | un
       return new Skill_Explosion(owner, skill_JSON);
     case '憤怒刺擊':
       return new Skill_FuriousStab(owner, skill_JSON);
+    case '平行刺擊':
+      return new Skill_ParallelStab(owner, skill_JSON);
     default:
       return undefined;
   }

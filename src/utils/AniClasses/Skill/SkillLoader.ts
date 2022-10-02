@@ -7,6 +7,7 @@ import { Skill_SingleSlash } from './Skill_SingleSlash';
 import { Skill_Explosion } from './Skill_Explosion';
 import { Skill_ParallelStab } from './Skill_ParallelStab';
 import { Skill_FuriousStab } from './Skill_FuriousStab';
+import { Skill_Meteor } from './Skill_Meteor';
 
 export function SkillLoader(owner: Combater, skill_JSON: Skill_JSON): Skill | undefined {
   switch (skill_JSON.name) {
@@ -22,6 +23,8 @@ export function SkillLoader(owner: Combater, skill_JSON: Skill_JSON): Skill | un
       return new Skill_FuriousStab(owner, skill_JSON);
     case '平行刺擊':
       return new Skill_ParallelStab(owner, skill_JSON);
+    case '流星':
+      return new Skill_Meteor(owner, skill_JSON);
     default:
       return undefined;
   }

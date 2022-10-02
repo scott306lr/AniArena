@@ -8,7 +8,6 @@ import { Skill_Explosion } from './Skill_Explosion';
 import { Skill_ParallelStab } from './Skill_ParallelStab';
 import { Skill_FuriousStab } from './Skill_FuriousStab';
 
-
 export function SkillLoader(owner: Combater, skill_JSON: Skill_JSON): Skill | undefined {
   switch (skill_JSON.name) {
     case '火球術':

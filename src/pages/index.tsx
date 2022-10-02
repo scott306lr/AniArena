@@ -111,16 +111,16 @@ const PostableName: React.FC<{ orgText: string }> = (props) => {
           setEditing((prev) => !prev);
         }}
       >
-        {isLoading ? 'Loading...' : isEditing ? 'Save' : 'Edit'}
+        {isLoading ? 'Loading...' : isEditing ? '儲存' : '修改'}
       </button>
       <button
-        className={`button-primary ${!isEditing ? 'hidden' : 'block'}`}
+        className={`button-primary bg-red-500 ${!isEditing ? 'hidden' : 'block'}`}
         onClick={() => {
           setText(props.orgText);
           setEditing(false);
         }}
       >
-        Cancel
+        取消
       </button>
     </div>
   );
@@ -170,16 +170,16 @@ const PostableDescription: React.FC<{ orgText: string | null }> = (props) => {
           setEditing((prev) => !prev);
         }}
       >
-        {isLoading ? 'Loading...' : isEditing ? 'Save' : 'Edit'}
+        {isLoading ? 'Loading...' : isEditing ? '儲存' : '修改'}
       </button>
       <button
-        className={`button-primary ${!isEditing ? 'hidden' : 'block'}`}
+        className={`button-primary bg-red-500 ${!isEditing ? 'hidden' : 'block'}`}
         onClick={() => {
           setText(props.orgText ?? '');
           setEditing(false);
         }}
       >
-        Cancel
+        取消
       </button>
     </div>
   );

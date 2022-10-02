@@ -119,22 +119,18 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
           {props.context.logs.map((round, index) => {
             const is_me = round.logger?.id === creatorID;
             return (
-              <li key={index} className={`flex w-full ${is_me ? 'justify-start pr-6' : 'justify-end pl-6'}`}>
+              <li key={index} className={`flex w-full ${is_me ? 'justify-start' : 'justify-end'}`}>
                 <p
                   className={`word-bubble flex items-center justify-center ${
                     round.type === 'effected' && 'bg-gray-300'
                   }`}
                 >
                   {round.type === 'effected' ? (
-                    <>
-                      <p className="text-blue-500">||</p>
-                      &nbsp;
-                      {round.log}
-                    </>
+                    <>{round.log}</>
                   ) : is_me ? (
                     <>
-                      <p className="text-blue-500">||</p>
-                      &nbsp;
+                      <p className="font-bold	text-blue-500">|</p>
+                      &nbsp;&nbsp;
                       <BattleIcon type={round.type} />
                       &nbsp;
                       {round.log}
@@ -144,8 +140,8 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
                       <BattleIcon type={round.type} />
                       &nbsp;
                       {round.log}
-                      &nbsp;
-                      <p className="text-red-500">||</p>
+                      &nbsp;&nbsp;
+                      <p className="font-bold text-red-500">|</p>
                     </>
                   )}
                 </p>

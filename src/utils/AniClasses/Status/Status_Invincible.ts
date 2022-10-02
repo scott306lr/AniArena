@@ -2,6 +2,7 @@ import { Combater } from '../Combater';
 import { Status } from './Status';
 import { Damage } from '../Damage';
 import { EventCode } from '../StatusManager';
+import { LogType } from '../Arena';
 
 export class Status_Invincible extends Status {
   override eventCode = EventCode.BeforeGetDamage;
@@ -19,7 +20,7 @@ export class Status_Invincible extends Status {
   }
 
   override activate(eventTrigger: Combater): void {
-    this.owner?.arena.logger.log(this.owner, '無敵效果發動！');
+    this.owner?.arena.logger.log(this.owner, LogType.action, '無敵效果發動！');
 
     if (this.owner?.damage !== undefined) {
       this.owner.damage.value = 0;

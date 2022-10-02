@@ -7,7 +7,7 @@ import Avatar from '../../components/Avatar';
 import { trpc } from '../../utils/trpc';
 import { useRouter } from 'next/router';
 import { CombatLog } from '../../utils/AniClasses/Arena';
-import { GiHearts, GiBroadsword, GiQueenCrown, GiDeathSkull, GiTrophy } from 'react-icons/gi';
+import { GiHearts, GiBroadsword, GiQueenCrown, GiDeathSkull, GiTrophy, GiBrokenHeart } from 'react-icons/gi';
 
 const Report: NextPage = () => {
   // Todo: fetch data here
@@ -80,7 +80,7 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
                 className={`flex w-full ${round.logger?.id === creatorID ? 'justify-start pr-6' : 'justify-end pl-6'}`}
               >
                 <p className="word-bubble flex items-center justify-center">
-                  {round.logger?.id !== creatorID ? <GiBroadsword /> : <GiHearts />}
+                  {<BattleIcon type={round.type}/>}
                   &nbsp;
                   {round.log}
                 </p>
@@ -92,5 +92,23 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
     </div>
   );
 };
+
+const BattleIcon: React.FC<{ type: string | undefined }> = (props) => {
+  if( props.type === 'effected'){
+    return <GiBrokenHeart />
+  }
+  else if( props.type === 'attack'){
+    return <GiBroadsword />
+  }
+  else if (props.type === 'die'){
+    return <GiDeathSkull />
+  }
+  else if (props.type === 'win'){
+    return <GiQueenCrown />
+  }
+  else if (props.type === undefined){
+    return <div>undefined</div>
+  }
+}
 
 export default Report;

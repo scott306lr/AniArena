@@ -3,7 +3,7 @@ import { Attribute_JSON, Character_JSON, Skill_JSON } from './Types';
 import { Attribute, AttributeState } from './Attribute';
 import { Player_JSON } from './Types';
 import { Skill } from './Skill/Skill';
-import { Arena, CombaterState } from './Arena';
+import { Arena, CombaterState, LogType } from './Arena';
 import { EventCode, StatusManager } from './StatusManager';
 import { getRandomElement } from './utils';
 import { SkillLoader } from './Skill/SkillLoader';
@@ -114,7 +114,7 @@ export class Combater {
     this.statusManager.trigger(EventCode.BeforeGetDamage, source);
 
     this.loseHP(this.damage.value, null);
-    this.arena.logger.log(this, `${this.player.name}受到${this.damage.getString()}`);
+    this.arena.logger.log(this, LogType.effected, `${this.player.name}受到${this.damage.getString()}`);
 
     this.statusManager.trigger(EventCode.AfterLoseHP, source);
 

@@ -2,6 +2,7 @@ import { Combater } from '../Combater';
 import { Status } from './Status';
 import { Damage } from '../Damage';
 import { EventCode } from '../StatusManager';
+import { LogType } from '../Arena';
 
 export class Status_RoundDamage extends Status {
   override eventCode = EventCode.AfterNewRound;
@@ -17,7 +18,7 @@ export class Status_RoundDamage extends Status {
 
   // just do nothing, this status don't bind to owner.
   override activate(eventTrigger: Combater): void {
-    this.owner?.arena.logger.log(this.owner, `${this.declaration}`);
+    this.owner?.arena.logger.log(this.owner, LogType.effected, `${this.declaration}`);
 
     this.owner?.getDamage(this.damage, this.caster);
 

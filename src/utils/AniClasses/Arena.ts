@@ -3,6 +3,8 @@ import { Combater } from './Combater';
 import { Character_JSON, Player_JSON } from './Types';
 import { StatusState } from './Status/Status';
 
+
+
 export class Arena {
   player1: Player_JSON;
   player2: Player_JSON;
@@ -80,20 +82,20 @@ export class Arena {
     const combater2_HP = combater2_state.attr.HP;
 
     if (combater1_HP <= 0 && combater2_HP <= 0) {
-      this.logger.log(undefined, `${combater1_state.name}和${combater2_state.name}同時倒下了！`);
+      this.logger.log(undefined, LogType.die, `${combater1_state.name}和${combater2_state.name}同時倒下了！`);
       return true;
     } else if (combater1_HP <= 0) {
-      this.logger.log(this.combater1, `${combater1_state.name}倒下了！`);
-      this.logger.log(this.combater2, `${combater2_state.name}獲得了勝利！`);
+      this.logger.log(this.combater1, LogType.die, `${combater1_state.name}倒下了！`);
+      this.logger.log(this.combater2, LogType.win, `${combater2_state.name}獲得了勝利！`);
       this.logger.setWinner(this.combater2);
       return true;
     } else if (combater2_HP <= 0) {
-      this.logger.log(this.combater2, `${combater2_state.name}倒下了！`);
-      this.logger.log(this.combater1, `${combater1_state.name}獲得了勝利！`);
+      this.logger.log(this.combater2, LogType.die, `${combater2_state.name}倒下了！`);
+      this.logger.log(this.combater1, LogType.win, `${combater1_state.name}獲得了勝利！`);
       this.logger.setWinner(this.combater1);
       return true;
     } else if (this.round > this.maxRound) {
-      this.logger.log(undefined, `${combater1_state.name}和${combater2_state.name}無法突破系統回合限制，戰鬥結束`);
+      this.logger.log(undefined, LogType.else,`${combater1_state.name}和${combater2_state.name}無法突破系統回合限制，戰鬥結束`);
       return true;
     }
     return false;
@@ -118,9 +120,19 @@ export type CombaterState = {
   status: StatusState[];
 };
 
+export enum LogType {
+  attack = 'attack',
+  action = 'action',
+  effected = 'effected',
+  die = 'die',
+  win = 'win',
+  else = 'else',
+}
+
 export type ActionLog = {
   logger: CombaterState | undefined;
   log: string;
+  type: LogType;
 };
 
 export type CombatLog = {
@@ -144,7 +156,7 @@ export class Logger {
     };
   }
 
-  log(logger: Combater | undefined, message: string) {
+  log(logger: Combater | undefined, type: LogType,  message: string) {
     let state = undefined;
     if (logger !== undefined) {
       state = logger.getCombaterState();
@@ -152,6 +164,7 @@ export class Logger {
     const actionLog: ActionLog = {
       logger: state,
       log: message,
+      type: type,
     };
     this.combatLog.logs.push(actionLog);
   }

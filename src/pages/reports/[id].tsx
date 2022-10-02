@@ -7,6 +7,7 @@ import Avatar from '../../components/Avatar';
 import { trpc } from '../../utils/trpc';
 import { useRouter } from 'next/router';
 import { CombatLog } from '../../utils/AniClasses/Arena';
+import { GiHearts, GiBroadsword } from 'react-icons/gi';
 
 const Report: NextPage = () => {
   // Todo: fetch data here
@@ -14,27 +15,27 @@ const Report: NextPage = () => {
   const BattleLogID = parseInt(router.query.id as string);
   const { data: BattleLog, isLoading } = trpc.arena.getBattleLog.useQuery({ id: BattleLogID });
   return (
-    <div>
+    <div className="h-screen overflow-hidden">
       <Navbar />
       <main className="grid">
         {/* sections */}
         {BattleLog && (
-          <div className="m-2 flex flex-wrap justify-center gap-4 p-2">
+          <div className="m-2 flex flex-wrap justify-center gap-10 p-2">
             {/* Character A status section */}
-            <div className="relative md:sticky md:top-16 flex w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 lg:grid lg:w-min lg:gap-4 h-fit">
+            <section className="relative flex h-fit w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 md:sticky md:top-16 lg:grid lg:w-min lg:gap-4">
               <PlayerInfo id={BattleLog?.creatorId} />
-            </div>
+            </section>
 
             {/* Character B status section */}
-            <div className="relative md:sticky md:top-16 flex w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 lg:order-last lg:grid lg:w-min lg:gap-4 h-fit">
+            <section className="relative flex h-fit w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 md:sticky md:top-16 lg:order-last lg:grid lg:w-min lg:gap-4">
               <PlayerInfo id={BattleLog?.opponentId} />
-            </div>
+            </section>
 
-            <div className="w-full lg:hidden"></div>
+            <section className="w-full lg:hidden"></section>
 
-            <div className="flex w-full lg:w-1/3">
+            <section className="flex h-screen w-full overflow-y-auto rounded-md bg-slate-50 lg:w-1/2">
               {BattleLog && <BattleContent context={BattleLog.content as unknown as CombatLog} />}
-            </div>
+            </section>
           </div>
         )}
       </main>
@@ -49,22 +50,17 @@ const PlayerInfo: React.FC<{ id: string }> = (props) => {
     return <div>is Loading...</div>;
   }
   return (
-    <div className='scroll-auto grid gap-y-4'>
-        <div className='hidden md:grid'>
-          <RectCard imgsrc={PlayerData.combater?.character.image} />
-        </div>
-        <div className='md:hidden'>
-          <Avatar
-              imgsrc={PlayerData.combater?.character.image}
-              org_width={225}
-              org_height={350}
-              className="h-12 w-12"
-              />
-        </div>
+    <div className="grid gap-y-2 scroll-auto">
+      <p className="flex justify-center text-xl leading-tight">{PlayerData.name}</p>
+      <div className="hidden md:grid">
+        <RectCard imgsrc={PlayerData.combater?.character.image} />
+      </div>
+      <div className="md:hidden">
+        <Avatar imgsrc={PlayerData.combater?.character.image} org_width={225} org_height={350} className="h-12 w-12" />
+      </div>
 
-        <p className='word-bubble'>{PlayerData.name}</p>
-        <p className="word-bubble">{PlayerData.description}</p>
-        {/* <AttributeBar attribute="HP" max={10} val={5} />
+      <p className="word-bubble">{PlayerData.description}</p>
+      {/* <AttributeBar attribute="HP" max={10} val={5} />
         <AttributeBar attribute="AP" max={10} val={4} /> */}
     </div>
   );
@@ -74,18 +70,24 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
   console.log(props.context);
   const creatorID = props.context.combater1.id;
   return (
-    <ul className="grid h-fit w-full gap-4 p-2">
-      {props.context.logs.map((round, index) => {
-        return (
-          <li
-            key={index}
-            className={`flex w-full ${round.logger?.id === creatorID ? 'justify-start pr-6' : 'justify-end pl-6'}`}
-          >
-            <p className="word-bubble">{round.log}</p>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="flex h-fit w-full items-center justify-center">
+      <ul className="my-4 grid h-fit w-full gap-4 p-2 lg:w-11/12">
+        {props.context.logs.map((round, index) => {
+          return (
+            <li
+              key={index}
+              className={`flex w-full ${round.logger?.id === creatorID ? 'justify-start pr-6' : 'justify-end pl-6'}`}
+            >
+              <p className="word-bubble flex items-center justify-center">
+                {round.logger?.id !== creatorID ? <GiBroadsword /> : <GiHearts />}
+                &nbsp;
+                {round.log}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

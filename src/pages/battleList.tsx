@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 import type { inferProcedureOutput, inferProcedureInput } from '@trpc/server';
 import type { AppRouter } from '../server/trpc/router';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 const BattleList: NextPage = () => {
   const { data: profiles, isLoading } = trpc.getInfo.getAllProfiles.useQuery();
@@ -56,10 +56,10 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
   };
 
   const handleRedirect = () => {
-    if(data){
+    if (data) {
       router.push(`/reports/${data?.id}`);
     }
-  } 
+  };
 
   return (
     <>
@@ -69,15 +69,15 @@ const PlayerProfile: React.FC<{ profile: SelectedProfile }> = (props) => {
         <>
           <div className="grid items-center gap-4">
             <RectCard imgsrc={props.profile.combater?.character?.image} />
-            { hasClick ?
+            {hasClick ? (
               <button onClick={handleRedirect} className="button-primary">
                 查看戰報
               </button>
-              :
+            ) : (
               <button onClick={handleBattle} className="button-primary">
                 發起決鬥
               </button>
-            }
+            )}
           </div>
           <div className="word-bubble">{props.profile.name}</div>
         </>

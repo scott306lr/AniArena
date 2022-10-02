@@ -12,7 +12,7 @@ function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <div className="sticky top-2 mx-5 my-2 flex justify-center z-10">
+    <div className="sticky top-2 z-10 mx-5 my-2 flex justify-center">
       <div className="flex w-full justify-between rounded-lg bg-white py-2 px-4 shadow-xl lg:w-10/12">
         {/* left */}
         <p className="hidden self-center text-lg font-bold sm:grid ">AniArena</p>

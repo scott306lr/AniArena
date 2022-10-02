@@ -3,8 +3,6 @@ import { Combater } from './Combater';
 import { Character_JSON, Player_JSON } from './Types';
 import { StatusState } from './Status/Status';
 
-
-
 export class Arena {
   player1: Player_JSON;
   player2: Player_JSON;
@@ -95,7 +93,11 @@ export class Arena {
       this.logger.setWinner(this.combater1);
       return true;
     } else if (this.round > this.maxRound) {
-      this.logger.log(undefined, LogType.else,`${combater1_state.name}和${combater2_state.name}無法突破系統回合限制，戰鬥結束`);
+      this.logger.log(
+        undefined,
+        LogType.else,
+        `${combater1_state.name}和${combater2_state.name}無法突破系統回合限制，戰鬥結束`
+      );
       return true;
     }
     return false;
@@ -157,7 +159,7 @@ export class Logger {
     };
   }
 
-  log(logger: Combater | undefined, type: LogType,  message: string) {
+  log(logger: Combater | undefined, type: LogType, message: string) {
     let state = undefined;
     if (logger !== undefined) {
       state = logger.getCombaterState();

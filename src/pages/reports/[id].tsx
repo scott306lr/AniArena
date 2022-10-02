@@ -72,7 +72,7 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
   return (
     <div className="flex h-auto w-full justify-center">
       <div className="h-auto w-full overflow-y-auto">
-        <ul className="my-4 grid h-auto w-auto gap-4  p-2 lg:w-11/12">
+        <ul className="my-4 grid h-auto w-full gap-4 px-4">
           {props.context.logs.map((round, index) => {
             return (
               <li

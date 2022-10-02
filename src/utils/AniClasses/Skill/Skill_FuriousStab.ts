@@ -20,8 +20,8 @@ export class Skill_FuriousStab extends Skill {
     this.declaration = `${name}憤怒的突刺(／‵Д′)つ¤=[]————`;
     this.owner.arena.logger.log(this.owner, LogType.attack, this.declaration);
 
-    let loseHP = this.owner.attr.maxHP.get() - this.owner.attr.HP.get();
-    let value = 2.5 + loseHP * 0.4;
+    const loseHP = this.owner.attr.maxHP.get() - this.owner.attr.HP.get();
+    const value = 2.5 + loseHP * 0.4;
     const damage = new Damage(value, DamageType.physical);
     const status = new Status_Damage(this.owner, damage);
     status.apply(object);

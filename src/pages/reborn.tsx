@@ -65,11 +65,12 @@ const Reborn: NextPage = () => {
           <ul className="flex flex-wrap rounded-lg bg-white shadow-lg">
             {u_isLoading || unlockedChars == null ? (
               <div className="flex justify-center">
-                <div className="spinner"></div>
+                {/* <div className="spinner"></div> */}
+                loading
               </div>
             ) : (
               unlockedChars.map((character, index) => (
-                <li key={index} className="md:h-1/2 md:w-1/2" onClick={() => selectClick(index)}>
+                <li key={index} className="h-auto w-auto" onClick={() => selectClick(index)}>
                   <div className="hover-primary">
                     <Avatar imgsrc={character?.image} org_width={225} org_height={350} className="h-24 w-24" />
                   </div>

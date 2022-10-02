@@ -69,13 +69,13 @@ const Report: NextPage = () => {
             <section className="flex h-fit w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 md:top-16 lg:grid lg:w-min lg:gap-4">
               <PlayerInfo id={BattleLog?.creatorId} />
               <AttributeBar attribute="HP" max={combater1_maxHP} val={combater1_HP} />
-              {/* <AttributeBar attribute="AP" max={combater1_maxAP} val={combater1_AP} /> */}
+              <AttributeBar attribute="AP" max={combater1_maxAP} val={combater1_AP} />
             </section>
 
             <section className="flex h-fit w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 md:top-16 lg:order-last lg:grid lg:w-min lg:gap-4">
               <PlayerInfo id={BattleLog?.opponentId} />
               <AttributeBar attribute="HP" max={combater2_maxHP} val={combater2_HP} />
-              {/* <AttributeBar attribute="AP" max={combater2_maxAP} val={combater2_AP} /> */}
+              <AttributeBar attribute="AP" max={combater2_maxAP} val={combater2_AP} />
             </section>
 
             <section className="flex h-auto w-full justify-center overflow-hidden rounded-md bg-slate-50 lg:w-1/3 ">

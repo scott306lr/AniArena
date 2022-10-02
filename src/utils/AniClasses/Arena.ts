@@ -46,15 +46,13 @@ export class Arena {
       while (this.combater1.isReady() || this.combater2.isReady()) {
         // Combater takes action
         if (this.combater1.isReady() && this.combater2.isReady()) {
-          if (this.combater1.getPriority() === this.combater2.getPriority()) {
-            if (this.combater1.attr.AP.get() > this.combater2.attr.AP.get()) {
-              this.combater1.castSkill(this.combater2);
-            } else {
-              this.combater2.castSkill(this.combater1);
-            }
-          } else if (this.combater1.getPriority() < this.combater2.getPriority()) {
+          const c1 = this.combater1.getPriority();
+          const c2 = this.combater2.getPriority();
+          const threshold = c1 / (c1 + c2);
+          if(Math.random() >= threshold){
             this.combater1.castSkill(this.combater2);
-          } else {
+          }
+          else{
             this.combater2.castSkill(this.combater1);
           }
         } else if (this.combater1.isReady()) {

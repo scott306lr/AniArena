@@ -26,7 +26,7 @@ const Home: NextPage = () => {
               <h1 className="text-2xl font-bold">{'使用角色'}</h1>
               <CharProfile combater={myProfile.combater} />
             </section>
-            <section className="flex w-3/6 flex-col items-center justify-center gap-2 rounded-md bg-white/70 p-8 pt-4">
+            <section className="flex w-3/6 flex-col items-center justify-center gap-4 rounded-md bg-white/70 p-8 pt-4">
               <h1 className="text-2xl font-bold">{'個人資料'}</h1>
 
               <PostableName orgText={myProfile.name} />

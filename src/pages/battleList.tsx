@@ -94,7 +94,7 @@ const PlayerList: React.FC<{ profiles: ProfilesFromServer; setSelected: Dispatch
         <ul className="grid w-full gap-1">
           {props.profiles.map((profile, index) => {
             return (
-              <li onClick={() => props.setSelected(index)} key={index}>
+              <li className="flex" onClick={() => props.setSelected(index)} key={index}>
                 {profile?.combater && (
                   <PlayerCard
                     name={profile.name}

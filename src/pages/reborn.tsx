@@ -48,9 +48,10 @@ const Reborn: NextPage = () => {
     ) {
       const id = Number(unlockedChars[selected]?.id);
       mutateName({ characterId: id, attr: attr });
-      setTimeout(() => {router.push("/").then(() => router.reload())}, 0);
+      setTimeout(() => {
+        router.push('/').then(() => router.reload());
+      }, 0);
       // router.push("/");
-
     }
   };
 

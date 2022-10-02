@@ -74,19 +74,29 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
       <div className="h-auto w-full overflow-y-auto">
         <ul className="my-4 grid h-auto w-full gap-4 px-4">
           {props.context.logs.map((round, index) => {
+            const is_me = round.logger?.id === creatorID;
             return (
-              <li
-                key={index}
-                className={`flex w-full ${round.logger?.id === creatorID ? 'justify-start pr-6' : 'justify-end pl-6'}`}
-              >
+              <li key={index} className={`flex w-full ${is_me ? 'justify-start pr-6' : 'justify-end pl-6'}`}>
                 <p
                   className={`word-bubble flex items-center justify-center ${
                     round.type === 'effected' && 'bg-gray-300'
                   }`}
                 >
-                  {round.type !== 'effected' && <BattleIcon type={round.type} />}
-                  &nbsp;
-                  {round.log}
+                  {round.type === 'effected' ? (
+                    round.log
+                  ) : is_me ? (
+                    <>
+                      <BattleIcon type={round.type} />
+                      &nbsp;
+                      {round.log}
+                    </>
+                  ) : (
+                    <>
+                      {round.log}
+                      &nbsp;
+                      <BattleIcon type={round.type} />
+                    </>
+                  )}
                 </p>
               </li>
             );
@@ -112,6 +122,5 @@ const BattleIcon: React.FC<{ type: string | undefined }> = (props) => {
     return <div>undefined</div>;
   }
 };
-
 
 export default Report;

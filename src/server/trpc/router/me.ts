@@ -84,6 +84,7 @@ export const meAuthRouter = t.router({
       return ctx.prisma.combater.update({
         where: { playerId: playerResponse.id },
         data: {
+          // playerId: playerResponse.id,
           characterId: input.characterId,
           attr: input.attr,
         },

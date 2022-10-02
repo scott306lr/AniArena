@@ -54,7 +54,7 @@ export class Attribute {
     this.exp = new IntAttribute(this.jsonData.exp);
     this.HP = new IntAttribute(this.jsonData.HP);
     this.maxHP = new IntAttribute(this.jsonData.HP);
-    this.AP = new IntAttribute(this.jsonData.AP);
+    this.AP = new IntAttribute(0);
     this.maxAP = new IntAttribute(this.jsonData.AP);
     this.APRegen = new IntAttribute(this.jsonData.APRegen);
   }

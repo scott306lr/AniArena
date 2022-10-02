@@ -8,30 +8,75 @@ import { trpc } from '../../utils/trpc';
 import { useRouter } from 'next/router';
 import { CombatLog } from '../../utils/AniClasses/Arena';
 import { GiHearts, GiBroadsword, GiQueenCrown, GiHarryPotterSkull, GiTrophy, GiBrokenHeart } from 'react-icons/gi';
+import { isContext } from 'vm';
 
 const Report: NextPage = () => {
   // Todo: fetch data here
   const router = useRouter();
   const BattleLogID = parseInt(router.query.id as string);
   const { data: BattleLog, isLoading } = trpc.arena.getBattleLog.useQuery({ id: BattleLogID });
+  const logContent = BattleLog?.content as unknown as CombatLog | undefined;
+  const creatorID = logContent?.combater1.id;
+
+  const combater1_maxHP = logContent?.combater1.attr.maxHP || 0;
+  const combater1_HP =
+    logContent?.logs.reduce((prev, curr) => {
+      if (curr.logger == null) return prev;
+      if (curr.logger.id === creatorID) {
+        return +curr.logger.attr.HP;
+      } else {
+        return prev;
+      }
+    }, 0) || 0;
+  const combater1_maxAP = logContent?.combater1.attr.maxAP || 0;
+  const combater1_AP =
+    logContent?.logs.reduce((prev, curr) => {
+      if (curr.logger == null) return prev;
+      if (curr.logger.id === creatorID) {
+        return +curr.logger.attr.AP;
+      } else {
+        return prev;
+      }
+    }, 0) || 0;
+
+  const combater2_maxHP = logContent?.combater2.attr.maxHP || 0;
+  const combater2_HP =
+    logContent?.logs.reduce((prev, curr) => {
+      if (curr.logger == null) return prev;
+      if (curr.logger.id !== creatorID) {
+        return +curr.logger.attr.HP;
+      } else {
+        return prev;
+      }
+    }, 0) || 0;
+  const combater2_maxAP = logContent?.combater1.attr.maxAP || 0;
+  const combater2_AP =
+    logContent?.logs.reduce((prev, curr) => {
+      if (curr.logger == null) return prev;
+      if (curr.logger.id === creatorID) {
+        return +curr.logger.attr.AP;
+      } else {
+        return prev;
+      }
+    }, 0) || 0;
+
   return (
     <div className="flex h-screen flex-col">
       <Navbar />
       <main className="flex h-auto justify-center overflow-hidden p-4">
-        {/* sections */}
         {BattleLog && (
           <div className="m-2 flex h-auto w-full justify-center gap-10 p-2">
-            {/* Character A status section */}
             <section className="flex h-fit w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 md:top-16 lg:grid lg:w-min lg:gap-4">
               <PlayerInfo id={BattleLog?.creatorId} />
+              <AttributeBar attribute="HP" max={combater1_maxHP} val={combater1_HP} />
+              {/* <AttributeBar attribute="AP" max={combater1_maxAP} val={combater1_AP} /> */}
             </section>
 
-            {/* Character B status section */}
             <section className="flex h-fit w-5/12 justify-items-center rounded-lg bg-slate-50 p-4 md:top-16 lg:order-last lg:grid lg:w-min lg:gap-4">
               <PlayerInfo id={BattleLog?.opponentId} />
+              <AttributeBar attribute="HP" max={combater2_maxHP} val={combater2_HP} />
+              {/* <AttributeBar attribute="AP" max={combater2_maxAP} val={combater2_AP} /> */}
             </section>
-
-            {/* <section className="h-auto w-full lg:hidden"></section> */}
 
             <section className="flex h-auto w-full justify-center overflow-hidden rounded-md bg-slate-50 lg:w-1/3 ">
               {BattleLog && <BattleContent context={BattleLog.content as unknown as CombatLog} />}
@@ -60,8 +105,6 @@ const PlayerInfo: React.FC<{ id: string }> = (props) => {
       </div>
 
       <p className="word-bubble">{PlayerData.description}</p>
-      {/* <AttributeBar attribute="HP" max={10} val={5} />
-        <AttributeBar attribute="AP" max={10} val={4} /> */}
     </div>
   );
 };
@@ -92,9 +135,9 @@ const BattleContent: React.FC<{ context: CombatLog }> = (props) => {
                     </>
                   ) : (
                     <>
-                      {round.log}
-                      &nbsp;
                       <BattleIcon type={round.type} />
+                      &nbsp;
+                      {round.log}
                     </>
                   )}
                 </p>
